@@ -1,4 +1,11 @@
 source 'https://rubygems.org'
+gem 'dotenv-rails', :groups => 'dotenv/rails-now'
+
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-github'
+
+
 
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

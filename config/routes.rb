@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'page#home'
+
   devise_for :users, :path => 'account'
 
    resources :users do
@@ -8,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'page#home'
+
 
   get 'page/about'
 
