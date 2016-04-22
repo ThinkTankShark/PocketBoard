@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  symbol: MyString
+  name: MyString
+  description: MyString
+  request_token: MyString
+  request_key: MyString
+
+two:
+  symbol: MyString
+  name: MyString
+  description: MyString
+  request_token: MyString
+  request_key: MyString
