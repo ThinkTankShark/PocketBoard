@@ -18,3 +18,7 @@ industries.each do |industry|
     description: Faker::Lorem.sentences(3)
     })
 end
+
+User.create(email:"test@gmail.com", password:"1234")
+Stock.create(symbol:"FB", name:"Facebook Inc.")
+Stock.create(symbol:"AAPL", name:"Apple Inc.")
