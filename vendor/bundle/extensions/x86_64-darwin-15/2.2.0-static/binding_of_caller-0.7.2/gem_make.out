@@ -1,0 +1,16 @@
+current directory: /Users/sepandassadi/Programming/DBC/Phase3/Week3/Pocket-Board/vendor/bundle/gems/binding_of_caller-0.7.2/ext/binding_of_caller
+/Users/sepandassadi/.rbenv/versions/2.2.3/bin/ruby -r ./siteconf20160422-76259-uk2lip.rb extconf.rb
+
+current directory: /Users/sepandassadi/Programming/DBC/Phase3/Week3/Pocket-Board/vendor/bundle/gems/binding_of_caller-0.7.2/ext/binding_of_caller
+make "DESTDIR=" clean
+make: *** No rule to make target `clean'.  Stop.
+
+current directory: /Users/sepandassadi/Programming/DBC/Phase3/Week3/Pocket-Board/vendor/bundle/gems/binding_of_caller-0.7.2/ext/binding_of_caller
+make "DESTDIR="
+echo "Nada."
+Nada.
+
+current directory: /Users/sepandassadi/Programming/DBC/Phase3/Week3/Pocket-Board/vendor/bundle/gems/binding_of_caller-0.7.2/ext/binding_of_caller
+make "DESTDIR=" install
+echo "Nada."
+Nada.
