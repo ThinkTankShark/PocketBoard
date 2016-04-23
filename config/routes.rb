@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
 
+
   root 'page#home'
 
   devise_for :users, :path => 'account'
 
    resources :users do
       resources :portfolios do
-        resources :stocks
+        resources :industries do
+          resources :stocks
+      end
     end
   end
 
