@@ -1,15 +1,17 @@
 industries = [
-"Food",
-"Health",
-"Beauty",
+"Basic Industries",
+"Capital Goods",
+"Consumer Durables",
+"Consumer Non-Durables",
+"Consumer Services",
+"Energy",
+"Finance",
+"Health Care",
+"Miscellaneous",
+"Public Utilities",
 "Technology",
-"Sports + Fitness",
-"Telecommunication",
-"Waste Management",
-"Toys + Games",
-"Steel + Iron",
-"Textiles",
-"Oil + Gas"
+"Transportation",
+"n/a"
 ]
 
 industries.each do |industry|
@@ -19,6 +21,14 @@ industries.each do |industry|
     })
 end
 
+
+
+
+
+
+
+
+
+
+
 User.create(email:"test@gmail.com", password:"1234")
-Stock.create(symbol:"FB", name:"Facebook Inc.")
-Stock.create(symbol:"AAPL", name:"Apple Inc.")
