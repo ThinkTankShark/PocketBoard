@@ -13,6 +13,7 @@ gem 'devise'
 gem 'rails'
 gem 'pg'
 
+gem 'font-awesome-sass'
 gem 'quandl'
 gem 'json', '~> 1.8', '>= 1.8.3'
 gem 'rest-client', '~> 1.8.0'
@@ -25,6 +26,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'simple_form'
 
 gem 'dotenv-rails', :groups => [:development, :test]
 

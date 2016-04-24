@@ -6,10 +6,14 @@ Rails.application.routes.draw do
 
   devise_for :users, :path => 'account'
 
-  resources :users
 
   resources :stocks, only: ["index"]
-  resources :industries, only: ["index"]
+  resources :industries, only: ["index", "show"] do
+   member do
+     patch :select
+   end
+  end
+
   resources :portfolios
 
   get 'page/about'

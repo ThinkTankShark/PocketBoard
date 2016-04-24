@@ -1,5 +1,4 @@
 class Stock < ActiveRecord::Base
-  has_many :portfolios
-  has_many :users, through: :portfolios
+  has_many :holdings
   belongs_to :industry
 end
