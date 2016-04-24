@@ -14,6 +14,8 @@
   <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,9 +52,6 @@
                   <li>
                       <a class="page-scroll" href="#services">About</a>
                   </li>
-                   <li>
-                      <a class="page-scroll" href="#portfolio">Portfolio</a>
-                  </li>
                   <li>
                       <a class="page-scroll" href="#team">Team</a>
                   </li>
@@ -60,10 +59,14 @@
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
                   <li>
-                      <a class="page-scroll">Login</a>
+
+                      <a class="page-scroll" href="/portfolios">Portfolios</a>
                   </li>
                   <li>
-                      <a class="page-scroll">Register</a>
+                      <a class="page-scroll" href="#about">Login</a>
+                  </li>
+                  <li>
+                      <a class="page-scroll" href="/account/sign_up">Register</a>
                   </li>
               </ul>
           </div>
@@ -71,6 +74,9 @@
       </div>
       <!-- /.container-fluid -->
   </nav>
+
+    <p class="notice"><%= notice  %></p>
+    <p class="alert"><%= alert  %></p>
 
     <%= yield %>
 
