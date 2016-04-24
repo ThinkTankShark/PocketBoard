@@ -11,7 +11,7 @@ class IndustriesController < ApplicationController
   # GET /industries/1.json
   def show
     @industry = Industry.find(params[:id])
-    @stocks = Stock.all
+    @stocks = @industry.stocks
 
   end
 
