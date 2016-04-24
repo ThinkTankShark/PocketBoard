@@ -20,13 +20,19 @@ sectors = [
 sectors.each do |sector|
   Industry.create({
     name: sector,
-    description: Faker::Lorem.sentences(3)
+    description: Faker::Lorem.sentence
     })
 end
 
 
-User.create(email:"test@gmail.com", password:"1234")
+10.times do
+  User.create({
+    email: Faker::Internet.free_email,
+    password: "test123"
+    })
+end
 
+User.create(email:"test@gmail.com", password:"1234")
 
 
 def parse_csv(file_path)
@@ -46,5 +52,4 @@ nasdaq_stocks.each do |stock|
   sector.stocks << new_stock
   new_stock.save
 end
-
 

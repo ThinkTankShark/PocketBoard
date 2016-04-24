@@ -4,8 +4,10 @@ class PortfoliosController < ApplicationController
   # GET /portfolios
   # GET /portfolios.json
   def index
-    @user = User.find(session[:user_id])
-    @portfolios = user.portfolios
+
+    @user = User.find(current_user.id)
+    @portfolios = @user.portfolios
+
   end
 
   # GET /portfolios/1
