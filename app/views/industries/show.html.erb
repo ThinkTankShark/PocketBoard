@@ -8,7 +8,6 @@
 <br>
 <br>
 
-
 <div id="container">
     <div class="buddy" style="display: block;"><div class="avatar"  style="display: block; background-image: url(/assets/team/4.jpg)"></div></div>
     <div class="buddy"><div class="avatar" style="display: block; background-image: url(/assets/team/2.jpg)"></div></div>
@@ -25,14 +24,19 @@
 
 
 <p>
-  <strong>Name:</strong>
-  <%= @industry.name %>
+  <strong>Name: </strong>
+  <%= @stock.name %>
 </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @industry.description %>
-</p>
+<!-- <button type="button" class="btn btn-default navbar-btn" method="post" action=<% stock_users_path %>>Yes</button> -->
+
+<%= button_to 'Yes', stock_users_path, params: {'session[user_id]'=> 1,'stock_user[stock_id]' => @stock.id}  %>
+<%= button_to 'No', industry_path(session[:industry_id]) %>
+
+</div>
+<#% end %>
+
+<%= button_to 'Proceed', stock_users_path %>
 
 <%= link_to 'Edit', edit_industry_path(@industry) %> |
 <%= link_to 'Back', industries_path %>
