@@ -16,6 +16,14 @@ ActiveRecord::Schema.define(version: 20160424044450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "holdings", force: :cascade do |t|
+    t.string   "symbol"
+    t.integer  "allocation"
+    t.integer  "stock_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "industries", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -39,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160424044450) do
     t.string   "symbol"
     t.string   "name"
     t.string   "description"
+    t.string   "sector"
     t.string   "request_token"
     t.string   "request_key"
     t.datetime "created_at",    null: false

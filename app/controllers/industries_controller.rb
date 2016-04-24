@@ -67,7 +67,8 @@ class IndustriesController < ApplicationController
   # select industry
   def select
     @industry = Industry.find(params[:id])
-    @industry
+    @industry.update_attribute(:selected, True)
+    redirect_to industries_path
 
   end
 

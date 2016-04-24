@@ -31,13 +31,13 @@
     <type label="Year" length="0" sql="YEAR" quote=""/>
     <type label="Timestamp" length="0" sql="TIMESTAMP" quote="'"/>
   </group>
-  
+
   <group label="Miscellaneous" color="rgb(200,200,255)">
     <type label="ENUM" length="1" sql="ENUM" quote=""/>
     <type label="SET" length="1" sql="SET" quote=""/>
     <type label="Bit" length="0" sql="bit" quote=""/>
   </group>
-</datatypes><table x="555" y="168" name="users">
+</datatypes><table x="453" y="154" name="users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -54,7 +54,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="855" y="166" name="portfolios">
+<table x="663" y="149" name="portfolios">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -65,15 +65,15 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="users" row="id" />
 </row>
-<row name="id_stocks" null="1" autoincrement="0">
+<row name="holding_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="stocks" row="id" />
+<default>NULL</default><relation table="holdings" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="1192" y="162" name="stocks">
+<table x="1160" y="151" name="stocks">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -89,6 +89,21 @@
 <row name="request token" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="925" y="151" name="holdings">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="allocation" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="stock_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="stocks" row="id" />
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
