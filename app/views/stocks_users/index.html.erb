@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Stock Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Stock</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stocks_users.each do |stocks_user| %>
+      <tr>
+        <td><%= stocks_user.user %></td>
+        <td><%= stocks_user.stock %></td>
+        <td><%= link_to 'Show', stocks_user %></td>
+        <td><%= link_to 'Edit', edit_stocks_user_path(stock_user) %></td>
+        <td><%= link_to 'Destroy', stocks_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stock user', new_stocks_user_path %>

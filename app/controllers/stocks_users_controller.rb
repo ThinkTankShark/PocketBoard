@@ -1,10 +1,10 @@
-class StockUsersController < ApplicationController
+class StocksUsersController < ApplicationController
   before_action :set_stock_user, only: [:show, :edit, :update, :destroy]
 
   # GET /stock_users
   # GET /stock_users.json
   def index
-    @stock_users = StockUser.all
+    @stock_users = StocksUser.all
   end
 
   # GET /stock_users/1
@@ -15,7 +15,7 @@ class StockUsersController < ApplicationController
 
   # GET /stock_users/new
   def new
-    @stock_user = StockUser.new
+    @stock_user = StocksUser.new
   end
 
   # GET /stock_users/1/edit
@@ -25,7 +25,7 @@ class StockUsersController < ApplicationController
   # POST /stock_users
   # POST /stock_users.json
   def create
-    @stock_user = StockUser.new(stock_user_params)
+    @stock_user = StocksUser.new(stock_user_params)
 
     respond_to do |format|
       if @stock_user.save
@@ -65,7 +65,7 @@ class StockUsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stock_user
-      @stock_user = StockUser.find(params[:id])
+      @stock_user = StocksUser.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
