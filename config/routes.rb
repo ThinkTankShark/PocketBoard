@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :stock_users
   root 'page#home'
 
   devise_for :users, :path => 'account'
