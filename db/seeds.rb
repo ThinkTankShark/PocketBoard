@@ -19,5 +19,8 @@ industries.each do |industry|
     })
 end
 
-User.create(email: "test@gmail.com", password:"123456")
+
+User.create(email:"test@gmail.com", password:"1234")
 Stock.create(symbol:"FB", name:"Facebook Inc.")
+Stock.create(symbol:"AAPL", name:"Apple Inc.")
+
