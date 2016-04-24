@@ -7,6 +7,7 @@ class PortfoliosController < ApplicationController
 
     @user = User.find(current_user.id)
     @portfolios = @user.portfolios
+    2.times{@portfolio.holdings.build}
 
   end
 
@@ -74,6 +75,7 @@ class PortfoliosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def portfolio_params
-      params.require(:portfolio).permit(:name, :user_id)
+      params.require(:portfolio).permit(:name, :user_id, holdings_attributes: [:symbol, :allocation])
     end
+
 end

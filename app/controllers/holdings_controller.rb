@@ -1,7 +1,7 @@
 class HoldingsController < ApplicationController
   def create
     @holding = Holding.new(holding_params)
-
+    debugger
     respond_to do |format|
       if @holding.save
         format.html { redirect_to @holding, notice: 'Holding was successfully created.' }
