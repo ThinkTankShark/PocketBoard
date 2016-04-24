@@ -15,6 +15,9 @@ industries = [
 industries.each do |industry|
   Industry.create({
     name: industry,
-    description: Faker::Lorem.sentences(3)
+    description: Faker::Lorem.sentence
     })
 end
+
+User.create(email: "test@gmail.com", password:"123456")
+Stock.create(symbol:"FB", name:"Facebook Inc.")

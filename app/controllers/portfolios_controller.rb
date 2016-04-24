@@ -5,7 +5,7 @@ class PortfoliosController < ApplicationController
   # GET /portfolios.json
   def index
     @portfolios = Portfolio.all
-    @user = User.find(params[:user_id])
+
   end
 
   # GET /portfolios/1

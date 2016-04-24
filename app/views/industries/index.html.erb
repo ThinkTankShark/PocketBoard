@@ -2,28 +2,24 @@
 
 <h1>Listing Industries</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="industry_form">
+        <%= form_for(@industries)  do |form|  %>
+         <% @industries.each_with_index do |industry, index| %>
+          <%= check_box_tag(:industry) %><br>
+          <%= label_tag(:industry, <%= industry.name %>) %><br>
+          <!-- <select name="industries" id="industry"><br>
+            <option value="<#% index + 1 %>">industry.name</option><br>
+          </select><br> -->
+         <% end %>
+        <% end %>
+        <%#=  %>
 
-  <tbody>
-    <% @industries.each do |industry| %>
-      <tr>
-        <td><%= industry.name %></td>
-        <td><%= industry.description %></td>
-        <td><%= link_to 'Show',  user_portfolio_industries_path(industry.id ) %></td>
-        <td><%= link_to 'Edit', edit_industry_path(industry) %></td>
-        <td><%= link_to 'Destroy', industry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <%#= f.label industry.name %> <br />
+          <%#= f.check_box :industry.name %> <br />
+        <%# end %>
 
-<br>
+      </div>
 
-<%= link_to 'New Industry', new_industry_path %>
+
+
+
