@@ -1,4 +1,4 @@
-<%= form_for (setup_portfolio(@portfolio)), url: portfolios_path do |f| %>
+<%= form_for (setup_portfolio(@portfolio)) do |f| %>
   <% if @portfolio.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@portfolio.errors.count, "error") %> prohibited this portfolio from being saved:</h2>
@@ -15,7 +15,7 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <%= f.fields_for :holding do |ff| %>
+  <%= f.fields_for :holdings do |ff| %>
     <div class="field">
       <%= ff.label :symbol %><br>
       <%= ff.text_field :symbol %>
