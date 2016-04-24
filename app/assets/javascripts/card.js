@@ -19,7 +19,7 @@ $(document).ready(function(){
 
     if ( $(this).is(':last-child') ) {
      $('.buddy:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
-      alert('Na-na!');
+      // alert('Na-na!');
      } else {
         $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
     }
