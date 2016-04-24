@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160424012343) do
-=======
 ActiveRecord::Schema.define(version: 20160424044450) do
->>>>>>> development
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,14 +20,8 @@ ActiveRecord::Schema.define(version: 20160424044450) do
     t.string   "symbol"
     t.integer  "allocation"
     t.integer  "stock_id"
-<<<<<<< HEAD
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-=======
-    t.integer  "portfolio_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
->>>>>>> development
   end
 
   create_table "industries", force: :cascade do |t|
@@ -45,17 +35,18 @@ ActiveRecord::Schema.define(version: 20160424044450) do
   create_table "portfolios", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
+    t.integer  "stock_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "portfolios", ["stock_id"], name: "index_portfolios_on_stock_id", using: :btree
   add_index "portfolios", ["user_id"], name: "index_portfolios_on_user_id", using: :btree
 
   create_table "stocks", force: :cascade do |t|
     t.string   "symbol"
     t.string   "name"
     t.string   "description"
-    t.string   "sector"
     t.string   "request_token"
     t.string   "request_key"
     t.datetime "created_at",    null: false
@@ -85,6 +76,7 @@ ActiveRecord::Schema.define(version: 20160424044450) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "portfolios", "stocks"
   add_foreign_key "portfolios", "users"
   add_foreign_key "stocks", "industries"
 end
