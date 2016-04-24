@@ -7,18 +7,21 @@
 <br>
 <br>
 <br>
-<% @stocks.each do |s| %>
+<#% @stocks.each do |s| %>
 
 <div class="stock">
 <p>
   <strong>Name: </strong>
-  <%= s.name %>
+  <%= @stock.name %>
 </p>
 
-<button type="button" class="btn btn-default navbar-btn">Yes</button>
-|
-<button type="button" class="btn btn-default navbar-btn">No</button>
+<!-- <button type="button" class="btn btn-default navbar-btn" method="post" action=<% stock_users_path %>>Yes</button> -->
+
+<%= button_to 'Yes', stock_users_path, params: {'session[user_id]'=> 1,'stock_user[stock_id]' => @stock.id}  %>
+<%= button_to 'No', industry_path(session[:industry_id]) %>
 
 </div>
-<% end %>
+<#% end %>
+
+<%= button_to 'Proceed', stock_users_path, params: {'session[user_id]'=> 1,'stock_user[stock_id]' => @stock.id}  %>
 

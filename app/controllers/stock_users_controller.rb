@@ -10,6 +10,7 @@ class StockUsersController < ApplicationController
   # GET /stock_users/1
   # GET /stock_users/1.json
   def show
+    redirect_to industry_path(session[:industry_id])
   end
 
   # GET /stock_users/new
