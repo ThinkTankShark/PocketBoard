@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%#= notice %></p> -->
 <br>
 <br>
 <br>
@@ -7,18 +7,32 @@
 <br>
 <br>
 <br>
-<% @stocks.each do |s| %>
 
-<div class="stock">
+
+<div id="container">
+    <div class="buddy" style="display: block;"><div class="avatar"  style="display: block; background-image: url(/assets/team/4.jpg)"></div></div>
+    <div class="buddy"><div class="avatar" style="display: block; background-image: url(/assets/team/2.jpg)"></div></div>
+    <div class="buddy"><div class="avatar" style="display: block; background-image: url(/assets/team/1.jpg)"></div></div>
+    <div class="buddy"><div class="avatar" style="display: block; background-image: url(/assets/team/3.jpg)"></div></div>
+  </div>
+
+<!-- Tinder Card JavaScript -->
+<script src="/assets/card.js"></script>
+<!--
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+
+
 <p>
-  <strong>Name: </strong>
-  <%= s.name %>
+  <strong>Name:</strong>
+  <%= @industry.name %>
 </p>
 
-<button type="button" class="btn btn-default navbar-btn">Yes</button>
-|
-<button type="button" class="btn btn-default navbar-btn">No</button>
+<p>
+  <strong>Description:</strong>
+  <%= @industry.description %>
+</p>
 
-</div>
-<% end %>
-
+<%= link_to 'Edit', edit_industry_path(@industry) %> |
+<%= link_to 'Back', industries_path %>
