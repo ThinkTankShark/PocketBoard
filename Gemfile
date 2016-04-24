@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'dotenv-rails', :groups => 'dotenv/rails-now'
-
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
@@ -12,8 +10,12 @@ gem 'sass-rails', '>= 3.2'
 gem 'materialize-sass'
 gem 'faker'
 gem 'devise'
-gem 'rails', '4.2.4'
+gem 'rails'
 gem 'pg'
+
+gem 'quandl'
+gem 'json', '~> 1.8', '>= 1.8.3'
+gem 'rest-client', '~> 1.8.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
