@@ -8,7 +8,7 @@ $(function () {
                 gapGridLineWidth: 0
             },
 
- yAxis: {
+            yAxis: {
                 gridLineWidth: 0,
                 minorGridLineWidth: 0
               },
@@ -72,14 +72,10 @@ $(function () {
              shadow: true
           }
        },
-
        // Highstock specific
-
-
 
        // // General
        // background2: '#E0E0E8'
-
     };
 
     // Apply the theme
