@@ -3,6 +3,7 @@ class CreateHoldings < ActiveRecord::Migration
     create_table :holdings do |t|
       t.string :symbol
       t.integer :allocation
+      t.integer :stock_id
 
       t.timestamps null: false
     end
