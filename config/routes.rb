@@ -5,10 +5,9 @@ Rails.application.routes.draw do
 
   devise_for :users, :path => 'account'
 
-  resources :users
 
   resources :stocks, only: ["index"]
-  resources :industries, only: ["index"]
+  resources :industries, only: ["index", "show"]
   resources :portfolios
 
   get 'page/about'

@@ -1,14 +1,24 @@
 <p id="notice"><%= notice %></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<% @stocks.each do |s| %>
 
+<div class="stock">
 <p>
   <strong>Name:</strong>
-  <%= @industry.name %>
+  <%= s.name %>
 </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @industry.description %>
-</p>
+<button type="button" class="btn btn-default navbar-btn">Yes</button>
+|
+<button type="button" class="btn btn-default navbar-btn">No</button>
 
-<%= link_to 'Edit', edit_industry_path(@industry) %> |
-<%= link_to 'Back', industries_path %>
+</div>
+<% end %>
+

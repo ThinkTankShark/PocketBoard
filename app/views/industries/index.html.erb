@@ -2,23 +2,11 @@
 
 <h1>Listing Industries</h1>
 
-      <div class="industry_form">
-        <%= form_for(@industries)  do |form|  %>
-         <% @industries.each_with_index do |industry, index| %>
-          <%= check_box_tag(:industry) %><br>
-          <%= label_tag(:industry, <%= industry.name %>) %><br>
-          <!-- <select name="industries" id="industry"><br>
-            <option value="<#% index + 1 %>">industry.name</option><br>
-          </select><br> -->
-         <% end %>
-        <% end %>
-        <%#=  %>
-
-          <%#= f.label industry.name %> <br />
-          <%#= f.check_box :industry.name %> <br />
-        <%# end %>
-
-      </div>
+        <div id="industry">
+          <% @industries.each do |i| %>
+            <h2><a href=" /industries/<%= i.id %>"><%= i.name %></a></h2><br>
+          <% end %>
+        </div>
 
 
 
