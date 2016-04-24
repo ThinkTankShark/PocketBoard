@@ -29,7 +29,6 @@ User.create(email:"test@gmail.com", password:"1234")
 
 
 
-
 def parse_csv(file_path)
   csv = CSV.open(file_path, :headers => true)
   stock_arr = csv.map{|row| row.to_hash}

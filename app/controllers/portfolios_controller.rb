@@ -4,13 +4,14 @@ class PortfoliosController < ApplicationController
   # GET /portfolios
   # GET /portfolios.json
   def index
-    @portfolios = Portfolio.all
-    @user = User.find(params[:user_id])
+    @user = User.find(session[:user_id])
+    @portfolios = user.portfolios
   end
 
   # GET /portfolios/1
   # GET /portfolios/1.json
   def show
+    @portfolio = Portfolio.find(params[:id])
   end
 
   # GET /portfolios/new
@@ -26,9 +27,13 @@ class PortfoliosController < ApplicationController
   # POST /portfolios.json
   def create
     @portfolio = Portfolio.new(portfolio_params)
-
+    @holdings = session[:holdings]  #{"FB": 20, "AAPL": 80}
     respond_to do |format|
       if @portfolio.save
+        @holdings.each do |symbol, percentage|
+          holding = Holding.new(stock_id: Stock.find_by(symbol: "#{symbol}").id, allocation: "#{percentage}")
+          portfolio.holdings << holding
+        end
         format.html { redirect_to @portfolio, notice: 'Portfolio was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio }
       else
@@ -70,6 +75,6 @@ class PortfoliosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def portfolio_params
-      params.require(:portfolio).permit(:name, :user_id, :stock_id)
+      params.require(:portfolio).permit(:name, :user_id)
     end
 end
