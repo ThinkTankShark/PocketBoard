@@ -10,9 +10,17 @@ class IndustriesController < ApplicationController
   # GET /industries/1
   # GET /industries/1.json
   def show
+    session[:industry_id] = params[:id]
+    if session[:index].nil?
+      session[:index] = 0
+    else
+      session[:index] += 1
+    end
+
     @industry = Industry.find(params[:id])
     @stocks = @industry.stocks
-
+    @stock = @stocks[session[:index]]
+    # redirect_to
   end
 
   # GET /industries/new
