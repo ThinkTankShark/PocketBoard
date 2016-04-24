@@ -89,9 +89,6 @@
 <row name="request token" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
-<row name="new field" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -114,7 +111,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="685" y="398" name="users_stocks">
+<table x="680" y="398" name="stocks_users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
