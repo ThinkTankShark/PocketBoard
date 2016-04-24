@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160424012343) do
     t.string   "symbol"
     t.string   "name"
     t.string   "description"
+    t.string   "sector"
     t.string   "request_token"
     t.string   "request_key"
     t.datetime "created_at",    null: false
