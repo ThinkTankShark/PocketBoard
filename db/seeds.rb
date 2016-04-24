@@ -30,11 +30,10 @@ end
     email: Faker::Internet.free_email,
     password: "test123"
     })
-
 end
 
-
 User.create(email:"test@gmail.com", password:"1234")
+
 
 def parse_csv(file_path)
   csv = CSV.open(file_path, :headers => true)

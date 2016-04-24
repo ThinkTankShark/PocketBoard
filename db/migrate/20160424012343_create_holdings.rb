@@ -4,6 +4,7 @@ class CreateHoldings < ActiveRecord::Migration
       t.string :symbol
       t.integer :allocation
       t.integer :stock_id
+      t.integer :portfolio_id
 
       t.timestamps null: false
     end

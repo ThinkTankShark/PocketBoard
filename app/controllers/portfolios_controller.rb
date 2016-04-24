@@ -4,17 +4,21 @@ class PortfoliosController < ApplicationController
   # GET /portfolios
   # GET /portfolios.json
   def index
-    @portfolios = Portfolio.all
+
+    @user = User.find(current_user.id)
+    @portfolios = @user.portfolios
 
   end
 
   # GET /portfolios/1
   # GET /portfolios/1.json
   def show
+    @portfolio = Portfolio.find(params[:id])
   end
 
   # GET /portfolios/new
   def new
+    session[:id] = 1
     @portfolio = Portfolio.new
   end
 
@@ -70,6 +74,6 @@ class PortfoliosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def portfolio_params
-      params.require(:portfolio).permit(:name, :user_id, :stock_id)
+      params.require(:portfolio).permit(:name, :user_id)
     end
 end

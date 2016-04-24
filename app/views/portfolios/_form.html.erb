@@ -1,4 +1,5 @@
-<%= form_for([@portfolio]) do |f| %>
+<%= form_for (setup_portfolio(@portfolio)), url: portfolios_path do |f| %>
+
   <% if @portfolio.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@portfolio.errors.count, "error") %> prohibited this portfolio from being saved:</h2>
@@ -15,14 +16,21 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :stock_id %><br>
-    <%= f.text_field :stock_id %>
-  </div>
+  <%= f.fields_for :holding do |ff| %>
+    <div class="field">
+      <%= ff.label :symbol %><br>
+      <%= ff.text_field :symbol %>
+    </div>
+    <div class="field">
+      <%= ff.label :allocation %><br>
+      <%= ff.text_field :allocation %>
+    </div>
+    <%# if ff.object.persisted? %>
+      <%#= ff.check_box :_destroy %>
+      <%#= ff.label :_destroy, "Destroy" %>
+    <%# end %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
