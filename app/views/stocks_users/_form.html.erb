@@ -1,10 +1,10 @@
-<%= form_for(@stock_user) do |f| %>
-  <% if @stock_user.errors.any? %>
+<%= form_for(@stocks_user) do |f| %>
+  <% if @stocks_user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@stock_user.errors.count, "error") %> prohibited this stock_user from being saved:</h2>
+      <h2><%= pluralize(@stocks_user.errors.count, "error") %> prohibited this stock_user from being saved:</h2>
 
       <ul>
-      <% @stock_user.errors.full_messages.each do |message| %>
+      <% @stocks_user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
