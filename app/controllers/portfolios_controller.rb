@@ -48,6 +48,8 @@ class PortfoliosController < ApplicationController
   # POST /portfolios.json
   def create
     @portfolio = Portfolio.new(portfolio_params)
+    # @stock = Stock.find_by(symbol: params[:portfolio][:holdings_attributes][:symbol])
+    # @holding = Holding.find()
 
     respond_to do |format|
       if @portfolio.save

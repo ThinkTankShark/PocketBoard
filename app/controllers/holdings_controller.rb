@@ -1,7 +1,8 @@
 class HoldingsController < ApplicationController
   def create
     @holding = Holding.new(holding_params)
-    debugger
+    @stock = Stock.find_by(symbol: @holding.symbol)
+    @holding.stock = @stock
     respond_to do |format|
       if @holding.save
         format.html { redirect_to @holding, notice: 'Holding was successfully created.' }
