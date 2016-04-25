@@ -69,4 +69,20 @@ class ApplicationController < ActionController::Base
     end
     return stock_result;
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 end
