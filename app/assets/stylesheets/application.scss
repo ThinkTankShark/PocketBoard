@@ -3,41 +3,7 @@
 @import "agency";
 @import "font-awesome";
 @import "font-awesome-sprockets";
-@import "styles";
-@import "cards";
+@import "styles"; //Main Styles to website
+@import "cards";  //Tinder cards
+@import "login"; //Login Section
 
-
-// *{
-//   margin: 0;
-//   padding: 0;
-// }
-
-// #nav{
-//   width: 100%;
-//   height: 40px;
-//   background: #000;
-//   float: left;
-// }
-
-// #page_nav a, #sign_in a{
-//   line-height: 40px;
-//   color: #fff;
-//   padding: 0 20px 0 20px;
-//   text-decoration: 0;
-// }
-
-// #page_nav{
-//   margin: 0 0 0 5%;
-//   float: left;
-// }
-
-// #sign_in{
-//   float: right;
-//   margin: 0 5% 0 0;
-// }
-
-// .main{
-//   width: 90%;
-//   float: left;
-//   margin: 20px 5% 0 5%;
-// }
