@@ -42,14 +42,14 @@ class PortfoliosController < ApplicationController
 
     @start_date = "2016-01-01"
     @end_date = "2016-01-08"
+    @stock_symbol ="AAPL"
+    # @stocks.each do |stock|
+    #   json = quan(stock.symbol,@start_date,@end_date)
+    #   dates = date_array(json)
+    #   values = value_array(json)
+    #   allocated = value_allocation(value, Holding.find_by(stock_id: stock.id).allocation)
 
-    @stocks.each do |stock|
-      json = quan(stock.symbol,@start_date,@end_date)
-      dates = date_array(json)
-      values = value_array(json)
-      allocated = value_allocation(value, Holding.find_by(stock_id: stock.id).allocation)
-
-    end
+    # end
 
     @json = quan(@stock_symbol, @start_date, @end_date)
     @date = date_array(@json)

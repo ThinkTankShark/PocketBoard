@@ -115,7 +115,13 @@ class ApplicationController < ActionController::Base
     array = []
     hash.each do |h|
       h.each do |key,value|
-        if key == "date"
+        if key == "month"
+          array << value
+        end
+        if key == "day"
+          array << value
+        end
+        if key == "year"
           array << value
         end
       end
