@@ -46,7 +46,7 @@ var yesButtonListener = function() {
     var that = $(this)
 
     var request = $.ajax({
-      url: "/stock_users",
+      url: "/stocks_users",
       type: "post",
       data: {stock_user: {stock_id: stock_id, user_id: user_id}},
       other: that
