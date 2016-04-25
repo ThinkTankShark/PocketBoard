@@ -1,5 +1,6 @@
 class PortfoliosController < ApplicationController
   before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
+  helper_method :hash_to_array
 
   # Sample code to use Quandl gem to made api request
   # =====================================================================================
@@ -29,7 +30,7 @@ class PortfoliosController < ApplicationController
     end
 
     @quan_result = quan("dji","2016-01-01","2016-04-20")
-  
+
 
   end
 
@@ -37,6 +38,24 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/1.json
   def show
     @portfolio = Portfolio.find(params[:id])
+    @stocks = @portfolio.stocks
+
+    @start_date = "2016-01-01"
+    @end_date = "2016-01-08"
+
+    @stocks.each do |stock|
+      json = quan(stock.symbol,@start_date,@end_date)
+      dates = date_array(json)
+      values = value_array(json)
+      allocated = value_allocation(value, Holding.find_by(stock_id: stock.id).allocation)
+
+    end
+
+    @json = quan(@stock_symbol, @start_date, @end_date)
+    @date = date_array(@json)
+    @value = value_array(@json)
+    @allocation = value_allocation(@value, 0.33)
+
   end
 
   # GET /portfolios/new

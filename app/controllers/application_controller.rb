@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  skip_before_filter :verify_authenticity_token  
+  skip_before_filter :verify_authenticity_token
   require 'uri'
 
 
@@ -111,6 +111,57 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def date_array(hash)
+    array = []
+    hash.each do |h|
+      h.each do |key,value|
+        if key == "date"
+          array << value
+        end
+      end
+    end
+    return array
+  end
+
+  def value_array(hash)
+    array = []
+    hash.each do |h|
+      h.each do |key,value|
+        if key == "value"
+          array << value
+        end
+      end
+    end
+    return array
+  end
+
+  # def hash_to_array(hash)
+  #   array = []
+  #   hash.each do |h|
+  #     temp =[]
+  #     h.each do |key,value|
+  #       if key == "value"
+  #         temp << value
+  #       end
+  #     end
+  #     array <<temp
+  #   end
+  #   array.each do |a|
+  #     a.delete_at(1)
+  #     a.delete_at(1)
+  #   end
+  #   return array
+  # end
+
+  def value_allocation(array,allocation)
+    temp =[]
+    array.map do |a|
+      temp << a * allocation
+    end
+    return temp
+  end
+
+
   # def highchartarray(quan_result)
   #   data = []
   #   num_of_day = quan_result.length
@@ -122,5 +173,5 @@ class ApplicationController < ActionController::Base
   #   end
   #   return data
   # end
-  
+
 end
