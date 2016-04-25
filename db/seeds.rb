@@ -26,10 +26,30 @@ end
 
 
 10.times do
-  User.create({
+  user = User.create({
     email: Faker::Internet.free_email,
     password: "test123"
     })
+
+  2.times do
+
+    portfolio = Portfolio.create({
+      name: Faker::Lorem.word,
+      user_id: user.id
+      })
+
+
+    3.times do
+      holding = Holding.new({
+        symbol: "AA",
+        allocation: 0.35,
+        stock_id: rand(50),
+        portfolio_id: portfolio.id
+        })
+    end
+
+  end
+
 end
 
 User.create(email:"test@gmail.com", password:"1234")
