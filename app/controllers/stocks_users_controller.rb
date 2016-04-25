@@ -1,7 +1,7 @@
 class StocksUsersController < ApplicationController
   before_action :set_stock_user, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token
-
+  
   # GET /stock_users
   # GET /stock_users.json
   def index
