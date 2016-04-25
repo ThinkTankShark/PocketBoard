@@ -1,5 +1,5 @@
 class Portfolio < ActiveRecord::Base
-  helper PortfoliosHelper
+  # helper PortfoliosHelper
 
   belongs_to :user
   has_many :holdings

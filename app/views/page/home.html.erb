@@ -264,60 +264,87 @@
         <!-- Use the modals below to showcase details about your portfolio projects! -->
 
         <!-- Login / Sign up Section  -->
-        <div class="form form-hidden">
+        <div class="popup" data-popup="popup-1">
+            <div class="popup-inner">
 
-          <ul class="tab-group">
-            <li class="tab active"><a href="#signup">Sign Up</a></li>
-            <li class="tab"><a href="#login">Log In</a></li>
-        </ul>
+                <div class="form form-hidden">
 
-        <div class="tab-content">
-            <div id="signup">
+                  <ul class="tab-group">
+                    <li class="tab active"><a href="#signup">Sign Up</a></li>
+                    <li class="tab"><a href="#login">Log In</a></li>
+                </ul>
 
-            <form action="/users" method="post" name="signup-form">
+                <div class="tab-content">
+                    <div id="signup">
 
-                <div class="field-wrap">
-                    <label>
-                        Email Address<span class="req">*</span>
-                    </label>
-                    <input name="user[email]" type="email"required autocomplete="off"/>
-                </div>
+                        <form action="/users" method="post" name="signup-form">
 
-                <div class="field-wrap">
-                    <label>
-                        Set A Password<span class="req">*</span>
-                    </label>
-                    <input name="user[password]" type="password"required autocomplete="off"/>
-                </div>
-                <input type="submit" class='button button-block'></input>
-            </form>
-        </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Email Address<span class="req">*</span>
+                                </label>
+                                <input name="user[email]" type="email"required autocomplete="off"/>
+                            </div>
 
-        <div id="login">
-          <h1>Welcome Back!</h1>
+                            <div class="field-wrap">
+                                <label>
+                                    Set A Password<span class="req">*</span>
+                                </label>
+                                <input name="user[password]" type="password"required autocomplete="off"/>
+                            </div>
+                            <input type="submit" class='button button-block'></input>
+                        </form>
+                    </div>
 
-          <form action="/sessions" method="post">
+                    <div id="login">
+                      <h1>Welcome Back!</h1>
 
-            <div class="field-wrap">
-                <label>
-                  Email Address<span class="req">*</span>
-              </label>
-              <input name="email" type="email"required autocomplete="off"/>
+                      <form action="/sessions" method="post">
+
+                        <div class="field-wrap">
+                            <label>
+                              Email Address<span class="req">*</span>
+                          </label>
+                          <input name="email" type="email"required autocomplete="off"/>
+                      </div>
+
+                      <div class="field-wrap">
+                        <label>
+                          Password<span class="req">*</span>
+                      </label>
+                      <input name="password" type="password"required autocomplete="off"/>
+                  </div>
+
+                  <p class="forgot"><a href="#">Forgot Password?</a></p>
+                  <input type="submit" class='button button-block' value="Log In">
+              </form>
           </div>
+      </div><!-- tab-content -->
+  </div> <!-- /form -->
 
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-          </label>
-          <input name="password" type="password"required autocomplete="off"/>
-      </div>
-
-      <p class="forgot"><a href="#">Forgot Password?</a></p>
-      <input type="submit" class='button button-block' value="Log In">
-  </form>
+  <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
 </div>
-</div><!-- tab-content -->
-</div> <!-- /form -->
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        //----- OPEN
+        $('[data-popup-open]').on('click', function(e)  {
+            var targeted_popup_class = jQuery(this).attr('data-popup-open');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+            e.preventDefault();
+        });
+
+        //----- CLOSE
+        $('[data-popup-close]').on('click', function(e)  {
+            var targeted_popup_class = jQuery(this).attr('data-popup-close');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+            e.preventDefault();
+        });
+    });
+</script>
 
 <!-- jQuery -->
 <script src="assets/jquery.js"></script>

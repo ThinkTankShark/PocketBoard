@@ -1,0 +1,69 @@
+<!-- JS -->
+    <!-- load angular, nganimate, and ui-router -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>
+    <script src="assets/portfolio.js"></script>
+
+<div ng-app="yourApp">
+<div ng-controller="stepCtrl">
+<div ng-switch="step">
+<div ng-switch-when="1">
+<!-- here you can include your step 1 template,
+or simply just hardcode it here: -->
+<div ng-include src="'http://www.google.com'">
+<button ng-click="setStep(1)"></button>
+</div>
+<div ng-switch-when="2">
+<div ng-include src="'.../step2.html'">
+<button ng-click="setStep(2)"></button>
+</div>
+<div ng-switch-when="3">
+<div ng-include src="'.../step3.html'">
+<button ng-click="setStep(3)"></button>
+</div>
+</div>
+</div>
+  </div>
+
+<script type="text/javascript">
+yourApp.controller('stepCtrl',function($scope){
+$scope.step = 1;
+$scope.setStep = function(step){
+$scope.step = step;
+}
+});
+app.config(function($stateProvider, $urlRouterProvider) {
+$stateProvider
+.state('wizard', {// this will be the wrapper for our wizard
+url: '/wizard',
+templateUrl: 'wizard.html',
+controller: 'wizardController'
+})
+.state('wizard.stepOne', {// this will be the wrapper for our wizard
+url: '/stepOne',
+templateUrl: 'stepOne.html',
+controller: 'wizardController'
+})
+.state('wizard.stepTwo', {// this will be the wrapper for our wizard
+url: '/stepTwo',
+templateUrl: 'stepTwo.html',
+controller: 'wizardController'
+});
+
+<div id="container">
+<div>
+<h2>Our multistep form wizard</h2>
+<div id="status-buttons" class="text-center">
+<a ui-sref-active="active" ui-sref=".stepOne"><span>1</span> Step One</a>
+<a ui-sref-active="active" ui-sref=".stepTwo"><span>2</span> Step Two </a>
+</div>
+</div>
+<!-- Here we specify our view that is a container for our subviews(steps) , which in our case can be a form !-->
+<form id="signup-form" ng-submit="submit()">
+
+<div ui-view></div>
+</form>
+</div>
+
+</script>
