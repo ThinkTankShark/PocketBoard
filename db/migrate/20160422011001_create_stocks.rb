@@ -4,6 +4,7 @@ class CreateStocks < ActiveRecord::Migration
       t.string :symbol
       t.string :name
       t.string :description
+      t.string :sector
       t.string :request_token
       t.string :request_key
 

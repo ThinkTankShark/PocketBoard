@@ -1,10 +1,22 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and
+  include BCrypt
 
   has_many :portfolios
-  has_many :stocks, through: :portfolios
+  has_many :stocks_users
+  has_many :stocks, through: :stocks_users
 
-  devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :trackable, :validatable
+
+  # users.password_hash in the database is a :string
+
+  def password
+    @password ||= Password.new(password_hash)
+  end
+
+  def password=(new_password)
+    @password = Password.create(new_password)
+    self.password_hash = @password
+  end
+
+
 end
+
