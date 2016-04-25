@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  skip_before_filter :verify_authenticity_token
+
 
   def yahoo_table(snp)
     snp_result = []
@@ -71,18 +71,12 @@ class ApplicationController < ActionController::Base
   end
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  def user_signed_in?
+    if session[:id].nil?
+      return false
+    else
+      return true
+    end
+  end
 
 end
