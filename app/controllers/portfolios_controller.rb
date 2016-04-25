@@ -27,6 +27,10 @@ class PortfoliosController < ApplicationController
       @user = User.find(session[:id])
       @portfolios = @user.portfolios
     end
+
+    @quan_result = quan("dji","2016-01-01","2016-04-20")
+  
+
   end
 
   # GET /portfolios/1
@@ -58,6 +62,7 @@ class PortfoliosController < ApplicationController
     @user.portfolios << @portfolio
     StocksUser.delete_all
     redirect_to portfolios_path
+
 
     # respond_to do |format|
     #   if @portfolio.save

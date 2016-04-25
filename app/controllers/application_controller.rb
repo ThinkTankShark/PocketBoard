@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  skip_before_filter :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token  
+  require 'uri'
 
 
   def yahoo_table(snp)
@@ -80,4 +81,46 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def nytimes(query, begin_date, end_date)
+    # result = RestClient.get 'http://api.nytimes.com/svc/search/v2/articlesearch.json?callback=svc_search_v2_articlesearch&q=finance&begin_date=20140101&end_date=20150101&sort=oldest&api-key=4135b3b218606cfe437e454cea3fca0f%3A0%3A75109961'
+
+    link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q="+query+"&fq=news_desk:(\"Finance\",\"Business\",\"SundayBusiness\")&begin_date="+begin_date+"&end_date="+end_date+"&api-key=")
+    link += ENV["NYTIMESKEY"]
+    result = RestClient.get link
+    return result
+
+  end
+
+  def quan(query, start_date, end_date)
+    if query == "snp"
+      snp = Quandl::Dataset.get("YAHOO/INDEX_GSPC").data(params: { start_date: "#{start_date}", end_date: "#{end_date}" }) # ["date", "open", "high", "low", "close", "volume", "adjusted_close"]
+      snp_result = yahoo_table(snp)
+      return snp_result
+    elsif query == "nasdaq"
+      nasdaq = Quandl::Dataset.get("NASDAQOMX/COMP").data(params: {start_date: "#{start_date}", end_date: "#{end_date}" }) # ["trade_date", "index_value", "high", "low", "total_market_value", "dividend_market_value"]
+      nasdaq_result = nasdaq_table(nasdaq)
+      return nasdaq_result
+    elsif query == "dji"
+      dji = Quandl::Dataset.get("YAHOO/INDEX_DJI").data(params: {start_date: "#{start_date}", end_date: "#{end_date}" }) # ["date", "open", "high", "low", "close", "volume", "adjusted_close"]
+      dji_result = yahoo_table(dji)
+      return dji_result
+    else
+      stock = Quandl::Dataset.get("WIKI/#{query}").data(params: { start_date: "#{start_date}", end_date: "#{end_date}" }) # ["date", "open", "high", "low", "close", "volume", "ex_dividend", "split_ratio", "adj_open", "adj_high", "adj_low", "adj_close", "adj_volume"]
+      stock_result = stock_table(stock)
+      return stock_result
+    end
+  end
+
+  # def highchartarray(quan_result)
+  #   data = []
+  #   num_of_day = quan_result.length
+  #   for i in 0..num_of_day-1
+  #     datapoint = []
+  #     datapoint.push(Date.UTC(quan_result[i]["date"].year, quan_result[i]["date"].month-1, quan_result[i]["date"].day))
+  #     datapoint.push(quan_result[i]["value"])
+  #     data.push(datapoint)
+  #   end
+  #   return data
+  # end
+  
 end
