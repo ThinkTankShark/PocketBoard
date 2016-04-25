@@ -63,11 +63,14 @@
                       <a class="page-scroll" href="/portfolios">Portfolios</a>
                   </li>
                   <li>
-                      <a class="page-scroll" href="#about">Login</a>
+                      <a class="page-scroll" href="/account/sign_in">Login</a>
                   </li>
                   <li>
                       <a class="page-scroll" href="/account/sign_up">Register</a>
                   </li>
+                  <% if user_signed_in? %>
+                  <li><%= button_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+                  <% end%>
               </ul>
           </div>
           <!-- /.navbar-collapse -->
