@@ -31,6 +31,17 @@
 
 <%= link_to 'New Portfolio', industries_path %>
 
-<h1>Testing NYtimes API</h1>
+<h1>Testing API</h1>
 
-<%= @ny_result %>
+<%= @quan_result[0] %>
+<%= @quan_result[0]["date"] %>
+<br>
+<%= @quan_result.length %>
+
+<%= @quan_result[0]["date"].year %>
+<%= @quan_result[0]["date"].month - 1 %>
+<%= @quan_result[0]["date"].day %>
+
+<br>
+
+<%= @chart_result %>

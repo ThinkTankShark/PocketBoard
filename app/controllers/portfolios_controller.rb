@@ -23,7 +23,8 @@ class PortfoliosController < ApplicationController
       @portfolios = @user.portfolios
     end
 
-    @ny_result = nytimes("facebook", "20160101", "20160420")
+    @quan_result = quan("dji","2016-01-01","2016-04-20")
+    @chart_result = highchartarray(@quan_result)
 
   end
 
