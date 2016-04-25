@@ -56,22 +56,25 @@
                       <a class="page-scroll" href="#team">Team</a>
                   </li>
                  <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
+                      <a class="page-scroll" href="#contact">Contact</a>
+                 </li>
+                 <% if user_signed_in? %>
                   <li>
-
                       <a class="page-scroll" href="/portfolios">Portfolios</a>
                   </li>
+                  <% end %>
                   <% if !user_signed_in?%>
                     <li>
-                        <a class="page-scroll" href="/account/sign_in">Login</a>
+                        <a class="page-scroll" href="">Login</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/account/sign_up">Register</a>
+                        <a class="page-scroll" href="">Register</a>
                     </li>
                   <%end%>
                   <% if user_signed_in? %>
-                  <li><%= button_to "Sign Out", logout_path, method: "get" %></li>
+                    <li>
+                        <a class="page-scroll" href="/logout">Logout</a>
+                    </li>
                   <% end%>
               </ul>
           </div>
