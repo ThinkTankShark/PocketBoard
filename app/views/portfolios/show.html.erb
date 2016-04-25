@@ -12,7 +12,10 @@
 
 <p>
   <strong>Stock:</strong>
-  <%= @portfolio.stock %>
+  <%= @portfolio.holdings %>
+  <%= @portfolio.holdings.nil? %>
+<!-- <%#= @portfolio.holdings.first %>
+  <%#= @portfolio.holdings.first.allocation %> -->
 </p>
 
 <%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |

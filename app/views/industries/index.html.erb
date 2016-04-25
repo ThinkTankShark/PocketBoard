@@ -2,28 +2,15 @@
 
 <h1>Listing Industries</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <div id="industry">
+          <% @industries.each do |i| %>
+            <h2 style="opacity: 0.5;"><strike><a href=" /industries/<%= i.id %>"><%= i.name %></a></strike></h2>
+            <%= link_to select_industry_path(i), method: :patch do %>
+              <i class="fa fa-lg fa-check"></i>
+            <% end %>
+          <% end %>
+        </div>
 
-  <tbody>
-    <% @industries.each do |industry| %>
-      <tr>
-        <td><%= industry.name %></td>
-        <td><%= industry.description %></td>
-        <td><%= link_to 'Show',  user_portfolio_industries_path(industry.id ) %></td>
-        <td><%= link_to 'Edit', edit_industry_path(industry) %></td>
-        <td><%= link_to 'Destroy', industry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
 
-<%= link_to 'New Industry', new_industry_path %>
+

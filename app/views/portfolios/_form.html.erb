@@ -1,4 +1,5 @@
-<%= form_for([current_user, @portfolio]) do |f| %>
+<%= form_for @portfolio do |f| %>
+
   <% if @portfolio.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@portfolio.errors.count, "error") %> prohibited this portfolio from being saved:</h2>
@@ -15,14 +16,24 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :stock_id %><br>
-    <%= f.text_field :stock_id %>
-  </div>
+
+  <% i = 0 %>
+    <%= f.fields_for :holdings do |ff| %>
+      <div class="field">
+        <%= ff.label :symbol %><br>
+        <%= ff.text_field :symbol, :value => @selections[i].symbol %>
+      </div>
+      <div class="field">
+        <%= ff.label :allocation %><br>
+        <%= ff.number_field :allocation, :value => 0 %>
+      </div>
+      <%# if ff.object.persisted? %>
+        <%#= ff.check_box :_destroy %>
+        <%#= ff.label :_destroy, "Destroy" %>
+      <%# end %>
+    <% i += 1 %>
+    <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

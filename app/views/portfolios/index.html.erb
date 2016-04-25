@@ -15,9 +15,9 @@
   <tbody>
     <% @portfolios.each do |portfolio| %>
       <tr>
-        <td><%= portfolio.name %></td>
-        <td><%= portfolio.user %></td>
-        <td><%= portfolio.stock %></td>
+        <td> <%= link_to portfolio.name, portfolio_path(portfolio.id) %></td>
+<!--         <td><%#= portfolio.user %></td> -->
+<!--         <td><%#= portfolio.stocks %></td> -->
         <td><%= link_to 'Show', portfolio %></td>
         <td><%= link_to 'Edit', edit_portfolio_path(portfolio) %></td>
         <td><%= link_to 'Destroy', portfolio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -28,4 +28,5 @@
 
 <br>
 
-<%= link_to 'New Portfolio', new_portfolio_path %>
+ <%= link_to 'New Portfolio', industries_path %>
+
