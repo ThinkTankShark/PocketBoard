@@ -28,6 +28,15 @@ $(function () {
 });
 
 
+var utcdate = function(data){
+
+    var year = data["year"];
+    var month = data["month"];
+    var day = data["day"];
+
+    return Date.UTC(year, month, day)
+};
+
 
 
 // $(function () {
