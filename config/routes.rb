@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :users, only: ["new", "create"]
 
-  resources :portfolios, only: ["index", "new", "create"]
+  resources :portfolios
 
   resources :stocks_users, only: ["create"]
 
