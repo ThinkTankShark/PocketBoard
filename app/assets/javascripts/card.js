@@ -9,6 +9,7 @@ $(document).ready(function(){
 
 var swipeRightListener = function() {
   $(".buddy").on("swiperight",function(){
+      console.log("right")
       $(this).addClass('rotate-left').delay(700).fadeOut(1);
       $('.buddy').find('.status').remove();
 
@@ -23,6 +24,7 @@ var swipeRightListener = function() {
 
 var swipeLeftListener = function() {
   $(".buddy").on("swipeleft",function(){
+    console.log("left")
     $(this).addClass('rotate-right').delay(700).fadeOut(1);
     $('.buddy').find('.status').remove();
     $(this).append('<div class="status dislike">Dislike!</div>');
@@ -38,6 +40,8 @@ var swipeLeftListener = function() {
 
 var yesButtonListener = function() {
   $('.yes-button').on('click', function(event) {
+    console.log("yes")
+
     event.preventDefault();
 
     var stock_id = $(this).parent().parent().children()[3].value;
@@ -60,6 +64,7 @@ var yesButtonListener = function() {
 
 var noButtonListener = function() {
   $('.no-button').on('click', function(event) {
+    console.log("no")
     event.preventDefault();
     $(this).parent().parent().parent().addClass('rotate-right').delay(700).fadeOut(1);
   });

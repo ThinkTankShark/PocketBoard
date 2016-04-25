@@ -50,6 +50,8 @@ class PortfoliosController < ApplicationController
     p params
     p "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     @portfolio = Portfolio.create(portfolio_params)
+    @user = User.find(current_user.id)
+    @user.portfolios << @portfolio
     StocksUser.delete_all
     redirect_to portfolios_path
 
