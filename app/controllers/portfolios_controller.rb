@@ -33,8 +33,10 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/new
   def new
     session[:id] = 1
+    @user = User.find(1)
     @portfolio = Portfolio.new
-    num_of_stocks = StockUser.where(user_id: 1).count
+    @selections = @user.stocks
+    num_of_stocks = StocksUser.where(user_id: 1).count
     num_of_stocks.times{@portfolio.holdings.build}
   end
 
