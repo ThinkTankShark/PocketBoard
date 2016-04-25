@@ -21,8 +21,7 @@ class PortfoliosController < ApplicationController
 
     @user = User.find(current_user.id)
     @portfolios = @user.portfolios
-    2.times{@portfolio.holdings.build}
-
+    
   end
 
   # GET /portfolios/1
@@ -35,6 +34,8 @@ class PortfoliosController < ApplicationController
   def new
     session[:id] = 1
     @portfolio = Portfolio.new
+    num_of_stocks = StockUser.where(user_id: 1).count
+    num_of_stocks.times{@portfolio.holdings.build}
   end
 
   # GET /portfolios/1/edit

@@ -19,7 +19,7 @@
   <%= f.fields_for :holdings do |ff| %>
     <div class="field">
       <%= ff.label :symbol %><br>
-      <%= ff.text_field :symbol %>
+      <%= ff.text_field :symbol, :value => StockUser.first %>
     </div>
     <div class="field">
       <%= ff.label :allocation %><br>
