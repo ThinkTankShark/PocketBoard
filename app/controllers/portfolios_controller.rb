@@ -29,7 +29,7 @@ class PortfoliosController < ApplicationController
     end
 
     @quan_result = quan("dji","2016-01-01","2016-04-20")
-    @chart_result = highchartarray(@quan_result)
+  
 
   end
 

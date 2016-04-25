@@ -111,15 +111,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def highchartarray(quan_result)
-    data = []
-    num_of_day = quan_result.length
-    for i in 0..num_of_day-1
-      datapoint = []
-      datapoint.push(Date.UTC(quan_result[i]["date"].year, quan_result[i]["date"].month-1, quan_result[i]["date"].day))
-      datapoint.push(quan_result[i]["value"])
-      data.push(datapoint)
-    end
-    return data
-  end
+  # def highchartarray(quan_result)
+  #   data = []
+  #   num_of_day = quan_result.length
+  #   for i in 0..num_of_day-1
+  #     datapoint = []
+  #     datapoint.push(Date.UTC(quan_result[i]["date"].year, quan_result[i]["date"].month-1, quan_result[i]["date"].day))
+  #     datapoint.push(quan_result[i]["value"])
+  #     data.push(datapoint)
+  #   end
+  #   return data
+  # end
+  
 end
