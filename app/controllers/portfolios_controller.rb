@@ -5,9 +5,9 @@ class PortfoliosController < ApplicationController
   # GET /portfolios.json
   def index
 
-    @user = User.find(current_user.id)
-    @portfolios = @user.portfolios
-    2.times{@portfolio.holdings.build}
+    # @user = User.find(current_user.id)
+    # @portfolios = @user.portfolios
+    # 2.times{@portfolio.holdings.build}
 
   end
 
