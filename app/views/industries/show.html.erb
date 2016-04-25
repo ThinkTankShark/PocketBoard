@@ -28,7 +28,7 @@
   <%= @stock.name %>
 </p>
 
-<!-- <button type="button" class="btn btn-default navbar-btn" method="post" action=<% stock_users_path %>>Yes</button> -->
+<!-- <button type="button" class="btn btn-default navbar-btn" method="post" action=<%# stocks_users_path %>>Yes</button> -->
 
 <%= button_to 'Yes', stock_users_path, params: {'session[user_id]'=> 1,'stock_user[stock_id]' => @stock.id}  %>
 <%= button_to 'No', industry_path(session[:industry_id]) %>
