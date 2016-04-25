@@ -24,6 +24,11 @@ class ApplicationController < ActionController::Base
       else
         snp_result[t]['value'] = snp_result[t-1]['value']*(1+snp_result[t]['change'])
       end
+
+      snp_result[t]['year'] = snp_result[t]['date'].year
+      snp_result[t]['month'] = snp_result[t]['date'].month-1
+      snp_result[t]['day'] = snp_result[t]['date'].day
+
     end
     return snp_result;
   end

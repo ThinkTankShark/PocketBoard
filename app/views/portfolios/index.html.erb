@@ -33,9 +33,12 @@
 
 <h1>Testing API</h1>
 
-<%= @quan_result[0] %>
-<%= @quan_result[0]["date"] %>
+<% @quan_result.each do |day| %>
+  <%= day %><br>
+<% end %>
+
 <br>
+<%= @quan_result[0]["date"] %>
 <%= @quan_result.length %>
 
 <%= @quan_result[0]["date"].year %>

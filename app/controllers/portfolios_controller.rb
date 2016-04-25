@@ -28,8 +28,7 @@ class PortfoliosController < ApplicationController
       @portfolios = @user.portfolios
     end
 
-    @quan_result = quan("dji","2016-01-01","2016-04-20")
-  
+    @quan_result = quan("snp","2016-01-01","2016-04-20")
 
   end
 
