@@ -35,24 +35,14 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/1
   # GET /portfolios/1.json
   def show
-    @portfolio = Portfolio.find(params[:id])
-    @stocks = @portfolio.stocks
-
     @start_date = "2016-01-01"
     @end_date = "2016-01-08"
     @stock_symbol ="AAPL"
-    # @stocks.each do |stock|
-    #   json = quan(stock.symbol,@start_date,@end_date)
-    #   dates = date_array(json)
-    #   values = value_array(json)
-    #   allocated = value_allocation(value, Holding.find_by(stock_id: stock.id).allocation)
 
-    # end
+    @portfolio = Portfolio.find(params[:id])
+    @stocks = @portfolio.holdings
 
-    @json = quan(@stock_symbol, @start_date, @end_date)
-    @date = date_array(@json)
-    @value = value_array(@json)
-    @allocation = value_allocation(@value, 0.33)
+
 
   end
 
