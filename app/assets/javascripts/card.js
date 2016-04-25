@@ -1,6 +1,14 @@
 $(document).ready(function(){
 
-    $(".buddy").on("swiperight",function(){
+    swipeRightListener();
+    swipeLeftListener();
+    yesButtonListener();
+    noButtonListener();
+
+});
+
+var swipeRightListener = function() {
+  $(".buddy").on("swiperight",function(){
       $(this).addClass('rotate-left').delay(700).fadeOut(1);
       $('.buddy').find('.status').remove();
 
@@ -11,8 +19,10 @@ $(document).ready(function(){
           $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
        }
     });
+}
 
-   $(".buddy").on("swipeleft",function(){
+var swipeLeftListener = function() {
+  $(".buddy").on("swipeleft",function(){
     $(this).addClass('rotate-right').delay(700).fadeOut(1);
     $('.buddy').find('.status').remove();
     $(this).append('<div class="status dislike">Dislike!</div>');
@@ -24,4 +34,33 @@ $(document).ready(function(){
         $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
     }
   });
-});
+}
+
+var yesButtonListener = function() {
+  $('.yes-button').on('click', function(event) {
+    event.preventDefault();
+
+    var stock_id = $(this).parent().parent().children()[3].value;
+    var user_id = $(this).parent().parent().children()[2].value;
+    var authenticity = $(this).parent().parent().children()[1].value;
+    var that = $(this)
+
+    var request = $.ajax({
+      url: "/stock_users",
+      type: "post",
+      data: {stock_user: {stock_id: stock_id, user_id: user_id}},
+      other: that
+    })
+
+    request.done(function(response){
+      $(this.other).parent().parent().parent().addClass('rotate-left').delay(700).fadeOut(1);
+    })
+  });
+}
+
+var noButtonListener = function() {
+  $('.no-button').on('click', function(event) {
+    event.preventDefault();
+    $(this).parent().parent().parent().addClass('rotate-right').delay(700).fadeOut(1);
+  });
+}

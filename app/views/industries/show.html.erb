@@ -11,12 +11,13 @@
 
   <div id="container">
     <% @stocks.each do |stock| %>
+    <% stock.id %>
       <div class="buddy" style="display: block;">
         <div class="avatar"  style="display: block; background-image: url(/assets/team/4.jpg)"></div>
         <p style=" color: black">Name:<%= stock.name %></p>
         <p style=" color: black">Symbol:<%= stock.symbol %></p>
-        <p><%= button_to 'Yes', stock_users_path, params: {'session[user_id]'=> 1,'stock_user[stock_id]' => @stock.id},  class: "btn btn-primary" %></p>
-        <p><%= button_to 'No', industry_path(session[:industry_id]), class: "btn btn-primary" %></p>
+        <p><%= button_to 'Yes', stock_users_path, params: {'stock_user[user_id]'=> 1,'stock_user[stock_id]' => stock.id},  class: "btn btn-primary yes-button" %></p>
+        <p><%= button_to 'No', industry_path(session[:industry_id]), class: "btn btn-primary no-button" %></p>
       </div>
     <% end %>
   </div>
