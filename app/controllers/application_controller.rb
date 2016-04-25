@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   skip_before_filter :verify_authenticity_token  
   require 'uri'
 
+
   def yahoo_table(snp)
     snp_result = []
     snp.each_with_index do |d,t|

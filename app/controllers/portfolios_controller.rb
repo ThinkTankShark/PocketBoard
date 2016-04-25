@@ -1,5 +1,6 @@
 class PortfoliosController < ApplicationController
   before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
+
   # Sample code to use Quandl gem to made api request
   # =====================================================================================
   # @snp = Quandl::Dataset.get("YAHOO/INDEX_GSPC").data(params: { start_date: "2016-01-01", end_date: "2016-04-22" }) # ["date", "open", "high", "low", "close", "volume", "adjusted_close"]
@@ -17,6 +18,10 @@ class PortfoliosController < ApplicationController
 
   # GET /portfolios
   # GET /portfolios.json
+  def step
+    render "steps"
+  end
+
   def index
     if user_signed_in?
       @user = User.find(session[:id])
@@ -53,7 +58,7 @@ class PortfoliosController < ApplicationController
   def create
 
     @portfolio = Portfolio.create(portfolio_params)
-    @user = User.find(current_user.id)
+    @user = User.find(session[:id])
     @user.portfolios << @portfolio
     StocksUser.delete_all
     redirect_to portfolios_path
@@ -100,7 +105,6 @@ class PortfoliosController < ApplicationController
       @portfolio = Portfolio.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def portfolio_params
       params.require(:portfolio).permit(:name, :user_id, holdings_attributes: [:symbol, :allocation])
     end

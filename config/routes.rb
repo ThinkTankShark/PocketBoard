@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   get 'logout', to: 'sessions#destroy'
 
+  get 'steps', to: 'portfolios#step'
+
   root 'page#home'
 
   resources :users, only: ["new", "create"]
