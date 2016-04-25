@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   require 'uri'
 
 
-  def yahoo_table(snp)
+  def yahoo_table(snp) #also work for DJI
     snp_result = []
     snp.each_with_index do |d,t|
       snp_result[t] = {}
