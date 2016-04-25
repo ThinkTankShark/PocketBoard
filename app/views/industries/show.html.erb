@@ -8,12 +8,23 @@
 <br>
 <br>
 
-<div id="container">
-    <div class="buddy" style="display: block;"><div class="avatar"  style="display: block; background-image: url(/assets/team/4.jpg)"></div></div>
-    <div class="buddy"><div class="avatar" style="display: block; background-image: url(/assets/team/2.jpg)"></div></div>
-    <div class="buddy"><div class="avatar" style="display: block; background-image: url(/assets/team/1.jpg)"></div></div>
-    <div class="buddy"><div class="avatar" style="display: block; background-image: url(/assets/team/3.jpg)"></div></div>
+
+  <div id="container">
+    <% @stocks.each do |stock| %>
+    <% stock.id %>
+      <div class="buddy" style="display: block;">
+        <div class="avatar"  style="display: block; background-image: url(/assets/team/4.jpg)"></div>
+        <p style=" color: black">Name:<%= stock.name %></p>
+        <p style=" color: black">Symbol:<%= stock.symbol %></p>
+        <p><%= button_to 'Yes', stocks_users_path, params: {'stocks_user[user_id]'=> 1,'stocks_user[stock_id]' => stock.id},  class: "btn btn-primary yes-button" %></p>
+        <p><%= button_to 'No', industry_path(session[:industry_id]), class: "btn btn-primary no-button" %></p>
+      </div>
+    <% end %>
   </div>
+  <div id="stock-button">
+        <%= button_to 'Proceed', stocks_users_path, class: "btn btn-primary" %>
+  </div>
+
 
 <!-- Tinder Card JavaScript -->
 <script src="/assets/card.js"></script>
@@ -22,20 +33,3 @@
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
 <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
 
-
-<p>
-  <strong>Name: </strong>
-  <%= @stock.name %>
-</p>
-
-<!-- <button type="button" class="btn btn-default navbar-btn" method="post" action=<%# stocks_users_path %>>Yes</button> -->
-
-<%= button_to 'Yes', stock_users_path, params: {'session[user_id]'=> 1,'stock_user[stock_id]' => @stock.id}  %>
-<%= button_to 'No', industry_path(session[:industry_id]) %>
-
-</div>
-<#% end %>
-
-<%= button_to 'Proceed', stock_users_path %>
-
-<%= link_to 'Back', industries_path %>

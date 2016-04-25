@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424233049) do
+ActiveRecord::Schema.define(version: 20160425012114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,26 @@ ActiveRecord::Schema.define(version: 20160424233049) do
   end
 
   add_index "portfolios", ["user_id"], name: "index_portfolios_on_user_id", using: :btree
+
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "stock_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "stock_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "stock_users", ["stock_id"], name: "index_stock_users_on_stock_id", using: :btree
+  add_index "stock_users", ["user_id"], name: "index_stock_users_on_user_id", using: :btree
 
   create_table "stocks", force: :cascade do |t|
     t.string   "symbol"
@@ -84,5 +104,7 @@ ActiveRecord::Schema.define(version: 20160424233049) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "portfolios", "users"
+  add_foreign_key "stock_users", "stocks"
+  add_foreign_key "stock_users", "users"
   add_foreign_key "stocks", "industries"
 end

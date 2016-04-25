@@ -11,6 +11,7 @@ class IndustriesController < ApplicationController
   # GET /industries/1.json
   def show
     session[:industry_id] = params[:id]
+
     if session[:index].nil?
       session[:index] = 0
     else
@@ -19,6 +20,7 @@ class IndustriesController < ApplicationController
 
     @industry = Industry.find(params[:id])
     @stocks = @industry.stocks
+    session[:stocks] = @stocks
     @stock = @stocks[session[:index]]
     # redirect_to
   end
