@@ -1,15 +1,10 @@
 class UsersController < ApplicationController
-  skip_before_filter :verify_authenticity_token
+
   def create
     @user = User.new(user_params)
-    p @user
-    if @user.save
-      redirect_to 'pages#home'
-      p "GOOD"
-    else
-      p "ERROR"
-    end
-
+    @user.save!
+    session[:id] = @user.id
+    redirect_to '/'
   end
 
   private
