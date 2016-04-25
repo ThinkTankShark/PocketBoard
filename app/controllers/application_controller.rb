@@ -51,6 +51,11 @@ class ApplicationController < ActionController::Base
       else
         nasdaq_result[t]['value'] = nasdaq_result[t-1]['value']*(1+nasdaq_result[t]['change'])
       end
+
+      nasdaq_result[t]['year'] = nasdaq_result[t]['date'].year
+      nasdaq_result[t]['month'] = nasdaq_result[t]['date'].month-1
+      nasdaq_result[t]['day'] = nasdaq_result[t]['date'].day
+
     end
     return nasdaq_result;
   end
@@ -73,6 +78,11 @@ class ApplicationController < ActionController::Base
       else
         stock_result[t]['value'] = stock_result[t-1]['value']*(1+stock_result[t]['change'])
       end
+
+      stock_result[t]['year'] = stock_result[t]['date'].year
+      stock_result[t]['month'] = stock_result[t]['date'].month-1
+      stock_result[t]['day'] = stock_result[t]['date'].day
+
     end
     return stock_result;
   end
