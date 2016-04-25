@@ -40,9 +40,8 @@ class PortfoliosController < ApplicationController
     @stock_symbol ="AAPL"
 
     @portfolio = Portfolio.find(params[:id])
-    @stocks = @portfolio.holdings
-
-
+    @holdings = @portfolio.holdings
+    @final = zippy(@holdings)
 
   end
 

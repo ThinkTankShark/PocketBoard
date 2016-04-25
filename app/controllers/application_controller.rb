@@ -173,10 +173,10 @@ class ApplicationController < ActionController::Base
   def zippy(holdings)
     @stocks_values = []
     holdings.each do |holding|
-      json = quan(holding.symbol,@start_date,@end_date)
+      json = quan("AAPL",@start_date,@end_date) ################################################## holding.symbol
       @dates = date_array(json)
       value = value_array(json)
-      allocated = value_allocation(value, stock.allocation/100)
+      allocated = value_allocation(value, holding.allocation/100)
       @stocks_values << allocated
     end
     @total = @stocks_values.transpose.map {|x| x.reduce(:+)}

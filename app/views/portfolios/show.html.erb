@@ -23,6 +23,11 @@
 
 
 <div class="container">
+
+  <%= javascript_tag do %>
+    var stocks = <%= @final %>
+  <% end %>
+
   <%=@stock_names%>
   <br>
   <%=@value%>
@@ -33,4 +38,8 @@
   <br>
   <%=@final%>
 
+
+
 </div>
+
+
