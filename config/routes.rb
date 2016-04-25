@@ -1,27 +1,18 @@
-
 Rails.application.routes.draw do
 
+  get 'logout', to: 'sessions#destroy'
 
-  resources :stocks_users
-  
   root 'page#home'
 
-  devise_for :users, :path => 'account'
+  resources :users, only: ["new", "create"]
 
+  resources :portfolios, only: ["index", "new", "create"]
 
-  resources :stocks, only: ["index"]
-  resources :industries, only: ["index", "show"] do
-   member do
-     patch :select
-   end
-  end
+  resources :stocks_users, only: ["create"]
 
-  resources :portfolios
+  resources :stocks, only: ["show"]
 
-  get 'page/about'
+  resources :industries, only: ["index", "show"]
 
-  get 'page/faqs'
-
-  get 'page/contact'
-
+  resources :sessions, only: ["create", "destroy"]
 end

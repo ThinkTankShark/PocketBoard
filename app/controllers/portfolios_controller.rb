@@ -20,6 +20,7 @@ class PortfoliosController < ApplicationController
   def index
     @user = User.find(current_user.id)
     @portfolios = @user.portfolios
+
   end
 
   # GET /portfolios/1
@@ -45,17 +46,23 @@ class PortfoliosController < ApplicationController
   # POST /portfolios
   # POST /portfolios.json
   def create
-    @portfolio = Portfolio.new(portfolio_params)
+    p params
+    p "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    @portfolio = Portfolio.create(portfolio_params)
+    @user = User.find(current_user.id)
+    @user.portfolios << @portfolio
+    StocksUser.delete_all
+    redirect_to portfolios_path
 
-    respond_to do |format|
-      if @portfolio.save
-        format.html { redirect_to @portfolio, notice: 'Portfolio was successfully created.' }
-        format.json { render :show, status: :created, location: @portfolio }
-      else
-        format.html { render :new }
-        format.json { render json: @portfolio.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @portfolio.save
+    #     format.html { redirect_to @portfolio, notice: 'Portfolio was successfully created.' }
+    #     format.json { render :show, status: :created, location: @portfolio }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @portfolio.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /portfolios/1
