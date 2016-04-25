@@ -1,31 +1,31 @@
-// $(function () {
+$(function () {
 
-//         // Create the chart
-//         $('#test').highcharts('StockChart', {
+        // Create the chart
+        $('#test').highcharts('StockChart', {
 
 
-//             rangeSelector : {
-//                 selected : 5
-//             },
+            rangeSelector : {
+                selected : 5
+            },
 
-//             title : {
-//                 text : 'AAPL Stock Price'
-//             },
+            title : {
+                text : 'AAPL Stock Price'
+            },
 
-//             series : [{
-//                 name : 'AAPL',
-//                 data : [ [Date.UTC(2015,2,10),1], 
-//                     [Date.UTC(2015,2,14), 2],
-//                   [Date.UTC(2015,2,15), 3],
-//                    [Date.UTC(2015,2,16), 4]
-//                   ],
-//                 tooltip: {
-//                     valueDecimals: 2
-//                 }
-//             }]
-//         });
+            series : [{
+                name : 'AAPL',
+                data : [ [Date.UTC(2015,2,10),1], 
+                    [Date.UTC(2015,2,14), 2],
+                  [Date.UTC(2015,2,15), 3],
+                   [Date.UTC(2015,2,16), 4]
+                  ],
+                tooltip: {
+                    valueDecimals: 2
+                }
+            }]
+        });
         
-// });
+});
 
 
 
