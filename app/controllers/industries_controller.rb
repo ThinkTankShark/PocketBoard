@@ -20,7 +20,7 @@ class IndustriesController < ApplicationController
 
     @industry = Industry.find(params[:id])
     @stocks = @industry.stocks
-    # session[:stocks] = @stocks
+    session[:stocks] = @stocks
     @stock = @stocks[session[:index]]
     # redirect_to
   end

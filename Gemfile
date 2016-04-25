@@ -13,6 +13,8 @@ gem 'devise'
 gem 'rails'
 gem 'pg'
 
+gem 'activerecord-session_store'
+
 gem 'font-awesome-sass'
 gem 'quandl'
 gem 'json', '~> 1.8', '>= 1.8.3'
