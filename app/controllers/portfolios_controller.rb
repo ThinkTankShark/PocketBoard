@@ -1,14 +1,25 @@
 class PortfoliosController < ApplicationController
   before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
+  # Sample code to use Quandl gem to made api request
+  # =====================================================================================
+  # @snp = Quandl::Dataset.get("YAHOO/INDEX_GSPC").data(params: { start_date: "2016-01-01", end_date: "2016-04-22" }) # ["date", "open", "high", "low", "close", "volume", "adjusted_close"]
+  # @snp_result = yahoo_table(@snp)
+
+  # @nasdaq = Quandl::Dataset.get("NASDAQOMX/COMP").data(params: {start_date: "2016-01-01", end_date: "2016-04-08" }) # ["trade_date", "index_value", "high", "low", "total_market_value", "dividend_market_value"]
+  # @nasdaq_result = nasdaq_table(@nasdaq)
+
+  # @dji = Quandl::Dataset.get("YAHOO/INDEX_DJI").data(params: {start_date: "2016-01-01", end_date: "2016-04-22" }) # ["date", "open", "high", "low", "close", "volume", "adjusted_close"]
+  # @dji_result = yahoo_table(@dji)
+
+  # @company = "AAPL"
+  # @stock = Quandl::Dataset.get("WIKI/#{@company}").data(params: { start_date: "2016-01-01", end_date: "2016-04-22" }) # ["date", "open", "high", "low", "close", "volume", "ex_dividend", "split_ratio", "adj_open", "adj_high", "adj_low", "adj_close", "adj_volume"]
+  # @stock_result = stock_table(@stock)
 
   # GET /portfolios
   # GET /portfolios.json
   def index
-
-    # @user = User.find(current_user.id)
-    # @portfolios = @user.portfolios
-    # 2.times{@portfolio.holdings.build}
-
+    @user = User.find(current_user.id)
+    @portfolios = @user.portfolios
   end
 
   # GET /portfolios/1
@@ -20,7 +31,11 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/new
   def new
     session[:id] = 1
+    @user = User.find(1)
     @portfolio = Portfolio.new
+    @selections = @user.stocks
+    num_of_stocks = StocksUser.where(user_id: 1).count
+    num_of_stocks.times{@portfolio.holdings.build}
   end
 
   # GET /portfolios/1/edit

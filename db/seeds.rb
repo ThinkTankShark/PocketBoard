@@ -53,3 +53,7 @@ nasdaq_stocks.each do |stock|
   new_stock.save
 end
 
+StocksUser.create(user_id: 1, stock_id: 1)
+StocksUser.create(user_id: 1, stock_id: 2)
+StocksUser.create(user_id: 1, stock_id: 3)
+StocksUser.create(user_id: 1, stock_id: 4)
