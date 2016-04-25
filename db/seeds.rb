@@ -19,8 +19,7 @@ sectors = [
 
 sectors.each do |sector|
   Industry.create({
-    name: sector,
-    description: Faker::Lorem.sentence
+    name: sector
     })
 end
 

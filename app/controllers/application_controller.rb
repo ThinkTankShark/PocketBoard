@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-
+  skip_before_filter :verify_authenticity_token  
+  require 'uri'
 
   def yahoo_table(snp)
     snp_result = []
@@ -79,4 +80,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def nytimes(query, begin_date, end_date)
+    # result = RestClient.get 'http://api.nytimes.com/svc/search/v2/articlesearch.json?callback=svc_search_v2_articlesearch&q=finance&begin_date=20140101&end_date=20150101&sort=oldest&api-key=4135b3b218606cfe437e454cea3fca0f%3A0%3A75109961'
+
+    link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q="+query+"&fq=news_desk:(\"Finance\",\"Business\",\"SundayBusiness\")&begin_date="+begin_date+"&end_date="+end_date+"&api-key=")
+    link += "4135b3b218606cfe437e454cea3fca0f%3A0%3A75109961"
+    result = RestClient.get link
+    return result
+
+  end
 end
