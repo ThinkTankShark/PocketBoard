@@ -20,7 +20,6 @@
   <% i = 0 %>
     <%= f.fields_for :holdings do |ff| %>
       <div class="field">
-        <%= i %>
         <%= ff.label :symbol %><br>
         <%= ff.text_field :symbol, :value => @selections[i].symbol %>
       </div>

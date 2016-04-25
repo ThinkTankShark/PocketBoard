@@ -15,13 +15,13 @@
 }
 .buddy {
   display: none;
-  background: #fff;
+  background: #c1bdba;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
   color: #fff;
   padding: 20px;
   width: 360px;
-  height: 360px;
+  height: 600px;
   top: 50px;
   left: 50px;
   position: absolute;
@@ -50,7 +50,7 @@
   margin-left: 10px;
   background-size: 100% auto !important;
   background-position: center;
- background-repeat: no-repeat;
+  background-repeat: no-repeat;
 }
 .like {
   border-radius: 5px;
@@ -75,4 +75,9 @@
   top: 50px;
   left: 40px;
   text-shadow: none;
+}
+
+#stock-button {
+  margin: 190px 0px 0px 700px;
+  width: 300px;
 }

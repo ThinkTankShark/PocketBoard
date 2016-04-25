@@ -9,9 +9,11 @@ gem 'sass-rails', '>= 3.2'
 
 gem 'materialize-sass'
 gem 'faker'
-gem 'devise'
 gem 'rails'
 gem 'pg'
+gem 'bcrypt'
+
+gem 'activerecord-session_store'
 
 gem 'font-awesome-sass'
 gem 'quandl'
