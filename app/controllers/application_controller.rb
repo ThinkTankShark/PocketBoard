@@ -194,6 +194,8 @@ class ApplicationController < ActionController::Base
     return @final
   end
 
+
+
   def dates(start_date, end_date)
     @start = start_date.to_date
     @end = end_date.to_date
@@ -214,6 +216,40 @@ class ApplicationController < ActionController::Base
     return @array_array_dates
 
   end
+
+  def compare_json_dates_range_dates(quandl_dates, array_array_dates)
+    if array_array_dates.length != quandl_dates.length
+      need_value = []
+      array_array_dates.each_with_index do |date, index|
+        if !quandl_dates.include?(date)
+          need_value <<  index
+        end
+      end
+      return need_value
+      #figure out which day did not have a stock value
+      #two counters one for each input
+      #start 0
+      #if dates dont match for first check value == 100
+      #any other dates that don't match set value at previous quandl date
+    end
+  end
+
+  def create_value(need_value, value_array)
+    need_value.each do |index|
+      if index == 0
+        value_array.unshift(100)
+      else
+        value_array.insert(index, value_array[index -1])
+      end
+    end
+
+  end
+
+  #method check which dates are not present in the quandl response
+
+  #add value for the dates that weren't present
+
+
 
 
 # Hold off from deleting
