@@ -28,8 +28,6 @@ class PortfoliosController < ApplicationController
       @user = User.find(session[:id])
       @portfolios = @user.portfolios
     end
-
-    @quan_result = quan("snp","2016-01-01","2016-04-20")
   end
 
   # GET /portfolios/1
@@ -41,17 +39,16 @@ class PortfoliosController < ApplicationController
 
     @portfolio = Portfolio.find(params[:id])
     @holdings = @portfolio.holdings
-    @final = zippy(@holdings)
+    @final = zippy(@holdings,@portfolio.start_time, @portfolio.end_time)
 
   end
 
   # GET /portfolios/new
   def new
-    session[:id] = 1
-    @user = User.find(1)
+    @user = User.find(session[:id])
     @portfolio = Portfolio.new
     @selections = @user.stocks
-    num_of_stocks = StocksUser.where(user_id: 1).count
+    num_of_stocks = StocksUser.where(user_id: session[:id]).count
     num_of_stocks.times{@portfolio.holdings.build}
   end
 
@@ -112,7 +109,7 @@ class PortfoliosController < ApplicationController
     end
 
     def portfolio_params
-      params.require(:portfolio).permit(:name, :user_id, holdings_attributes: [:symbol, :allocation])
+      params.require(:portfolio).permit(:name, :user_id,:start_time,:end_time, holdings_attributes: [:symbol, :allocation])
     end
 
 end

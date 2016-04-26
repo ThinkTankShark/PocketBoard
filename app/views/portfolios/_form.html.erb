@@ -13,18 +13,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    Name<%= f.label :name %><br>
     <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    Start-time<%= f.label :start_time %><br>
+    <%= f.text_field :start_time %>
+  </div>
+  <div class="field">
+    End-time<%= f.label :end_time %><br>
+    <%= f.text_field :end_time %>
   </div>
 
   <% i = 0 %>
     <%= f.fields_for :holdings do |ff| %>
       <div class="field">
-        <%= ff.label :symbol %><br>
+        Symbol<%= ff.label :symbol %><br>
         <%= ff.text_field :symbol, :value => @selections[i].symbol %>
       </div>
       <div class="field">
-        <%= ff.label :allocation %><br>
+        Allocation<%= ff.label :allocation %><br>
         <%= ff.number_field :allocation, :value => 0 %>
       </div>
       <%# if ff.object.persisted? %>
@@ -32,9 +40,10 @@
         <%#= ff.label :_destroy, "Destroy" %>
       <%# end %>
     <% i += 1 %>
-    <% end %>
+  <% end %>
+
 
   <div class="actions">
-    <%= f.submit %>
+    Submit:<%= f.submit %>
   </div>
 <% end %>

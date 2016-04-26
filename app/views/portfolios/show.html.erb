@@ -22,24 +22,18 @@
 <%= link_to 'Back', portfolios_path %>
 
 
-<div class="container">
-
-  <%= javascript_tag do %>
-    var stocks = <%= @final %>
-  <% end %>
-
-  <%=@stock_names%>
-  <br>
-  <%=@value%>
-  <br>
-  <%=@allocation%>
-  <br>
-  <%=@total%>
-  <br>
-  <%=@final%>
-
+<div id="chart" class="container">
 
 
 </div>
 
+ <%= javascript_tag do %>
+    var stocks = <%= @final.to_json.html_safe %>
+  <% end %>
+
+<!-- High Chart JavaScript -->
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+<script src="/assets/highcharts.js"></script>
 

@@ -164,19 +164,19 @@ class ApplicationController < ActionController::Base
   def value_allocation(array,allocation)
     temp =[]
     array.map do |a|
-      temp << a * allocation
+      temp << a * allocation.to_f/100
     end
     return temp
   end
 
 # Concatenates  all the stock value arrays together with the dates
-  def zippy(holdings)
+  def zippy(holdings,start_time,end_time)
     @stocks_values = []
     holdings.each do |holding|
-      json = quan("AAPL",@start_date,@end_date) ################################################## holding.symbol
+      json = quan(holding.symbol,start_time,end_time) ################################################## holding.symbol
       @dates = date_array(json)
       value = value_array(json)
-      allocated = value_allocation(value, holding.allocation/100)
+      allocated = value_allocation(value, holding.allocation)
       @stocks_values << allocated
     end
     @total = @stocks_values.transpose.map {|x| x.reduce(:+)}
