@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   skip_before_filter :verify_authenticity_token
   require 'uri'
+  require 'date'
 
 
   def yahoo_table(snp) #also work for DJI
@@ -28,7 +29,6 @@ class ApplicationController < ActionController::Base
       snp_result[t]['year'] = snp_result[t]['date'].year
       snp_result[t]['month'] = snp_result[t]['date'].month-1
       snp_result[t]['day'] = snp_result[t]['date'].day
-
     end
     return snp_result;
   end
@@ -97,13 +97,9 @@ class ApplicationController < ActionController::Base
   end
 
   def nytimes(query, begin_date, end_date)
-    # result = RestClient.get 'http://api.nytimes.com/svc/search/v2/articlesearch.json?callback=svc_search_v2_articlesearch&q=finance&begin_date=20140101&end_date=20150101&sort=oldest&api-key=4135b3b218606cfe437e454cea3fca0f%3A0%3A75109961'
-
-    link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q="+query+"&fq=news_desk:(\"Finance\",\"Business\",\"SundayBusiness\")&begin_date="+begin_date+"&end_date="+end_date+"&api-key=")
-    link += ENV["NYTIMESKEY"]
+    link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{query}&fq=news_desk:('Finance' 'Business' 'SundayBusiness')&begin_date=#{begin_date}&end_date=#{end_date}&api-key=sample-key") ##{ENV["NYTIME_KEY"]}
     result = RestClient.get link
     return result
-
   end
 
   def quan(query, start_date, end_date)
@@ -170,28 +166,81 @@ class ApplicationController < ActionController::Base
   end
 
 # Concatenates  all the stock value arrays together with the dates
-  def zippy(holdings,start_time,end_time)
+  def zippy(holdings,start_date,end_date)
     @stocks_values = []
+    @all_dates = dates(start_date, end_date)
+
     holdings.each do |holding|
-      json = quan(holding.symbol,start_time,end_time) ################################################## holding.symbol
+      json = quan(holding.symbol,start_date,end_date)
       @dates = date_array(json)
       value = value_array(json)
-      allocated = value_allocation(value, holding.allocation)
+      @missing_dates = compare_json_dates_range_dates(@dates, @all_dates)
+      create_value(@missing_dates, value)
+      allocated = value_allocation(value,holding.allocation)
       @stocks_values << allocated
     end
+
     @total = @stocks_values.transpose.map {|x| x.reduce(:+)}
-    @final = @dates.zip(@total)
+    @final = @all_dates.zip(@total)
     return @final
   end
 
-  def index_data(symbol, start_time, end_time)
-    json = quan(symbol,start_time,end_time)
+# Just for the index. No concatenation
+  def index_data(symbol, start_date, end_date)
+    json = quan(symbol,start_date,end_date)
     @dates = date_array(json)
     value = value_array(json)
     @final = @dates.zip(value)
     return @final
   end
 
+# Gives an array of all the days from start to end in [year month day] format
+  def dates(start_date, end_date)
+    @start = start_date.to_date
+    @end = end_date.to_date
+    @array_array_dates = []
+    @range =  (@start..@end)
+
+    @dates = @range.map do |date|
+      @day = date.day
+      @month = date.mon - 1
+      @year = date.year
+      date = []
+      date << @year
+      date << @month
+      date << @day
+      @array_array_dates << date
+    end
+    return @array_array_dates
+  end
+
+# Finds missing days index from the quandl data recieved
+  def compare_json_dates_range_dates(quandl_dates, array_array_dates)
+    need_value = []
+
+    if array_array_dates.length != quandl_dates.length
+      array_array_dates.each_with_index do |date, index|
+        if !quandl_dates.include?(date)
+          need_value <<  index
+        end
+      end
+      return need_value
+    else
+      return need_value
+    end
+  end
+
+# Creates values for those missing days, with the previous day's value
+  def create_value(need_value, value_array)
+    need_value.each do |index|
+      if index == 0
+        value_array.unshift(100)
+      else
+        value_array.insert(index, value_array[index -1])
+      end
+    end
+    return value_array
+  end
 
 # Hold off from deleting
   # def hash_to_array(hash)
