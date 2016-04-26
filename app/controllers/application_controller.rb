@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   skip_before_filter :verify_authenticity_token
   require 'uri'
+  require 'date'
 
 
   def yahoo_table(snp) #also work for DJI
@@ -170,10 +171,11 @@ class ApplicationController < ActionController::Base
   end
 
 # Concatenates  all the stock value arrays together with the dates
-  def zippy(holdings,start_time,end_time)
+  def zippy(holdings,start_date,end_date)
     @stocks_values = []
+    @all_dates = dates(start_date, end_date)
     holdings.each do |holding|
-      json = quan(holding.symbol,start_time,end_time) ################################################## holding.symbol
+      json = quan(holding.symbol,start_date,end_date) ################################################## holding.symbol
       @dates = date_array(json)
       value = value_array(json)
       allocated = value_allocation(value, holding.allocation)
@@ -184,12 +186,33 @@ class ApplicationController < ActionController::Base
     return @final
   end
 
-  def index_data(symbol, start_time, end_time)
-    json = quan(symbol,start_time,end_time)
+  def index_data(symbol, start_date, end_date)
+    json = quan(symbol,start_date,end_date)
     @dates = date_array(json)
     value = value_array(json)
     @final = @dates.zip(value)
     return @final
+  end
+
+  def dates(start_date, end_date)
+    @start = start_date.to_date
+    @end = end_date.to_date
+
+    @array_array_dates = []
+    @range =  (@start..@end)
+    @dates = @range.map do |date|
+      @day = date.day
+      @month = date.mon - 1
+      @year = date.year
+      date = []
+      date << @year
+      date << @month
+      date << @day
+      @array_array_dates << date
+    end
+
+    return @array_array_dates
+
   end
 
 
