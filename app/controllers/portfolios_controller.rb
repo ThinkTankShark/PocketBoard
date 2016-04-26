@@ -49,11 +49,14 @@ class PortfoliosController < ApplicationController
 
   # GET /portfolios/new
   def new
+    session[:index] = nil
+    session[:stock] = nil
     @user = User.find(session[:id])
     @portfolio = Portfolio.new
     @selections = @user.stocks
     num_of_stocks = StocksUser.where(user_id: session[:id]).count
     num_of_stocks.times{@portfolio.holdings.build}
+    @holdings = @portfolio.holdings
   end
 
   # GET /portfolios/1/edit

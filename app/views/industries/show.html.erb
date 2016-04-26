@@ -8,23 +8,45 @@
 <br>
 <br>
 
+<!-- start padding container -->
+    <div class="wrap container">
+        <!-- start jtinder container -->
+        <div id="tinderslide">
+            <ul>
+            <% session[:stocks].each do |stock| %>
+             <% stock.id %>
+                <li class="pane2">
+                    <div class="img"></div>
+                    <div class="stock-info"><p><strong>Name: </strong><%= stock.name %></p><p><strong>Symbol: </strong><span class="stock-symbol"><%= stock.symbol %></span></p></div>
+                    <div class="like"></div>
+                    <div class="dislike"></div>
+                </li>
+                <% end %>
+            </ul>
+        </div>
+        <!-- end jtinder container -->
+    </div>
+    <!-- end padding container -->
 
-  <div id="container">
-    <% @stocks.each do |stock| %>
-    <% stock.id %>
-      <div class="buddy" style="display: block;">
-        <div class="avatar"  style="display: block; background-image: url(/assets/team/4.jpg)"></div>
-        <p style=" color: black">Name:<%= stock.name %></p>
-        <p style=" color: black">Symbol:<%= stock.symbol %></p>
-        <p><%= button_to 'Yes', stocks_users_path, params: {'stock_user[user_id]'=> session[:id],'stock_user[stock_id]' => stock.id},  class: "btn btn-primary yes-button" %></p>
-        <p><%= button_to 'No', industry_path(session[:industry_id]), class: "btn btn-primary no-button" %></p>
-      </div>
-    <% end %>
-  </div>
-  <div id="stock-button">
+    <!-- jTinder trigger by buttons  -->
+    <div class="actions">
+        <a href="#" class="dislike"><i></i></a>
+        <a href="#" class="like"><i></i></a>
         <%= link_to 'Proceed', new_portfolio_path, class: "btn btn-primary" %>
-  </div>
+    </div>
 
+    <!-- jTinder status text  -->
+    <div id="status"></div>
+
+
+    <!-- jQuery lib -->
+    <script type="text/javascript" src="/assets/jquery.min.js"></script>
+    <!-- transform2d lib -->
+    <script type="text/javascript" src="/assets/jquery.transform2d.js"></script>
+    <!-- jTinder lib -->
+    <script type="text/javascript" src="/assets/jquery.jTinder.js"></script>
+    <!-- jTinder initialization script -->
+    <script type="text/javascript" src="/assets/main.js"></script>
 
 <!-- Tinder Card JavaScript -->
 <script src="/assets/card.js"></script>
@@ -32,4 +54,3 @@
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css">
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
 <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
-

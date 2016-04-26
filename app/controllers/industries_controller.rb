@@ -11,17 +11,14 @@ class IndustriesController < ApplicationController
   # GET /industries/1.json
   def show
     session[:industry_id] = params[:id]
-
     if session[:index].nil?
       session[:index] = 0
-    else
-      session[:index] += 1
-    end
 
-    @industry = Industry.find(params[:id])
-    @stocks = @industry.stocks
-    session[:stocks] = @stocks
-    @stock = @stocks[session[:index]]
+      @industry = Industry.find(params[:id])
+      @stocks = @industry.stocks
+      session[:stocks] = @stocks.to_a
+    end
+    # @stock = @stocks[session[:index]]
     # redirect_to
   end
 
@@ -80,6 +77,10 @@ class IndustriesController < ApplicationController
     @industry.update_attribute(:selected, True)
     redirect_to industries_path
 
+  end
+
+  def clear
+    session[:index] = nil
   end
 
   private

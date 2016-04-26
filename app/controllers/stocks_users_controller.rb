@@ -27,31 +27,37 @@ class StocksUsersController < ApplicationController
   # POST /stock_users.json
   def create
 
-    if request.xhr?
-      p "*" * 100
-      p stocks_user_params
-       @stocks_user = StocksUser.new(stocks_user_params)
-       if @stocks_user.save
-         render json: "200"
-       else
-          render json: "500"
-       end
+    if session[:index].nil?
+      session[:index] = 0
     else
-      @stocks_user = StocksUser.new(stocks_user_params)
-      redirect_to industry_path(session[:industry_id])
+      session[:index] += 1
     end
 
+    if request.xhr?
 
-    # respond_to do |format|
-    #   if @stock_user.save
-    #     format.html { redirect_to @stock_user, notice: 'Stock user was successfully created.' }
-    #     format.json { render :show, status: :created, location: @stock_user }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @stock_user.errors, status: :unprocessable_entity }
-    #   end
-    # end
+      @stock_id = Stock.find_by(symbol: params["symbol"]).id
+      @user_id = session[:id]
+      @stocks_user = StocksUser.new(user_id: @user_id, stock_id: @stock_id)
+      session[:stocks].pop
+
+      if @stocks_user.save
+        render json: "200"
+      else
+        render json: "500"
+      end
+    else
+      #redirect_to previous page
+    end
+
   end
+
+    def pass
+      if request.xhr?
+        p "*"*100
+        session[:stocks].pop
+        render json: "200"
+      end
+    end
 
   # PATCH/PUT /stock_users/1
   # PATCH/PUT /stock_users/1.json
