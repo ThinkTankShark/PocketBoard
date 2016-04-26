@@ -25,7 +25,7 @@ var addChart = function(){
              selected : 5
          },
          title : {
-             text : 'Portfolio'
+             text : title
          },
          series : [{
              name : 'Portfolio',

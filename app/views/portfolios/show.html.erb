@@ -27,9 +27,13 @@
 
 </div>
 
- <%= javascript_tag do %>
-    var stocks = <%= @final.to_json.html_safe %>
-  <% end %>
+<%= javascript_tag do %>
+  var stocks = <%= @final.to_json.html_safe %>
+<% end %>
+
+<%= javascript_tag do %>
+  var title = <%= @portfolio.name.to_json.html_safe %>
+<% end %>
 
 <!-- High Chart JavaScript -->
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
