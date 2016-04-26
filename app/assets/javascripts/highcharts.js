@@ -89,13 +89,39 @@ var startChart = function(){
     $.each(names, function (i, name) {
         seriesOptions[i] = {
             name: name,
-            data: data[i]
-        // As we're loading the data asynchronously, we don't know what order it will arrive. So
-        // we keep a counter and create the chart when all the data is loaded.
-        // seriesCounter += 1;
-        // if (seriesCounter === names.length) {
-        //     createChart();
-        // }
+             data: data[i]
+              },
+              {
+                type : 'flags',
+                data : [{
+               x : Date.UTC(2016, 1, 2),
+                    title : 'C',
+                    text : 'Stocks fall on Greece, rate concerns; US dollar dips'
+                }, {
+                    x : Date.UTC(2016, 2, 2),
+                    title : 'D',
+                    text : 'Zimbabwe ditches \'worthless\' currency for the US dollar '
+                }, {
+                    x : Date.UTC(2016, 1, 3),
+                    title : 'E',
+                    text : 'US Dollar Declines Over the Week on Rate Timeline'
+                }, {
+                    x : Date.UTC(2016, 2, 3),
+                    title : 'F',
+                    text : 'Greek Negotiations Take Sharp Turn for Worse, US Dollar set to Rally '
+                }, {
+                    x : Date.UTC(2016, 2, 29),
+                    title : 'G',
+                    text : 'Euro records stunning reversal against dollar'
+                }, {
+                    x : Date.UTC(2016, 3, 30),
+                    title : 'H',
+                    text : 'Surging US dollar curbs global IT spend'
+                }],
+                onSeries : 'dataseries',
+                shape : 'circlepin',
+                width : 16
+
       };
     });
     createChart();
