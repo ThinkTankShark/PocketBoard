@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gem 'dotenv-rails', :groups => [:development, :test]
 
-gem "gon"
-
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-github'

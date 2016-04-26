@@ -3,7 +3,6 @@ $(function () {
         // Create the chart
         $('#test').highcharts('StockChart', {
 
-
             rangeSelector : {
                 selected : 5
             },
@@ -14,7 +13,7 @@ $(function () {
 
             series : [{
                 name : 'AAPL',
-                data : [ [Date.UTC(2015,2,10),1], 
+                data : [ [Date.UTC(2015,2,10),1],
                     [Date.UTC(2015,2,14), 2],
                   [Date.UTC(2015,2,15), 3],
                    [Date.UTC(2015,2,16), 4]
@@ -24,9 +23,7 @@ $(function () {
                 }
             }]
         });
-        
 });
-
 
 var utcdate = function(data){
 
