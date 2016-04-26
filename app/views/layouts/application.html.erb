@@ -26,12 +26,9 @@
   <![endif]-->
   <!-- Add Gon before any JS scripts so we can access the variables without waiting for the entire DOM to load-->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
   <%= csrf_meta_tags %>
-  <%= include_gon(:init => true) %>
-    <%= Gon::Base.render_data({}) %>
+
 </head>
   <body id="page-top" class="index <%= controller_name%> <%=action_name%>">
     <!-- Navigation -->
