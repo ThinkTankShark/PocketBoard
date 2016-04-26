@@ -1,5 +1,6 @@
 class PortfoliosController < ApplicationController
   before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
+  helper_method :hash_to_array
 
   # Sample code to use Quandl gem to made api request
   # =====================================================================================
@@ -32,16 +33,25 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/1
   # GET /portfolios/1.json
   def show
+    @start_date = "2016-01-01"
+    @end_date = "2016-01-08"
+    @stock_symbol ="AAPL"
+
     @portfolio = Portfolio.find(params[:id])
+    @holdings = @portfolio.holdings
+    @portfolio_data = zippy(@holdings,@portfolio.start_time, @portfolio.end_time)
+    @nasdaq= index_data("nasdaq",@portfolio.start_time, @portfolio.end_time)
+    @snp= index_data("snp",@portfolio.start_time, @portfolio.end_time)
+    @dji= index_data("dji",@portfolio.start_time, @portfolio.end_time)
+
   end
 
   # GET /portfolios/new
   def new
-    session[:id] = 1
-    @user = User.find(1)
+    @user = User.find(session[:id])
     @portfolio = Portfolio.new
     @selections = @user.stocks
-    num_of_stocks = StocksUser.where(user_id: 1).count
+    num_of_stocks = StocksUser.where(user_id: session[:id]).count
     num_of_stocks.times{@portfolio.holdings.build}
   end
 
@@ -58,6 +68,7 @@ class PortfoliosController < ApplicationController
     @user.portfolios << @portfolio
     StocksUser.delete_all
     redirect_to portfolios_path
+
 
     # respond_to do |format|
     #   if @portfolio.save
@@ -101,7 +112,7 @@ class PortfoliosController < ApplicationController
     end
 
     def portfolio_params
-      params.require(:portfolio).permit(:name, :user_id, holdings_attributes: [:symbol, :allocation])
+      params.require(:portfolio).permit(:name, :user_id,:start_time,:end_time, holdings_attributes: [:symbol, :allocation])
     end
 
 end

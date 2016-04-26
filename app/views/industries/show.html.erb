@@ -1,22 +1,6 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-      <%= javascript_tag do %>
-            var stocks = <%= @stocks.to_json.html_safe %>
-          <% end %>
-
-
-
-
+<%= javascript_tag do %>
+  var stocks = <%= @stocks.to_json.html_safe %>
+<% end %>
 
 <script src="/assets/card.js"></script>
