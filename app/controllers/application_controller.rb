@@ -184,6 +184,14 @@ class ApplicationController < ActionController::Base
     return @final
   end
 
+  def index_data(symbol, start_time, end_time)
+    json = quan(symbol,start_time,end_time)
+    @dates = date_array(json)
+    value = value_array(json)
+    @final = @dates.zip(value)
+    return @final
+  end
+
 
 # Hold off from deleting
   # def hash_to_array(hash)

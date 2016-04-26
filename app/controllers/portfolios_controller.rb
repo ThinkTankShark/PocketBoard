@@ -39,7 +39,10 @@ class PortfoliosController < ApplicationController
 
     @portfolio = Portfolio.find(params[:id])
     @holdings = @portfolio.holdings
-    @final = zippy(@holdings,@portfolio.start_time, @portfolio.end_time)
+    @portfolio_data = zippy(@holdings,@portfolio.start_time, @portfolio.end_time)
+    @nasdaq= index_data("nasdaq",@portfolio.start_time, @portfolio.end_time)
+    @snp= index_data("snp",@portfolio.start_time, @portfolio.end_time)
+    @dji= index_data("dji",@portfolio.start_time, @portfolio.end_time)
 
   end
 

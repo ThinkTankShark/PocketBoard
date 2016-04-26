@@ -1,26 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @portfolio.name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @portfolio.user %>
-</p>
-
-<p>
-  <strong>Stock:</strong>
-  <%= @portfolio.holdings %>
-  <%= @portfolio.holdings.nil? %>
+<br>
+<br>
+<br>
+<br>
+<p class= "container">
+  <strong>Stocks:</strong>
+  <% if !@portfolio.holdings.nil? %>
+    <% @portfolio.holdings.each do |holding|%>
+      <%= holding.symbol%>
+    <%end%>
+  <%end%>
 <!-- <%#= @portfolio.holdings.first %>
   <%#= @portfolio.holdings.first.allocation %> -->
-</p>
-
+  <br>
 <%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
 <%= link_to 'Back', portfolios_path %>
-
+</p>
 
 <div id="chart" class="container">
 
@@ -28,7 +24,16 @@
 </div>
 
 <%= javascript_tag do %>
-  var stocks = <%= @final.to_json.html_safe %>
+  var stocks = <%= @portfolio_data.to_json.html_safe %>
+<% end %>
+<%= javascript_tag do %>
+  var snp = <%= @snp.to_json.html_safe %>
+<% end %>
+<%= javascript_tag do %>
+  var nasdaq = <%= @nasdaq.to_json.html_safe %>
+<% end %>
+<%= javascript_tag do %>
+  var dji = <%= @dji.to_json.html_safe %>
 <% end %>
 
 <%= javascript_tag do %>
