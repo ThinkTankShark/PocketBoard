@@ -118,7 +118,6 @@ class ApplicationController < ActionController::Base
     else
       stock = Quandl::Dataset.get("WIKI/#{query}").data(params: { start_date: "#{start_date}", end_date: "#{end_date}" }) # ["date", "open", "high", "low", "close", "volume", "ex_dividend", "split_ratio", "adj_open", "adj_high", "adj_low", "adj_close", "adj_volume"]
       stock_result = stock_table(stock)
-      p stock_result
       return stock_result
     end
   end

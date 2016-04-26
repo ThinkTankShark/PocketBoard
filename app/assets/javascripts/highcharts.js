@@ -87,7 +87,7 @@ var startChart = function(){
             text : title
           },
           series: seriesOptions
-          },
+          }
 
       );
     }
