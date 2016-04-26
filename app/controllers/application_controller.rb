@@ -123,6 +123,7 @@ class ApplicationController < ActionController::Base
     else
       stock = Quandl::Dataset.get("WIKI/#{query}").data(params: { start_date: "#{start_date}", end_date: "#{end_date}" }) # ["date", "open", "high", "low", "close", "volume", "ex_dividend", "split_ratio", "adj_open", "adj_high", "adj_low", "adj_close", "adj_volume"]
       stock_result = stock_table(stock)
+      p stock_result
       return stock_result
     end
   end
@@ -175,16 +176,16 @@ class ApplicationController < ActionController::Base
     @stocks_values = []
     @all_dates = dates(start_date, end_date)
     holdings.each do |holding|
-      json = quan(holding.symbol,start_date,end_date) ################################################## holding.symbol
+      json = quan(holding.symbol,start_date,end_date)
       @dates = date_array(json)
       value = value_array(json)
       @missing_dates = compare_json_dates_range_dates(@dates, @all_dates)
       create_value(@missing_dates, value)
-      allocated = value_allocation(value, holding.allocation)
+      allocated = value_allocation(value,holding.allocation)
       @stocks_values << allocated
     end
     @total = @stocks_values.transpose.map {|x| x.reduce(:+)}
-    @final = @dates.zip(@total)
+    @final = @all_dates.zip(@total)
     return @final
   end
 
@@ -195,8 +196,6 @@ class ApplicationController < ActionController::Base
     @final = @dates.zip(value)
     return @final
   end
-
-
 
   def dates(start_date, end_date)
     @start = start_date.to_date
@@ -217,8 +216,8 @@ class ApplicationController < ActionController::Base
   end
 
   def compare_json_dates_range_dates(quandl_dates, array_array_dates)
+    need_value = []
     if array_array_dates.length != quandl_dates.length
-      need_value = []
       array_array_dates.each_with_index do |date, index|
         if !quandl_dates.include?(date)
           need_value <<  index
@@ -230,6 +229,8 @@ class ApplicationController < ActionController::Base
       #start 0
       #if dates dont match for first check value == 100
       #any other dates that don't match set value at previous quandl date
+    else
+      return need_value
     end
   end
 
