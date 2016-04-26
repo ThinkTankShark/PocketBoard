@@ -6,11 +6,11 @@
         <!-- start jtinder container -->
         <div id="tinderslide">
             <ul>
-            <% @stocks.each do |stock| %>
+            <% session[:stocks].each do |stock| %>
              <% stock.id %>
-                <li class="pane1">
+                <li class="pane2">
                     <div class="img"></div>
-                    <div><p><strong>Name: </strong><%= stock.name %></p><p><strong>Symbol: </strong><%= stock.symbol %></p></div>
+                    <div class="stock-info"><p><strong>Name: </strong><%= stock.name %></p><p><strong>Symbol: </strong><span class="stock-symbol"><%= stock.symbol %></span></p></div>
                     <div class="like"></div>
                     <div class="dislike"></div>
                 </li>
@@ -25,10 +25,12 @@
     <div class="actions">
         <a href="#" class="dislike"><i></i></a>
         <a href="#" class="like"><i></i></a>
+        <%= link_to 'Proceed', new_portfolio_path, class: "btn btn-primary" %>
     </div>
 
     <!-- jTinder status text  -->
     <div id="status"></div>
+
 
     <!-- jQuery lib -->
     <script type="text/javascript" src="/assets/jquery.min.js"></script>

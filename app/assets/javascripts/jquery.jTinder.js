@@ -57,6 +57,12 @@
 			panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {
 				if($that.settings.onDislike) {
 					$that.settings.onDislike(panes.eq(current_pane));
+
+					var jqXHR = $.ajax({
+						url: '/pass',
+						type: "get"
+					});
+
 				}
 				$that.next();
 			});
@@ -66,7 +72,16 @@
 			panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (pane_width*-1.5) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
 				if($that.settings.onLike) {
 					$that.settings.onLike(panes.eq(current_pane));
+					// debugger;
+					var stockSymbol = $('.stock-symbol', this).text();
+
+					var jqXHR = $.ajax({
+						url: '/stocks_users',
+						type: "post",
+						data: {symbol: stockSymbol}
+					});
 				}
+
 				$that.next();
 			});
 		},
@@ -131,14 +146,25 @@
 							panes.eq(current_pane).animate({"transform": "translate(" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(60deg)"}, $that.settings.animationSpeed, function () {
 								if($that.settings.onLike) {
 									$that.settings.onLike(panes.eq(current_pane));
+									// debugger
+									var stockSymbol = $('.stock-symbol', this).text();
+
+									var jqXHR = $.ajax({
+										url: '/stocks_users',
+										type: "post",
+										data: {symbol: stockSymbol}
+									});
 								}
+
 								$that.next();
 							});
 						} else {
 							panes.eq(current_pane).animate({"transform": "translate(-" + (pane_width) + "px," + (posY + pane_width) + "px) rotate(-60deg)"}, $that.settings.animationSpeed, function () {
 								if($that.settings.onDislike) {
 									$that.settings.onDislike(panes.eq(current_pane));
+
 								}
+
 								$that.next();
 							});
 						}
