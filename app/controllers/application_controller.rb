@@ -178,6 +178,8 @@ class ApplicationController < ActionController::Base
       json = quan(holding.symbol,start_date,end_date) ################################################## holding.symbol
       @dates = date_array(json)
       value = value_array(json)
+      @missing_dates = compare_json_dates_range_dates(@dates, @all_dates)
+      create_value(@missing_dates, value)
       allocated = value_allocation(value, holding.allocation)
       @stocks_values << allocated
     end
@@ -199,7 +201,6 @@ class ApplicationController < ActionController::Base
   def dates(start_date, end_date)
     @start = start_date.to_date
     @end = end_date.to_date
-
     @array_array_dates = []
     @range =  (@start..@end)
     @dates = @range.map do |date|
@@ -212,9 +213,7 @@ class ApplicationController < ActionController::Base
       date << @day
       @array_array_dates << date
     end
-
     return @array_array_dates
-
   end
 
   def compare_json_dates_range_dates(quandl_dates, array_array_dates)
@@ -242,7 +241,7 @@ class ApplicationController < ActionController::Base
         value_array.insert(index, value_array[index -1])
       end
     end
-
+    return value_array
   end
 
   #method check which dates are not present in the quandl response
