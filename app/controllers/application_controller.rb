@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  skip_before_filter :verify_authenticity_token  
+  skip_before_filter :verify_authenticity_token
   require 'uri'
 
 
@@ -126,6 +126,93 @@ class ApplicationController < ActionController::Base
     end
   end
 
+# Convert quandl api json date information into array of arrays with [month, day, year]
+  def date_array(hash)
+    array = []
+    hash.each do |h|
+      temp =[]
+      h.each do |key,value|
+        if key == "month"
+          temp << value
+        end
+        if key == "day"
+          temp << value
+        end
+        if key == "year"
+          temp << value
+        end
+      end
+      array << temp
+    end
+    return array
+  end
+
+#  Convert quandl api json value information into array
+  def value_array(hash)
+    array = []
+    hash.each do |h|
+      h.each do |key,value|
+        if key == "value"
+          array << value
+        end
+      end
+    end
+    return array
+  end
+
+# Multiply the values by the allocation given i.e. 100 * 0.33 = 33
+  def value_allocation(array,allocation)
+    temp =[]
+    array.map do |a|
+      temp << a * allocation.to_f/100
+    end
+    return temp
+  end
+
+# Concatenates  all the stock value arrays together with the dates
+  def zippy(holdings,start_time,end_time)
+    @stocks_values = []
+    holdings.each do |holding|
+      json = quan(holding.symbol,start_time,end_time) ################################################## holding.symbol
+      @dates = date_array(json)
+      value = value_array(json)
+      allocated = value_allocation(value, holding.allocation)
+      @stocks_values << allocated
+    end
+    @total = @stocks_values.transpose.map {|x| x.reduce(:+)}
+    @final = @dates.zip(@total)
+    return @final
+  end
+
+  def index_data(symbol, start_time, end_time)
+    json = quan(symbol,start_time,end_time)
+    @dates = date_array(json)
+    value = value_array(json)
+    @final = @dates.zip(value)
+    return @final
+  end
+
+
+# Hold off from deleting
+  # def hash_to_array(hash)
+  #   array = []
+  #   hash.each do |h|
+  #     temp =[]
+  #     h.each do |key,value|
+  #       if key == "value"
+  #         temp << value
+  #       end
+  #     end
+  #     array <<temp
+  #   end
+  #   array.each do |a|
+  #     a.delete_at(1)
+  #     a.delete_at(1)
+  #   end
+  #   return array
+  # end
+
+
   # def highchartarray(quan_result)
   #   data = []
   #   num_of_day = quan_result.length
@@ -137,5 +224,5 @@ class ApplicationController < ActionController::Base
   #   end
   #   return data
   # end
-  
+
 end

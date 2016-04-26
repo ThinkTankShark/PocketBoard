@@ -59,6 +59,10 @@ var yesButtonListener = function() {
     request.done(function(response){
       $(this.other).parent().parent().parent().addClass('rotate-left').delay(700).fadeOut(1);
     })
+
+    request.fail(function(response){
+      console.log("failed")
+    });
   });
 }
 

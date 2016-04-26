@@ -4,9 +4,9 @@
 
         <div id="industry">
           <% @industries.each do |i| %>
-            <h2 style="opacity: 0.5;"><strike><a href=" /industries/<%= i.id %>"><%= i.name %></a></strike></h2>
+            <h2 style="opacity: 0.5;"><a href=" /industries/<%= i.id %>"><%= i.name %></a></h2>
             <%= link_to industry_path(i), method: :patch do %>
-              <i class="fa fa-lg fa-check"></i>
+              <!-- <i class="fa fa-lg fa-check"></i> -->
             <% end %>
           <% end %>
         </div>

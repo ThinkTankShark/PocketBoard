@@ -1,7 +1,7 @@
 class StocksUsersController < ApplicationController
   before_action :set_stock_user, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token
-  
+
   # GET /stock_users
   # GET /stock_users.json
   def index
@@ -28,6 +28,8 @@ class StocksUsersController < ApplicationController
   def create
 
     if request.xhr?
+      p "*" * 100
+      p stocks_user_params
        @stocks_user = StocksUser.new(stocks_user_params)
        if @stocks_user.save
          render json: "200"
@@ -36,7 +38,7 @@ class StocksUsersController < ApplicationController
        end
     else
       @stocks_user = StocksUser.new(stocks_user_params)
-      redirect_to @stock_user
+      redirect_to industry_path(session[:industry_id])
     end
 
 
@@ -55,12 +57,12 @@ class StocksUsersController < ApplicationController
   # PATCH/PUT /stock_users/1.json
   def update
     respond_to do |format|
-      if @stock_user.update(stock_user_params)
-        format.html { redirect_to @stock_user, notice: 'Stock user was successfully updated.' }
-        format.json { render :show, status: :ok, location: @stock_user }
+      if @stocks_user.update(stock_user_params)
+        format.html { redirect_to @stocks_user, notice: 'Stock user was successfully updated.' }
+        format.json { render :show, status: :ok, location: @stocks_user }
       else
         format.html { render :edit }
-        format.json { render json: @stock_user.errors, status: :unprocessable_entity }
+        format.json { render json: @stocks_user.errors, status: :unprocessable_entity }
       end
     end
   end
