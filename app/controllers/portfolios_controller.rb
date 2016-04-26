@@ -28,6 +28,7 @@ class PortfoliosController < ApplicationController
       @user = User.find(session[:id])
       @portfolios = @user.portfolios
     end
+    @news =nytimes("Nasdaq", "20160101", "20160420" )
   end
 
   # GET /portfolios/1

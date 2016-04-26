@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
       snp_result[t]['year'] = snp_result[t]['date'].year
       snp_result[t]['month'] = snp_result[t]['date'].month-1
       snp_result[t]['day'] = snp_result[t]['date'].day
-
     end
     return snp_result;
   end
@@ -98,13 +97,9 @@ class ApplicationController < ActionController::Base
   end
 
   def nytimes(query, begin_date, end_date)
-    # result = RestClient.get 'http://api.nytimes.com/svc/search/v2/articlesearch.json?callback=svc_search_v2_articlesearch&q=finance&begin_date=20140101&end_date=20150101&sort=oldest&api-key=4135b3b218606cfe437e454cea3fca0f%3A0%3A75109961'
-
-    link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q="+query+"&fq=news_desk:(\"Finance\",\"Business\",\"SundayBusiness\")&begin_date="+begin_date+"&end_date="+end_date+"&api-key=")
-    link += ENV["NYTIMESKEY"]
+    link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{query}&fq=news_desk:('Finance' 'Business' 'SundayBusiness')&begin_date=#{begin_date}&end_date=#{end_date}&api-key=sample-key") ##{ENV["NYTIME_KEY"]}
     result = RestClient.get link
     return result
-
   end
 
   def quan(query, start_date, end_date)
@@ -175,6 +170,7 @@ class ApplicationController < ActionController::Base
   def zippy(holdings,start_date,end_date)
     @stocks_values = []
     @all_dates = dates(start_date, end_date)
+
     holdings.each do |holding|
       json = quan(holding.symbol,start_date,end_date)
       @dates = date_array(json)
@@ -184,11 +180,13 @@ class ApplicationController < ActionController::Base
       allocated = value_allocation(value,holding.allocation)
       @stocks_values << allocated
     end
+
     @total = @stocks_values.transpose.map {|x| x.reduce(:+)}
     @final = @all_dates.zip(@total)
     return @final
   end
 
+# Just for the index. No concatenation
   def index_data(symbol, start_date, end_date)
     json = quan(symbol,start_date,end_date)
     @dates = date_array(json)
@@ -197,11 +195,13 @@ class ApplicationController < ActionController::Base
     return @final
   end
 
+# Gives an array of all the days from start to end in [year month day] format
   def dates(start_date, end_date)
     @start = start_date.to_date
     @end = end_date.to_date
     @array_array_dates = []
     @range =  (@start..@end)
+
     @dates = @range.map do |date|
       @day = date.day
       @month = date.mon - 1
@@ -215,8 +215,10 @@ class ApplicationController < ActionController::Base
     return @array_array_dates
   end
 
+# Finds missing days index from the quandl data recieved
   def compare_json_dates_range_dates(quandl_dates, array_array_dates)
     need_value = []
+
     if array_array_dates.length != quandl_dates.length
       array_array_dates.each_with_index do |date, index|
         if !quandl_dates.include?(date)
@@ -224,16 +226,12 @@ class ApplicationController < ActionController::Base
         end
       end
       return need_value
-      #figure out which day did not have a stock value
-      #two counters one for each input
-      #start 0
-      #if dates dont match for first check value == 100
-      #any other dates that don't match set value at previous quandl date
     else
       return need_value
     end
   end
 
+# Creates values for those missing days, with the previous day's value
   def create_value(need_value, value_array)
     need_value.each do |index|
       if index == 0
@@ -244,13 +242,6 @@ class ApplicationController < ActionController::Base
     end
     return value_array
   end
-
-  #method check which dates are not present in the quandl response
-
-  #add value for the dates that weren't present
-
-
-
 
 # Hold off from deleting
   # def hash_to_array(hash)
