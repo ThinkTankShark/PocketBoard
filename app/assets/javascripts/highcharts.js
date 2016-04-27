@@ -19,9 +19,11 @@ $(document).ready(function(){
   for (var i=0; i < dji.length; i++){
     dji[i][0] = utcdate(dji[i][0]);
   }
-
-  articles = jQuery.parseJSON(articles)
-  var docs = articles.response.docs
+  for (var i = 0; i < articles.length; i++){
+    articles[i][1] = jQuery.parseJSON(articles[i][1])
+  }
+  // articles = jQuery.parseJSON(articles)
+  // var docs = articles.response.docs
 
 debugger;
   startChart();
@@ -154,15 +156,19 @@ var startChart = function(){
         // }
       }
     });
-    seriesOptions.push({
-              type: 'flags',
-              data: [{
-                x : Date.parse(articles.response.docs[1].pub_date),
-                title: articles.response.docs[1].headline.main,
-                url: articles.response.docs[1].web_url
-              }],
-              onSeries: 1
-              })
+    for (var i = 0; i < articles.length; i++){
+      for (var j =0; j <articles[i][1].response.docs.length; j++){
+        seriesOptions.push({
+                type: 'flags',
+                data: [{
+                  x : Date.parse(articles[i][1].response.docs[j].pub_date),
+                  title: articles[i][0],
+                  url: articles[i][1].response.docs[j].web_url
+                }],
+                onSeries: 1
+                })
+      }
+    }
     createChart();
   });
 
