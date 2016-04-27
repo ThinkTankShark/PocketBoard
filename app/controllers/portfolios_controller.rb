@@ -28,7 +28,6 @@ class PortfoliosController < ApplicationController
       @user = User.find(session[:id])
       @portfolios = @user.portfolios
     end
-
   end
 
   # GET /portfolios/1
@@ -43,7 +42,7 @@ class PortfoliosController < ApplicationController
     @news = []
     @holdings.each do |holding|
       name =Stock.find_by(symbol: holding.symbol).name
-      @news << [name, nytimes(name, @portfolio.start_time.tr('-',''), @portfolio.end_time.tr('-','') )]
+      @news << [holding.symbol, nytimes(name, @portfolio.start_time.tr('-',''), @portfolio.end_time.tr('-','') )]
     end
     # @news =nytimes(Stock.find_by(symbol: @holdings[0].symbol).name, @portfolio.start_time.tr('-',''), @portfolio.end_time.tr('-','') )
 
@@ -63,6 +62,7 @@ class PortfoliosController < ApplicationController
 
   # GET /portfolios/1/edit
   def edit
+
   end
 
   # POST /portfolios
