@@ -8,7 +8,7 @@
             <% session[:stocks].each do |stock| %>
              <% stock.id %>
                 <li class="pane2">
-                    <div class="img"></div>
+                    <div><img src="<%= stock.image_url  %>"></div>
                     <div class="stock-info"><p><strong>Name: </strong><%= stock.name %></p><p><strong>Symbol: </strong><span class="stock-symbol"><%= stock.symbol %></span></p></div>
                     <div class="like"></div>
                     <div class="dislike"></div>
