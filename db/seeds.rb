@@ -65,7 +65,9 @@ nasdaq_stocks = parse_csv('nasdaq.csv')
 nasdaq_stocks.each do |stock|
   new_stock = Stock.new(symbol: stock["Symbol"],
    name: stock["Name"],
-   sector: stock["Sector"])
+   sector: stock["Sector"],
+   image_url: "http://logo.clearbit.com/#{stock["Name"].downcase.chomp.split(" ")[0]}.com"
+   )
 
   sector = Industry.find_by(name: "#{new_stock.sector}")
   sector.stocks << new_stock
@@ -80,10 +82,10 @@ StocksUser.create(user_id: 1, stock_id: 4)
 
 @s = Stock.all
 
-@s.each do |a|
-   a.image_url = "http://logo.clearbit.com/#{a.name.downcase.chomp.split(" ")[0]}.com"
-   a.save
-end
+# @s.each do |a|
+#    a.image_url = "http://logo.clearbit.com/#{a.name.downcase.chomp.split(" ")[0]}.com"
+#    a.save
+# end
 
 # symbols = ["TFSC", "TFSCR", "TFSCU", "TFSCW", "PIH", "FLWS",
 #  "FCTY", "FCCY", "SRCE", "VNET", "TWOU", "JOBS", "CAFD", "EGHT",
@@ -266,4 +268,4 @@ end
     # @stocks_values << allocated1
     # @stocks_values << allocated2
     # @stocks_values << allocated3
->>>>>>> 66a0d5aee029b33998c6b93d6562b04594a78edb
+
