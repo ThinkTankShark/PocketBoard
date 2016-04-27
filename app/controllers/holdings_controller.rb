@@ -1,5 +1,5 @@
 class HoldingsController < ApplicationController
-  skip_before_filter :verify_authenticity_token  
+  skip_before_filter :verify_authenticity_token
   def create
     @holding = Holding.new(holding_params)
     @stock = Stock.find_by(symbol: @holding.symbol)

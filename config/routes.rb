@@ -23,4 +23,7 @@ Rails.application.routes.draw do
   resources :sessions, only: ["create", "destroy"]
 
   get 'test', to: 'page#test'
+
+  get "portfolios/:id/fetch", :to => "portfolios#fetch"
+  
 end

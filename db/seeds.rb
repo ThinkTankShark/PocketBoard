@@ -13,7 +13,7 @@ sectors = [
 "Public Utilities",
 "Technology",
 "Transportation",
-"N/A"
+"n/a"
 ]
 
 

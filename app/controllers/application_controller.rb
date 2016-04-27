@@ -97,7 +97,7 @@ class ApplicationController < ActionController::Base
   end
 
   def nytimes(query, begin_date, end_date)
-    link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{query}&fq=news_desk:(\"Finance\", \"Business\", \"SundayBusiness\")&begin_date=#{begin_date}&end_date=#{end_date}&api-key=") ##{ENV["NYTIME_KEY"]}
+    link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{query}&fq=news_desk:(\"Finance\", \"Business\", \"SundayBusiness\")&begin_date=#{begin_date}&end_date=#{end_date}&api-key=")
     link = link +ENV['KEY']
     result = RestClient.get link
 
@@ -189,10 +189,13 @@ class ApplicationController < ActionController::Base
 
 # Just for the index. No concatenation
   def index_data(symbol, start_date, end_date)
+    @all_dates = dates(start_date, end_date)
     json = quan(symbol,start_date,end_date)
     @dates = date_array(json)
     value = value_array(json)
-    @final = @dates.zip(value)
+    @missing_dates = compare_json_dates_range_dates(@dates, @all_dates)
+    create_value(@missing_dates, value)
+    @final = @all_dates.zip(value)
     return @final
   end
 
