@@ -60,7 +60,7 @@ class PortfoliosController < ApplicationController
       @dji= index_data("dji",@portfolio.start_time, @portfolio.end_time)
 
       @news =nytimes("Yahoo", "20150928", "20150929" )
-      render :json => {"stocks" => @portfolio_data, "snp" => @snp, "nasdaq" => @nasdaq, "dji" => @dji, "title" => @portfolio.name, "articles" => @news }
+      render :json => {"stocks" => @portfolio_data, "snp" => @snp, "nasdaq" => @nasdaq, "dji" => @dji, "title" => @portfolio.name, "articles" => @news, "holdings" => @holdings }
     end
   end
 

@@ -7,8 +7,6 @@ $(document).ready(function(){
 
     return Date.UTC(year, month, day)
   };
-
-
   
 
   var portfolio_id = $( '.hidden_portfolio_id' ).text();
@@ -20,7 +18,14 @@ $(document).ready(function(){
   });
 
   request.done(function(response){
-    console.log("GOOD!");
+
+    var data_for_pie = [];
+
+    for (var i=0; i < response["holdings"].length; i++){
+    data_for_pie.push({name: response["holdings"][i]["symbol"],
+        y: response["holdings"][i]["allocation"]})
+    }
+
 
     for (var i=0; i < response["stocks"].length; i++){
       response["stocks"][i][0] = utcdate(response["stocks"][i][0]);
@@ -35,18 +40,16 @@ $(document).ready(function(){
       response["dji"][i][0] = utcdate(response["dji"][i][0]);
     }
 
-    debugger;
-
-
     response["articles"] = jQuery.parseJSON(response["articles"])
     var docs = response["articles"].response.docs
 
-    startChart(response["stocks"],response["nasdaq"],response["snp"],response["dji"],response["articles"]);
-
+    startChart(response["stocks"],response["nasdaq"],response["snp"],response["dji"],response["articles"],response["title"]);
+    startPieChart(data_for_pie)
+    
   });
 
   request.fail(function(){
-    console.log("failed");
+    console.log("request failed");
 
   });
 
@@ -81,7 +84,67 @@ $(document).ready(function(){
 //   });
 // }
 
-var startChart = function(stocks,nasdaq,snp,dji,articles){
+var startPieChart = function(data_for_pie){
+  $(function () {
+  $('#container').highcharts({
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'Look I am a Pie chart for your portfolio'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+          style: {
+            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+          }
+        }
+      }
+    },
+    series: [{
+      name: 'Brands',
+      colorByPoint: true,
+      data: data_for_pie
+
+
+      // }, {
+      //     name: 'Chrome',
+      //     y: 24.03,
+      //     sliced: true,
+      //     selected: true
+      // }, {
+      //     name: 'Firefox',
+      //     y: 10.38
+      // }, {
+      //     name: 'Safari',
+      //     y: 4.77
+      // }, {
+      //     name: 'Opera',
+      //     y: 0.91
+      // }, {
+      //     name: 'Proprietary or Undetectable',
+      //     y: 0.2
+
+
+
+    }]
+  });
+  });
+};
+
+
+var startChart = function(stocks,nasdaq,snp,dji,articles,title){
   $(function () {
       var seriesOptions = [],
           seriesCounter = 0,
