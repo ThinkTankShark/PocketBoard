@@ -49,6 +49,10 @@ class PortfoliosController < ApplicationController
 
   end
 
+  #Get /portfolios/getting_started
+  def getting_started
+  end
+
   # GET /portfolios/new
   def new
     session[:index] = nil
