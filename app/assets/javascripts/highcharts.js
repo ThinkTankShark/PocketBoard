@@ -19,6 +19,11 @@ $(document).ready(function(){
   for (var i=0; i < dji.length; i++){
     dji[i][0] = utcdate(dji[i][0]);
   }
+
+  articles = jQuery.parseJSON(articles)
+  var docs = articles.response.docs
+
+debugger;
   startChart();
 
 });
@@ -86,23 +91,79 @@ var startChart = function(){
           title : {
             text : title
           },
-          series: seriesOptions
-          }
+          plotOptions:{
+                flags:{
+                    point:{
+                    events:{
+                        click:function(e){
+                            e.preventDefault();
+
+                            var url = this.url;
+
+                            window.open(url,'_blank');
+                        }
+                    }
+                    }
+                }
+            },
+            series: seriesOptions
+          // series: [{
+          //   name: "portfolio",
+          //   data: stocks,
+          //   id: "portfolio"
+          // },
+          // {
+          //   name: "NASDAQ",
+          //   data: nasdaq,
+          //   id: "nasdaq"
+          // },
+          // {
+          //   name: "SNP",
+          //   data: snp,
+          //   id: "snp"
+          // },
+          // {
+          //   name: "DJI",
+          //   data: dji,
+          //   id: "dji"
+          // },
+          // {
+          //   type: 'flags',
+          //   data: [{
+          //     x: Date.UTC(2015,8,28),
+          //     // x : articles.response.docs[0].pub_date,
+          //     title: articles.response.docs[0].headline.main,
+          //     url: articles.response.docs[0].web_url
+          //   }],
+          //   onSeries: 'portfolio'
+          // }]
+        }
 
       );
     }
     $.each(names, function (i, name) {
         seriesOptions[i] = {
             name: name,
-            data: data[i]
+            data: data[i],
+            id: i + 1
         // As we're loading the data asynchronously, we don't know what order it will arrive. So
         // we keep a counter and create the chart when all the data is loaded.
         // seriesCounter += 1;
         // if (seriesCounter === names.length) {
         //     createChart();
         // }
-      };
+      }
     });
+    seriesOptions.push({
+              type: 'flags',
+              data: [{
+                x : Date.parse(articles.response.docs[1].pub_date),
+                title: articles.response.docs[1].headline.main,
+                url: articles.response.docs[1].web_url
+              }],
+              onSeries: 1
+              })
     createChart();
   });
+
 };
