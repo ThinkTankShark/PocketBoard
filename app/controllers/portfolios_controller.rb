@@ -28,7 +28,7 @@ class PortfoliosController < ApplicationController
       @user = User.find(session[:id])
       @portfolios = @user.portfolios
     end
-    @news =nytimes("Nasdaq", "20160101", "20160420" )
+
   end
 
   # GET /portfolios/1
@@ -44,6 +44,8 @@ class PortfoliosController < ApplicationController
     @nasdaq= index_data("nasdaq",@portfolio.start_time, @portfolio.end_time)
     @snp= index_data("snp",@portfolio.start_time, @portfolio.end_time)
     @dji= index_data("dji",@portfolio.start_time, @portfolio.end_time)
+
+    @news =nytimes("Yahoo", "20150928", "20150929" )
 
   end
 

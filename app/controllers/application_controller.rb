@@ -97,8 +97,10 @@ class ApplicationController < ActionController::Base
   end
 
   def nytimes(query, begin_date, end_date)
-    link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{query}&fq=news_desk:('Finance' 'Business' 'SundayBusiness')&begin_date=#{begin_date}&end_date=#{end_date}&api-key=sample-key") ##{ENV["NYTIME_KEY"]}
+    link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{query}&fq=news_desk:(\"Finance\", \"Business\", \"SundayBusiness\")&begin_date=#{begin_date}&end_date=#{end_date}&api-key=") ##{ENV["NYTIME_KEY"]}
+    link = link +ENV['KEY']
     result = RestClient.get link
+
     return result
   end
 
