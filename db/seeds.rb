@@ -64,7 +64,8 @@ nasdaq_stocks.each do |stock|
   new_stock = Stock.new(symbol: stock["Symbol"],
    name: stock["Name"],
    sector: stock["Sector"],
-   image_url: "http://logo.clearbit.com/#{stock["Name"].downcase.chomp.split(" ")[0]}.com"
+   image_url: "http://www.nasdaq.com/logos/#{stock["Symbol"]}.gif"
+   # "http://logo.clearbit.com/#{stock["Name"].downcase.chomp.split(" ")[0]}.com"
    )
 
   sector = Industry.find_by(name: "#{new_stock.sector}")
