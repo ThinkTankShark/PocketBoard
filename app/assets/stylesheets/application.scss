@@ -22,7 +22,33 @@
   margin: 0 auto;
 }
 
-// industry/index.html
+// industries/index.html
 .industry-btn {
   display: inline-block;
 }
+
+//industries/:id
+ul.tinder-layout {
+  text-align: center;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.tinder-wrapper {
+  text-align: center;
+}
+.tinder-btn {
+  width: 50%;
+  display: inline-block;
+}
+
+div.actions.tinder-layout.tinder-btn {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+li.pane2 {
+  display: inline-block;
+  text-align: center;
+}
+

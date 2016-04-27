@@ -12,7 +12,8 @@ sectors = [
 "Miscellaneous",
 "Public Utilities",
 "Technology",
-"Transportation"
+"Transportation",
+"N/A"
 ]
 
 
