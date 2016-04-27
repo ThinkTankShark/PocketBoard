@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   resources :industries, only: ["index", "show"]
 
   resources :sessions, only: ["create", "destroy"]
+
+  get 'test', to: 'page#test'
 end
