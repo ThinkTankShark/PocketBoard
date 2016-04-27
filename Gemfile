@@ -15,6 +15,8 @@ gem 'rails'
 gem 'pg'
 gem 'bcrypt'
 
+gem 'angularjs-rails'
+
 gem 'activerecord-session_store'
 
 gem 'font-awesome-sass'

@@ -56,6 +56,8 @@ class PortfoliosController < ApplicationController
     end
   end
 
+  def getting_started
+  end
 
   # GET /portfolios/new
   def new

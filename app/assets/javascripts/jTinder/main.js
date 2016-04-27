@@ -5,12 +5,12 @@ $("#tinderslide").jTinder({
 	// dislike callback
     onDislike: function (item) {
 	    // set the status text
-        $('#status').html('Dislike image ' + (item.index()+1));
+        $('#status').html('Remaining Stocks: ' + (item.index()+1));
     },
 	// like callback
     onLike: function (item) {
 	    // set the status text
-        $('#status').html('Remaing Stocks: ' + (item.index()+1));
+        $('#status').html('Remaining Stocks: ' + (item.index()+1));
     },
 	animationRevertSpeed: 200,
 	animationSpeed: 400,
