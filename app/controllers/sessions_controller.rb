@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(params[:email])
     if @user.password == params[:password]
       session[:id] = @user.id
-      redirect_to '/'
+      redirect_to '/portfolios'
     else
       redirect_to '/'
     end

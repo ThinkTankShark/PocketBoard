@@ -529,10 +529,12 @@ section h3.section-subheading {
 .team-member {
   text-align: center;
   margin-bottom: 50px;
+  width: 200px;
 }
 .team-member img {
   margin: 0 auto;
   border: 7px solid white;
+  display: inline-block;
 }
 .team-member h4 {
   margin-top: 25px;
