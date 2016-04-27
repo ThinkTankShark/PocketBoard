@@ -1,4 +1,19 @@
 $(document).ready(function(){
+
+
+  $(".sk-folding-cube").hide();
+
+
+  // show spinner on AJAX start
+  $(document).ajaxStart(function(){
+    $(".sk-folding-cube").show();
+  });
+
+  // hide spinner on AJAX stop
+  $(document).ajaxStop(function(){
+    $(".sk-folding-cube").hide();
+  });
+
   var utcdate = function(data){
 
     var year = data[0];
@@ -7,24 +22,55 @@ $(document).ready(function(){
 
     return Date.UTC(year, month, day)
   };
-  for (var i=0; i < stocks.length; i++){
-    stocks[i][0] = utcdate(stocks[i][0]);
-  }
-  for (var i=0; i < nasdaq.length; i++){
-    nasdaq[i][0] = utcdate(nasdaq[i][0]);
-  }
-  for (var i=0; i < snp.length; i++){
-    snp[i][0] = utcdate(snp[i][0]);
-  }
-  for (var i=0; i < dji.length; i++){
-    dji[i][0] = utcdate(dji[i][0]);
-  }
+  
 
-  articles = jQuery.parseJSON(articles)
-  var docs = articles.response.docs
+  var portfolio_id = $( '.hidden_portfolio_id' ).text();
 
-debugger;
-  startChart();
+
+  var request = $.ajax({
+    url: `/portfolios/${portfolio_id}/fetch`,
+    type: "GET"
+  });
+
+  request.done(function(response){
+
+    // prepare data for pie chart
+    var data_for_pie = [];
+
+    for (var i=0; i < response["holdings"].length; i++){
+    data_for_pie.push({name: response["holdings"][i]["symbol"],
+        y: response["holdings"][i]["allocation"]})
+    }
+
+    // prepare data for stock charts
+    for (var i=0; i < response["stocks"].length; i++){
+      response["stocks"][i][0] = utcdate(response["stocks"][i][0]);
+    }
+    for (var i=0; i < response["nasdaq"].length; i++){
+      response["nasdaq"][i][0] = utcdate(response["nasdaq"][i][0]);
+    }
+    for (var i=0; i < response["snp"].length; i++){
+      response["snp"][i][0] = utcdate(response["snp"][i][0]);
+    }
+    for (var i=0; i < response["dji"].length; i++){
+      response["dji"][i][0] = utcdate(response["dji"][i][0]);
+    }
+
+    // prepare data for news
+    response["articles"] = jQuery.parseJSON(response["articles"])
+    var docs = response["articles"].response.docs
+
+    // construct both charts
+    startChart(response["stocks"],response["nasdaq"],response["snp"],response["dji"],response["articles"],response["title"]);
+    startPieChart(data_for_pie)
+
+  });
+
+
+  request.fail(function(){
+    console.log("request failed");
+
+  });
 
 });
 
@@ -52,7 +98,67 @@ debugger;
 //   });
 // }
 
-var startChart = function(){
+var startPieChart = function(data_for_pie){
+  $(function () {
+  $('#container').highcharts({
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: 'Look I am a Pie chart for your portfolio'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+          style: {
+            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+          }
+        }
+      }
+    },
+    series: [{
+      name: 'Brands',
+      colorByPoint: true,
+      data: data_for_pie
+
+
+      // }, {
+      //     name: 'Chrome',
+      //     y: 24.03,
+      //     sliced: true,
+      //     selected: true
+      // }, {
+      //     name: 'Firefox',
+      //     y: 10.38
+      // }, {
+      //     name: 'Safari',
+      //     y: 4.77
+      // }, {
+      //     name: 'Opera',
+      //     y: 0.91
+      // }, {
+      //     name: 'Proprietary or Undetectable',
+      //     y: 0.2
+
+
+
+    }]
+  });
+  });
+};
+
+
+var startChart = function(stocks,nasdaq,snp,dji,articles,title){
   $(function () {
       var seriesOptions = [],
           seriesCounter = 0,

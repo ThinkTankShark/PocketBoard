@@ -40,14 +40,30 @@ class PortfoliosController < ApplicationController
 
     @portfolio = Portfolio.find(params[:id])
     @holdings = @portfolio.holdings
-    @portfolio_data = zippy(@holdings,@portfolio.start_time, @portfolio.end_time)
-    @nasdaq= index_data("nasdaq",@portfolio.start_time, @portfolio.end_time)
-    @snp= index_data("snp",@portfolio.start_time, @portfolio.end_time)
-    @dji= index_data("dji",@portfolio.start_time, @portfolio.end_time)
+    # @portfolio_data = zippy(@holdings,@portfolio.start_time, @portfolio.end_time)
+    # @nasdaq= index_data("nasdaq",@portfolio.start_time, @portfolio.end_time)
+    # @snp= index_data("snp",@portfolio.start_time, @portfolio.end_time)
+    # @dji= index_data("dji",@portfolio.start_time, @portfolio.end_time)
 
-    @news =nytimes("Yahoo", "20150928", "20150929" )
+    # @news =nytimes("Yahoo", "20150928", "20150929" )
 
   end
+
+  def fetch
+
+    if request.xhr?
+      @portfolio = Portfolio.find(params[:id])
+      @holdings = @portfolio.holdings
+      @portfolio_data = zippy(@holdings,@portfolio.start_time, @portfolio.end_time)
+      @nasdaq= index_data("nasdaq",@portfolio.start_time, @portfolio.end_time)
+      @snp= index_data("snp",@portfolio.start_time, @portfolio.end_time)
+      @dji= index_data("dji",@portfolio.start_time, @portfolio.end_time)
+
+      @news =nytimes("Yahoo", "20150928", "20150929" )
+      render :json => {"stocks" => @portfolio_data, "snp" => @snp, "nasdaq" => @nasdaq, "dji" => @dji, "title" => @portfolio.name, "articles" => @news, "holdings" => @holdings }
+    end
+  end
+
 
   # GET /portfolios/new
   def new
