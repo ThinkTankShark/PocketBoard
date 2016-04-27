@@ -1,10 +1,11 @@
 <!-- <p id="notice"><%#= notice %></p> -->
 
 <!-- start padding container -->
-    <div class="wrap container">
+<section class="container tinder-wrapper">
+    <div class="wrap">
         <!-- start jtinder container -->
         <div id="tinderslide">
-            <ul>
+            <ul class="tinder-layout">
             <% session[:stocks].each do |stock| %>
              <% stock.id %>
                 <li class="pane2">
@@ -16,20 +17,20 @@
                 <% end %>
             </ul>
         </div>
-        <!-- end jtinder container -->
     </div>
     <!-- end padding container -->
 
     <!-- jTinder trigger by buttons  -->
-    <div class="actions">
+    <div class="actions tinder-layout tinder-btn">
         <a href="#" class="dislike"><i></i></a>
         <a href="#" class="like"><i></i></a>
-        <%= link_to 'Proceed', new_portfolio_path, class: "btn btn-primary" %>
+        <a href="/portfolios/new" class="proceed"><i></i></a>
     </div>
 
     <!-- jTinder status text  -->
     <div id="status"></div>
-
+    <!-- end jtinder container -->
+</section>
     <!-- jQuery lib -->
     <script type="text/javascript" src="/assets/jTinder/jquery.js"></script>
     <!-- transform2d lib -->

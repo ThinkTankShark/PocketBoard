@@ -27,9 +27,9 @@
         </div>
 
         <article class="card__article">
-          <h3><%= link_to portfolio.name, portfolio_path(portfolio.id) %></h3>
+          <h4><%= link_to portfolio.name, portfolio_path(portfolio.id) %></h4>
           <!-- Description for each portfolio goes here -->
-          <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...</p> -->
+          <p style="font-size: 13px"><%= portfolio.description %></p>
         </article>
       </div>
 
