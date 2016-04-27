@@ -36,6 +36,9 @@
 <%= javascript_tag do %>
   var dji = <%= @dji.to_json.html_safe %>
 <% end %>
+<%= javascript_tag do %>
+  var articles = <%= @news.to_json.html_safe %>
+<% end %>
 
 <%= javascript_tag do %>
   var title = <%= @portfolio.name.to_json.html_safe %>
