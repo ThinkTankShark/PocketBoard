@@ -94,7 +94,10 @@ h2 {
     .card__article a:hover {
         color: #2980b9;
     }
-
+p.card__article {
+    display: inline;
+    overflow: auto;
+}
 /* card action */
 .card__action {
     overflow: hidden;

@@ -82,13 +82,13 @@ StocksUser.create(user_id: 1, stock_id: 4)
 #Seed Users
 User.create(email: "sam@aol.com", password: "1234")
 
-Portfolio.create(name: "Value Compounding Fund", description: "A fund with all undervalued stocks listed in Nasdaq")
-Portfolio.create(name: "High Growth Fund", description: "A fund with high growth tech stocks")
-Portfolio.create(name: "Vanguard Fund", description: "A fund mimicking the actual Vanguard Fund")
-Portfolio.create(name: "Blackrock Index Fund", description: "A normal fund tracking the S&P index")
-Portfolio.create(name: "Quantum Testing Fund", description: "Quantum fund, still testing my strategy")
-Portfolio.create(name: "Google AlphaGo Fund", description: "Google AlphaGo machine learning comes into play!")
-Portfolio.create(name: "Microsoft Dividend Fund", description: "A fund to beat the inflation")
+Portfolio.create(name: "Value Compounding Fund", description: "A fund with all undervalued stocks listed in Nasdaq", user_id: 12)
+Portfolio.create(name: "High Growth Fund", description: "A fund with high growth tech stocks", user_id: 12)
+Portfolio.create(name: "Vanguard Fund", description: "A fund mimicking the actual Vanguard Fund", user_id: 12)
+Portfolio.create(name: "Blackrock Index Fund", description: "A normal fund tracking the S&P index", user_id: 12)
+Portfolio.create(name: "Quantum Testing Fund", description: "Quantum fund, still testing my strategy", user_id: 12)
+Portfolio.create(name: "Google AlphaGo Fund", description: "Google AlphaGo machine learning comes into play!", user_id: 12)
+Portfolio.create(name: "Microsoft Dividend Fund", description: "A fund to beat the inflation", user_id: 12)
 
 
 # @s.each do |a|
