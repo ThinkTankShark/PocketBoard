@@ -1,4 +1,19 @@
 $(document).ready(function(){
+
+
+  $(".sk-folding-cube").hide();
+
+
+  // show spinner on AJAX start
+  $(document).ajaxStart(function(){
+    $(".sk-folding-cube").show();
+  });
+
+  // hide spinner on AJAX stop
+  $(document).ajaxStop(function(){
+    $(".sk-folding-cube").hide();
+  });
+
   var utcdate = function(data){
 
     var year = data[0];
@@ -19,6 +34,7 @@ $(document).ready(function(){
 
   request.done(function(response){
 
+    // prepare data for pie chart
     var data_for_pie = [];
 
     for (var i=0; i < response["holdings"].length; i++){
@@ -26,7 +42,7 @@ $(document).ready(function(){
         y: response["holdings"][i]["allocation"]})
     }
 
-
+    // prepare data for stock charts
     for (var i=0; i < response["stocks"].length; i++){
       response["stocks"][i][0] = utcdate(response["stocks"][i][0]);
     }
@@ -40,23 +56,21 @@ $(document).ready(function(){
       response["dji"][i][0] = utcdate(response["dji"][i][0]);
     }
 
+    // prepare data for news
     response["articles"] = jQuery.parseJSON(response["articles"])
     var docs = response["articles"].response.docs
 
+    // construct both charts
     startChart(response["stocks"],response["nasdaq"],response["snp"],response["dji"],response["articles"],response["title"]);
     startPieChart(data_for_pie)
-    
+
   });
+
 
   request.fail(function(){
     console.log("request failed");
 
   });
-
-
-
-
-
 
 });
 
