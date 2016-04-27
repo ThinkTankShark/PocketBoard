@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'steps', to: 'portfolios#step'
 
+  get 'pass', to: 'stocks_users#pass'
+
   root 'page#home'
 
   resources :users, only: ["new", "create"]
