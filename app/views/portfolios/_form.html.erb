@@ -14,15 +14,15 @@
   <h2>Please Fill Out The Form Below</h2>
   <form>
     <div class="field">
-      Name<%= f.label :name %><br>
+      Name<br>
       <%= f.text_field :name %>
     </div>
     <div class="field">
-      Start-time<%= f.label :start_time %><br>
+      Start-time<br>
       <%= f.date_field :start_time %>
     </div>
     <div class="field">
-      End-time<%= f.label :end_time %><br>
+      End-time<br>
       <%= f.date_field :end_time %>
     </div>
 
@@ -30,11 +30,11 @@
       <%= f.fields_for :holdings do |ff| %>
       <div class="form-divider">
         <div class="field">
-          Symbol<%= ff.label :symbol %><br>
+          Symbol<br>
           <%= ff.text_field :symbol, :value => @selections[i].symbol %>
         </div>
         <div class="field">
-          Allocation<%= ff.label :allocation %><br>
+          Allocation<br>
           <%= ff.number_field :allocation, :value => 0 %>
         </div>
       </div>
