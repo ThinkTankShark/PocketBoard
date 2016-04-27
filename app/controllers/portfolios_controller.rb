@@ -28,24 +28,13 @@ class PortfoliosController < ApplicationController
       @user = User.find(session[:id])
       @portfolios = @user.portfolios
     end
-
   end
 
   # GET /portfolios/1
   # GET /portfolios/1.json
   def show
-    @start_date = "2016-01-01"
-    @end_date = "2016-01-08"
-    @stock_symbol ="AAPL"
-
     @portfolio = Portfolio.find(params[:id])
     @holdings = @portfolio.holdings
-    # @portfolio_data = zippy(@holdings,@portfolio.start_time, @portfolio.end_time)
-    # @nasdaq= index_data("nasdaq",@portfolio.start_time, @portfolio.end_time)
-    # @snp= index_data("snp",@portfolio.start_time, @portfolio.end_time)
-    # @dji= index_data("dji",@portfolio.start_time, @portfolio.end_time)
-
-    # @news =nytimes("Yahoo", "20150928", "20150929" )
 
   end
 
@@ -58,8 +47,11 @@ class PortfoliosController < ApplicationController
       @nasdaq= index_data("nasdaq",@portfolio.start_time, @portfolio.end_time)
       @snp= index_data("snp",@portfolio.start_time, @portfolio.end_time)
       @dji= index_data("dji",@portfolio.start_time, @portfolio.end_time)
-
-      @news =nytimes("Yahoo", "20150928", "20150929" )
+      @news = []
+      @holdings.each do |holding|
+        name =Stock.find_by(symbol: holding.symbol).name
+        @news << [holding.symbol, nytimes(name, @portfolio.start_time.tr('-',''), @portfolio.end_time.tr('-','') )]
+      end
       render :json => {"stocks" => @portfolio_data, "snp" => @snp, "nasdaq" => @nasdaq, "dji" => @dji, "title" => @portfolio.name, "articles" => @news, "holdings" => @holdings }
     end
   end
@@ -79,6 +71,7 @@ class PortfoliosController < ApplicationController
 
   # GET /portfolios/1/edit
   def edit
+
   end
 
   # POST /portfolios

@@ -1,8 +1,6 @@
 $(document).ready(function(){
 
-
   $(".sk-folding-cube").hide();
-
 
   // show spinner on AJAX start
   $(document).ajaxStart(function(){
@@ -22,7 +20,6 @@ $(document).ready(function(){
 
     return Date.UTC(year, month, day)
   };
-  
 
   var portfolio_id = $( '.hidden_portfolio_id' ).text();
 
@@ -42,7 +39,6 @@ $(document).ready(function(){
         y: response["holdings"][i]["allocation"]})
     }
 
-    // prepare data for stock charts
     for (var i=0; i < response["stocks"].length; i++){
       response["stocks"][i][0] = utcdate(response["stocks"][i][0]);
     }
@@ -55,10 +51,9 @@ $(document).ready(function(){
     for (var i=0; i < response["dji"].length; i++){
       response["dji"][i][0] = utcdate(response["dji"][i][0]);
     }
-
-    // prepare data for news
-    response["articles"] = jQuery.parseJSON(response["articles"])
-    var docs = response["articles"].response.docs
+    for (var i = 0; i < response["articles"].length; i++){
+      response["articles"][i][1] = jQuery.parseJSON(response["articles"][i][1])
+    }
 
     // construct both charts
     startChart(response["stocks"],response["nasdaq"],response["snp"],response["dji"],response["articles"],response["title"]);
@@ -73,30 +68,6 @@ $(document).ready(function(){
   });
 
 });
-
-
-
-
-// var addChart = function(){
-//   $(function () {
-//      // Create the chart
-//      $('#chart').highcharts('StockChart', {
-//          rangeSelector : {
-//              selected : 5
-//          },
-//          title : {
-//              text : title
-//          },
-//          series : [{
-//              name : 'Portfolio',
-//              data : stocks,
-//              tooltip: {
-//                  valueDecimals: 2
-//              }
-//          }]
-//      });
-//   });
-// }
 
 var startPieChart = function(data_for_pie){
   $(function () {
@@ -213,36 +184,6 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
                 }
             },
             series: seriesOptions
-          // series: [{
-          //   name: "portfolio",
-          //   data: stocks,
-          //   id: "portfolio"
-          // },
-          // {
-          //   name: "NASDAQ",
-          //   data: nasdaq,
-          //   id: "nasdaq"
-          // },
-          // {
-          //   name: "SNP",
-          //   data: snp,
-          //   id: "snp"
-          // },
-          // {
-          //   name: "DJI",
-          //   data: dji,
-          //   id: "dji"
-          // },
-          // {
-          //   type: 'flags',
-          //   data: [{
-          //     x: Date.UTC(2015,8,28),
-          //     // x : articles.response.docs[0].pub_date,
-          //     title: articles.response.docs[0].headline.main,
-          //     url: articles.response.docs[0].web_url
-          //   }],
-          //   onSeries: 'portfolio'
-          // }]
         }
 
       );
@@ -260,15 +201,19 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
         // }
       }
     });
-    seriesOptions.push({
-              type: 'flags',
-              data: [{
-                x : Date.parse(articles.response.docs[1].pub_date),
-                title: articles.response.docs[1].headline.main,
-                url: articles.response.docs[1].web_url
-              }],
-              onSeries: 1
-              })
+    for (var i = 0; i < articles.length; i++){
+      for (var j =0; j <articles[i][1].response.docs.length; j++){
+        seriesOptions.push({
+                type: 'flags',
+                data: [{
+                  x : Date.parse(articles[i][1].response.docs[j].pub_date),
+                  title: articles[i][0],
+                  url: articles[i][1].response.docs[j].web_url
+                }],
+                onSeries: 1
+                })
+      }
+    }
     createChart();
   });
 
