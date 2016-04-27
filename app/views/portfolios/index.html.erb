@@ -22,7 +22,7 @@
         </div>
 
         <div class="card__meta">
-        <a href="#"><strong>Portfolio <%= i %></strong></a>
+        <a href="#"><strong style="color: #3498e1">Portfolio <%= i %></strong></a>
           <time><%= portfolio.created_at.strftime("%b %d %Y") %></time>
         </div>
 
@@ -49,15 +49,14 @@
 </section>
 
 
-<div class="container">
-<%=@news%>
-<%=@news["response"]%>
-</div>
+<!-- <div class="container"> -->
+<%#=@news%>
+<%#=@news["response"]%>
+<!-- </div> -->
 
 <!-- High Chart JavaScript -->
 <!-- <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-<<<<<<< HEAD
 
 <script src="assets/portfolio.js"></script> -->
 <script src="assets/dashboard.js"></script>
