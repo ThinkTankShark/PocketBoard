@@ -7,24 +7,53 @@ $(document).ready(function(){
 
     return Date.UTC(year, month, day)
   };
-  for (var i=0; i < stocks.length; i++){
-    stocks[i][0] = utcdate(stocks[i][0]);
-  }
-  for (var i=0; i < nasdaq.length; i++){
-    nasdaq[i][0] = utcdate(nasdaq[i][0]);
-  }
-  for (var i=0; i < snp.length; i++){
-    snp[i][0] = utcdate(snp[i][0]);
-  }
-  for (var i=0; i < dji.length; i++){
-    dji[i][0] = utcdate(dji[i][0]);
-  }
 
-  articles = jQuery.parseJSON(articles)
-  var docs = articles.response.docs
 
-debugger;
-  startChart();
+  
+
+  var portfolio_id = $( '.hidden_portfolio_id' ).text();
+
+
+  var request = $.ajax({
+    url: `/portfolios/${portfolio_id}/fetch`,
+    type: "GET"
+  });
+
+  request.done(function(response){
+    console.log("GOOD!");
+
+    for (var i=0; i < response["stocks"].length; i++){
+      response["stocks"][i][0] = utcdate(response["stocks"][i][0]);
+    }
+    for (var i=0; i < response["nasdaq"].length; i++){
+      response["nasdaq"][i][0] = utcdate(response["nasdaq"][i][0]);
+    }
+    for (var i=0; i < response["snp"].length; i++){
+      response["snp"][i][0] = utcdate(response["snp"][i][0]);
+    }
+    for (var i=0; i < response["dji"].length; i++){
+      response["dji"][i][0] = utcdate(response["dji"][i][0]);
+    }
+
+    debugger;
+
+
+    response["articles"] = jQuery.parseJSON(response["articles"])
+    var docs = response["articles"].response.docs
+
+    startChart(response["stocks"],response["nasdaq"],response["snp"],response["dji"],response["articles"]);
+
+  });
+
+  request.fail(function(){
+    console.log("failed");
+
+  });
+
+
+
+
+
 
 });
 
@@ -52,7 +81,7 @@ debugger;
 //   });
 // }
 
-var startChart = function(){
+var startChart = function(stocks,nasdaq,snp,dji,articles){
   $(function () {
       var seriesOptions = [],
           seriesCounter = 0,
