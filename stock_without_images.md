@@ -8,7 +8,7 @@
      { "SYMX" => "http://cdn.octafinance.com/wp-content/uploads/2015/04/synthesis-energy-systems-logo.jpg"}
      { "SYNL" => }
      Sterling Construction Company
-     Stericycle, Inc
+     Stericycle, Inth
      Solazyme, Inc
      Sharps Compliance Corp
      Royal Gold, Inc
