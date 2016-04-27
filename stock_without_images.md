@@ -47,6 +47,14 @@
     ]
 
 
+1 off ruby script
+how do i check with each image
+rest client
+get request to url and check response code if 404 push into array
+
+
+check each image to see if you get a 404 back
+
 
 
 

@@ -1,4 +1,6 @@
+require 'pry-byebug'
 require 'csv'
+require 'rest-client'
 
 sectors = [
 "Basic Industries",
@@ -59,20 +61,35 @@ def parse_csv(file_path)
 end
 
 nasdaq_stocks = parse_csv('nasdaq.csv')
+stocks_without_images = []
+
+
 
 nasdaq_stocks.each do |stock|
+  begin
+   response = RestClient.get "http://www.nasdaq.com/logos/#{stock['Symbol']}.gif"
+  rescue
+    puts "Stock Not found"
+  end
+
+   if response
+    image_url = "http://www.nasdaq.com/logos/#{stock["Symbol"]}.gif"
+   # "http://logo.clearbit.com/#{stock["Name"].downcase.chomp.split(" ")[0]}.com"
+   else
+    stocks_without_images << stock
+   end
+
   new_stock = Stock.new(symbol: stock["Symbol"],
    name: stock["Name"],
    sector: stock["Sector"],
-   image_url: "http://www.nasdaq.com/logos/#{stock["Symbol"]}.gif"
-   # "http://logo.clearbit.com/#{stock["Name"].downcase.chomp.split(" ")[0]}.com"
+   image_url: image_url
    )
 
   sector = Industry.find_by(name: "#{new_stock.sector}")
   sector.stocks << new_stock
   new_stock.save
 end
-
+binding.pry
 StocksUser.create(user_id: 1, stock_id: 1)
 StocksUser.create(user_id: 1, stock_id: 2)
 StocksUser.create(user_id: 1, stock_id: 3)
