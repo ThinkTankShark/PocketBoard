@@ -21,6 +21,7 @@
 <div id="chart" class="container">
 
 
+
 </div>
 
 <%= javascript_tag do %>
@@ -39,10 +40,20 @@
 <%= javascript_tag do %>
   var title = <%= @portfolio.name.to_json.html_safe %>
 <% end %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<%= javascript_tag do %>
+  var holdings = <%= @holdings.to_json.html_safe %>
+<% end %>
+<p><div id="container"> Pie Chart </div></p>
 
 <!-- High Chart JavaScript -->
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
+<script src="/assets/piechart.js"></script>
 <script src="/assets/highcharts.js"></script>
 
