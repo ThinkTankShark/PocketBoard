@@ -40,7 +40,7 @@
     background-color: transparent;
 }
 
-// Down arrow homepage
+
 
 @include keyframes(bounce) {
   0%, 20%, 50%, 80%, 100% {
@@ -67,3 +67,4 @@
 .bounce {
   @include animation(bounce 2s infinite);
 }
+
