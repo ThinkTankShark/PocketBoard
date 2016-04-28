@@ -162,6 +162,7 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
           plotOptions: {
               series: {
                   compare: 'percent'
+
               }
           },
           tooltip: {
@@ -172,7 +173,7 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
             text : title
           },
           credits: {
-           enabled: false
+           enabled: true
           },
           plotOptions:{
                 flags:{
@@ -180,12 +181,11 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
                     events:{
                         click:function(e){
                             e.preventDefault();
-
                             var url = this.url;
-
                             window.open(url,'_blank');
                         }
-                    }
+
+                      }
                     }
                 }
             },
