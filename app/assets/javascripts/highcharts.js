@@ -71,7 +71,7 @@ $(document).ready(function(){
 
 var startPieChart = function(data_for_pie){
   $(function () {
-  $('#container').highcharts({
+  $('#pie-chart').highcharts({
     chart: {
       plotBackgroundColor: null,
       plotBorderWidth: null,
