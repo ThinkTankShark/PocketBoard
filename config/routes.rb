@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
+  root 'page#home'
+
   get 'logout', to: 'sessions#destroy'
 
   get 'steps', to: 'portfolios#step'
 
   get 'pass', to: 'stocks_users#pass'
 
-  root 'page#home'
+  get '/portfolios/:id/getting_started', to: 'portfolios#getting_started', as: 'getting_started'
 
   resources :users, only: ["new", "create"]
 
@@ -21,4 +23,7 @@ Rails.application.routes.draw do
   resources :sessions, only: ["create", "destroy"]
 
   get 'test', to: 'page#test'
+
+  get "portfolios/:id/fetch", :to => "portfolios#fetch"
+  
 end

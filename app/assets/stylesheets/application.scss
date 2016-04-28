@@ -7,6 +7,7 @@
 @import "jTinder";
 @import "dashboard";
 @import "form";
+@import "spinkit";
 // @import "portfolios";
 
 // Normalize Website Style
@@ -28,6 +29,7 @@
 }
 
 //industries/:id
+//Tinder Card Layout
 ul.tinder-layout {
   text-align: center;
   margin: 0 auto;
@@ -50,5 +52,30 @@ div.actions.tinder-layout.tinder-btn {
 li.pane2 {
   display: inline-block;
   text-align: center;
+  height: 50%;
 }
 
+.stock-info {
+  margin-top: 25px;
+}
+
+div.wrap {
+  width: 60%;
+  display: inline-block;
+  margin: auto;
+}
+
+section.container.tinder-wrapper {
+  height: 100%;
+  padding-bottom: 20px;
+}
+
+.pane2 img{
+  -webkit-filter: drop-shadow(6px 6px 4px rgba(0,0,0,0.9));
+  filter: drop-shadow(6px 6px 4px rgba(0,0,0,0.9));
+}
+
+//
+div.collapse {
+  display: none;
+}

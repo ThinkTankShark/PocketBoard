@@ -1,62 +1,166 @@
-<p id="notice"><%= notice %></p>
 
-<br>
-<br>
-<br>
-<br>
-<p class= "container">
-  <strong>Stocks:</strong>
-  <% if !@portfolio.holdings.nil? %>
-    <% @portfolio.holdings.each do |holding|%>
-      <%= holding.symbol%>
-    <%end%>
-  <%end%>
-<!-- <%#= @portfolio.holdings.first %>
-  <%#= @portfolio.holdings.first.allocation %> -->
-  <br>
-<%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
-<%= link_to 'Back', portfolios_path %>
-</p>
+    <!-- Bootstrap Core CSS -->
+    <link href="/assets/dashboard/bootstrap.min.css" rel="stylesheet">
 
-<div id="chart" class="container">
+    <!-- Custom CSS -->
+    <link href="/assets/dashboard/sb-admin.css" rel="stylesheet">
 
+    <!-- Morris Charts CSS -->
+    <link href="/assets/dashboard/plugins/morris.css" rel="stylesheet">
 
+    <!-- Custom Fonts -->
+    <link href="/assets/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-</div>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-<%= javascript_tag do %>
-  var stocks = <%= @portfolio_data.to_json.html_safe %>
-<% end %>
-<%= javascript_tag do %>
-  var snp = <%= @snp.to_json.html_safe %>
-<% end %>
-<%= javascript_tag do %>
-  var nasdaq = <%= @nasdaq.to_json.html_safe %>
-<% end %>
-<%= javascript_tag do %>
-  var dji = <%= @dji.to_json.html_safe %>
-<% end %>
-<%= javascript_tag do %>
-  var articles = <%= @news.to_json.html_safe %>
-<% end %>
+<p><span class="hidden_portfolio_id"><%= @portfolio.id %></span></p>
+    <div id="wrapper">
 
-<%= javascript_tag do %>
-  var title = <%= @portfolio.name.to_json.html_safe %>
-<% end %>
-<br>
-<br>
-<br>
-<br>
-<br>
-<%= javascript_tag do %>
-  var holdings = <%= @holdings.to_json.html_safe %>
-<% end %>
-<p><div id="container"> Pie Chart </div></p>
+        <div id="page-wrapper">
+            <div class="container-fluid">
 
-<!-- High Chart JavaScript -->
-<script src="https://code.highcharts.com/stock/highstock.js"></script>
-<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+<!--                         <h1 class="page-header">
+                            Dashboard <small>Statistics Overview</small>
+                        </h1> -->
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Dashboard
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
 
-<script src="/assets/piechart.js"></script>
-<script src="/assets/highcharts.js"></script>
+                <div class="row">
+                <div class="header-container">
+                  <div class="col-lg-3 col-md-6 tabs">
+                      <div class="panel panel-green">
+                          <div class="panel-heading">
+                              <div class="row">
+                                  <div class="col-xs-3">
+                                      <i class="fa fa-clipboard fa-5x"></i>
+                                  </div>
+                                  <div class="col-xs-9 text-right">
+                                      <div class="huge"><%=  @count %></div>
+                                      <div>Portfolios!</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 tabs">
+                      <div class="panel panel-yellow">
+                          <div class="panel-heading">
+                              <div class="row">
+                                  <div class="col-xs-3">
+                                      <i class="fa fa-calendar-o fa-5x"></i>
+                                  </div>
+                                  <div class="col-xs-9 text-right">
+                                  <% start_date = DateTime.parse(@portfolio.start_time).to_date %>
+                                      <div class="huge"><%= start_date.strftime('%d %b %Y') %></div>
+                                      <div>Start Date!</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 tabs">
+                      <div class="panel panel-red">
+                          <div class="panel-heading">
+                              <div class="row">
+                                  <div class="col-xs-3">
+                                      <i class="fa fa-calendar fa-5x"></i>
+                                  </div>
+                                  <div class="col-xs-9 text-right">
+                                  <% end_date = DateTime.parse(@portfolio.end_time).to_date %>
+                                      <div class="huge"><%= end_date.strftime('%d %b %Y') %></div>
+                                      <div>End Date!</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-4 pie">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Pie Chart</h3>
+                      </div>
+                      <div id="pie-chart">
+                        <div class="panel-body">
+                          <div class="sk-folding-cube">
+                            <div class="sk-cube1 sk-cube"></div>
+                            <div class="sk-cube2 sk-cube"></div>
+                            <div class="sk-cube4 sk-cube"></div>
+                            <div class="sk-cube3 sk-cube"></div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Stock Chart</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="chart"></div>
+                                <div class="panel-body">
+                                <div class="sk-folding-cube">
+                                  <div class="sk-cube1 sk-cube"></div>
+                                  <div class="sk-cube2 sk-cube"></div>
+                                  <div class="sk-cube4 sk-cube"></div>
+                                  <div class="sk-cube3 sk-cube"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <!-- News Section (Stretch Goal) -->
+                    <!-- <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Recent News</h3>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">just now</span>
+                                        <i class="fa fa-fw fa-calendar"></i> Yahoo got bankrupt today!
+                                    </a>
+                            </div>
+                        </div>
+                      </div> -->
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="/assets/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/assets/bootstrap.min.js"></script>
+
+    <!-- High Chart JavaScript -->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="/assets/highcharts.js"></script>
 
