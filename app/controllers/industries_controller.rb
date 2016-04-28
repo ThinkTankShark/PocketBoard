@@ -17,7 +17,7 @@ class IndustriesController < ApplicationController
 
       @industry = Industry.find(params[:id])
       @stocks = @industry.stocks
-      session[:stocks] = @stocks.to_a
+      session[:stocks] = @stocks.to_a.shuffle
     end
     # @stock = @stocks[session[:index]]
     # redirect_to
