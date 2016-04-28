@@ -25,8 +25,6 @@ $(document).ready(function(){
 
   var link = "/portfolios/" + portfolio_id + "/fetch";
 
-  console.log(link);
-
   var request = $.ajax({
     url: link,
     type: "GET"
