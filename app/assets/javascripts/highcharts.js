@@ -23,9 +23,10 @@ $(document).ready(function(){
 
   var portfolio_id = $( '.hidden_portfolio_id' ).text();
 
+  var link = "/portfolios/" + portfolio_id + "/fetch";
 
   var request = $.ajax({
-    url: `/portfolios/${portfolio_id}/fetch`,
+    url: link,
     type: "GET"
   });
 
