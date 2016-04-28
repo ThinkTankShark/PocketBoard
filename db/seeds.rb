@@ -65,7 +65,7 @@ stocks_without_images = []
 
 
 nasdaq_stocks.each do |stock|
-    name = stock.name
+    name = stock["name"]
     site = "https://www.google.com/search?q=#{name}+logo&tbs=ic:trans&tbm=isch&tbas=0&source=lnt&sa=X&ved=0ahUKEwjYipaC8K_MAhURymMKHZ9UCz0QpwUIFA&dpr=1&biw=1920&bih=686"
 
     response = RestClient.get site
@@ -77,6 +77,8 @@ nasdaq_stocks.each do |stock|
    sector: stock["Sector"],
    image_url: image_url
    )
+
+    p new_stock
 
   sector = Industry.find_by(name: "#{new_stock.sector}")
   sector.stocks << new_stock
