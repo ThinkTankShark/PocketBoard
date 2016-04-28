@@ -242,10 +242,9 @@ DEPENDENCIES
   activerecord-session_store
   angularjs-rails
   bcrypt
-  bootstrap-sass (~> 3.3.6)
+  bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)
-  compass
   compass-rails
   dotenv-rails
   faker
@@ -263,7 +262,7 @@ DEPENDENCIES
   quandl
   rails
   rest-client (~> 1.8.0)
-  sass-rails (>= 3.2)
+  sass-rails
   sdoc (~> 0.4.0)
   spring
   turbolinks
