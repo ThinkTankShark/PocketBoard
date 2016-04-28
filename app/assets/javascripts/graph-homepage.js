@@ -14,21 +14,30 @@ $(function () {
               },
 
             rangeSelector : {
-                buttons : [{
-                    type : 'hour',
-                    count : 1,
-                    text : '1h'
-                }, {
-                    type : 'day',
-                    count : 1,
-                    text : '1D'
-                }, {
-                    type : 'all',
-                    count : 1,
-                    text : 'All'
-                }],
-                selected : 1,
-                inputEnabled : false
+                selected: 4,
+              inputEnabled: false,
+              buttonTheme: {
+                  visibility: 'hidden'
+              },
+              labelStyle: {
+                  visibility: 'hidden'
+              }
+            },
+
+            navigator: {
+              enabled: false
+            },
+
+            scrollbar : {
+                enabled : false
+            },
+
+            exporting: {
+                     enabled: false
+            },
+
+            credits: {
+              enabled: false
             },
 
             series : [{
