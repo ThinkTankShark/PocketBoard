@@ -22,9 +22,10 @@ $(document).ready(function(){
   };
 
   var portfolio_id = $( '.hidden_portfolio_id' ).text();
-  console.log(portfolio_id);
 
   var link = "/portfolios/" + portfolio_id + "/fetch";
+
+  console.log(link);
 
   var request = $.ajax({
     url: link,
