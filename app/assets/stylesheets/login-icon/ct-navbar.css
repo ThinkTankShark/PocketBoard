@@ -37,7 +37,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 /*           Font Smoothing      */
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
-    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: white;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -457,9 +457,7 @@ h1 .subtitle{
         width: 170px;
         margin: 0 auto;
     }
-
 }
-
 
 .blurred-container{
   position:relative;
@@ -497,6 +495,10 @@ h4{
 }
 .space-200{
     height: 200px;
-
 }
 
+
+
+.navbar-default .nav li a, .navbar-default .navbar-brand {
+
+}
