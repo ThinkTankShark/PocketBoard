@@ -64,8 +64,9 @@ nasdaq_stocks = parse_csv('nasdaq.csv')
 stocks_without_images = []
 
 
-nasdaq_stocks.each do |stock|
-    name = stock["name"]
+nasdaq_stocks.each_with_index do |stock,index|
+    # if index > 1326
+    name = stock["Name"]
     site = "https://www.google.com/search?q=#{name}+logo&tbs=ic:trans&tbm=isch&tbas=0&source=lnt&sa=X&ved=0ahUKEwjYipaC8K_MAhURymMKHZ9UCz0QpwUIFA&dpr=1&biw=1920&bih=686"
 
     response = RestClient.get site
@@ -83,6 +84,7 @@ nasdaq_stocks.each do |stock|
   sector = Industry.find_by(name: "#{new_stock.sector}")
   sector.stocks << new_stock
   new_stock.save
+  # end
 end
 StocksUser.create(user_id: 1, stock_id: 1)
 StocksUser.create(user_id: 1, stock_id: 2)
