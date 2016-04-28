@@ -1,5 +1,8 @@
 class PageController < ApplicationController
   def home
-    @user = User.new
+    if user_signed_in?
+      @user = User.find(session[:id])
+      @portfolios = @user.portfolios
+    end
   end
 end

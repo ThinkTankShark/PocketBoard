@@ -6,7 +6,6 @@ class IndustriesController < ApplicationController
   def index
     @industries = Industry.all
     session[:index] = nil
-    # binding.pry
   end
 
   # GET /industries/1

@@ -65,10 +65,10 @@ class ApplicationController < ActionController::Base
     stock.each_with_index do |d,t|
       stock_result[t] = {}
       stock_result[t]['date'] = stock[stock.length-t-1]['date']
-      stock_result[t]['adj_close'] = stock[stock.length-t-1]['adj_close']
+      stock_result[t]['close'] = stock[stock.length-t-1]['close']
 
       unless t==0
-        stock_result[t]['change'] = stock[stock.length-t-1]['adj_close']/stock[stock.length-t]['adj_close']-1
+        stock_result[t]['change'] = stock[stock.length-t-1]['close']/stock[stock.length-t]['close']-1
       else
         stock_result[t]['change'] = 0
       end
@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
 
   def nytimes(query, begin_date, end_date)
     link = URI.escape("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{query}&fq=news_desk:(\"Finance\", \"Business\", \"SundayBusiness\")&begin_date=#{begin_date}&end_date=#{end_date}&api-key=")
-    link = link +ENV['KEY']
+    link = link + ENV['KEY']
     result = RestClient.get link
 
     return result
@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
       dji_result = yahoo_table(dji)
       return dji_result
     else
-      stock = Quandl::Dataset.get("WIKI/#{query}").data(params: { start_date: "#{start_date}", end_date: "#{end_date}" }) # ["date", "open", "high", "low", "close", "volume", "ex_dividend", "split_ratio", "adj_open", "adj_high", "adj_low", "adj_close", "adj_volume"]
+      stock = Quandl::Dataset.get("GOOG/NASDAQ_#{query}").data(params: { start_date: "#{start_date}", end_date: "#{end_date}" }) # ["date", "open", "high", "low", "close", "volume"]
       stock_result = stock_table(stock)
       return stock_result
     end
