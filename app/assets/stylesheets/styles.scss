@@ -67,3 +67,9 @@
 .bounce {
   @include animation(bounce 2s infinite);
 }
+
+//About Section Texts
+.about-text {
+  text-align: justify;
+  text-justify: inter-word;
+}
