@@ -11,10 +11,16 @@
              <% stock.id %>
                 <li class="pane2">
                     <div><img src="<%= stock.image_url  %>"></div>
-                    <div class="stock-info"><p><strong>Name: </strong><%= stock.name %></p><p><strong>Symbol: </strong><span class="stock-symbol"><%= stock.symbol %></span></p></div>
+                    <div class="stock-info">
+                        <p><strong>Name: </strong><%= link_to "stock.name", "http://www.google.com/search?query=", :target => "_blank" %></p>
+                        <p><strong>Symbol: </strong><span class="stock-symbol"><%= stock.symbol %></span></p>
+                    </div>
                     <div class="like"></div>
                     <div class="dislike"></div>
                 </li>
+
+                <%= link_to "Google Search Me", "http://www.facebook.com/mypage", :target => "_blank" %>
+
                 <% end %>
             </ul>
         </div>
