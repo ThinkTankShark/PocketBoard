@@ -25,6 +25,7 @@
 
 .btn-xl {
   border-radius: 5%;
+  margin-top: 30px;
 }
 
 // industries/index.html
@@ -115,6 +116,7 @@ pre.prettyprint{
     color: #999;
 }
 
+
 // Normalize All Buttons
 .form-style-8 input[type="button"], .form-style-8 input[type="submit"], #back-button, .btn-primary {
     -moz-box-shadow: inset 0px 1px 0px 0px #3b5998;
@@ -130,4 +132,16 @@ pre.prettyprint{
     padding: 8px 18px;
     text-decoration: none;
     text-transform: uppercase;
+}
+
+section {
+    padding: 90px;
+}
+
+.navbar-default .nav li a, .navbar-default .navbar-brand {
+    color: #2e2e2d;
+}
+
+.navbar.navbar-shrink li a, .navbar-shrink .navbar-brand{
+  color: white
 }

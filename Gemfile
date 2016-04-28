@@ -6,8 +6,8 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
 
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'sass-rails', '>= 3.2'
+gem 'bootstrap-sass'
+gem 'sass-rails'
 
 gem 'nokogiri', '~> 1.6', '>= 1.6.7.2'
 gem 'materialize-sass'
@@ -15,6 +15,8 @@ gem 'faker'
 gem 'rails'
 gem 'pg'
 gem 'bcrypt'
+
+gem 'compass-rails'
 
 gem 'angularjs-rails'
 
@@ -43,4 +45,6 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
+
+gem 'rails_12factor', group: :production
 
