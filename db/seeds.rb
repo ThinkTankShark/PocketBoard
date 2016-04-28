@@ -16,7 +16,7 @@ sectors = [
 "Public Utilities",
 "Technology",
 "Transportation",
-"n/a"
+"Others"
 ]
 
 
@@ -61,39 +61,45 @@ def parse_csv(file_path)
   return stock_arr
 end
 
-nasdaq_stocks = parse_csv('nasdaq.csv')
-stocks_without_images = []
+nasdaq_stocks = parse_csv('nasdaq_with_img.csv')
+# stocks_without_images = []
 
 
 nasdaq_stocks.each_with_index do |stock,index|
-    # if index > 1326
-    name = URI.escape(stock["Name"])
+    # # if index > 1587, now id:1589 is nil
+    # # no image: 1590
+    # if index > 2360
+    #   name = URI.escape(stock["Name"])
 
-    # site = "https://www.google.com/search?q=#{name}+logo&tbs=ic:trans&tbm=isch&tbas=0&source=lnt&sa=X&ved=0ahUKEwjYipaC8K_MAhURymMKHZ9UCz0QpwUIFA&dpr=1&biw=1920&bih=686"
+    #   site = "https://www.google.com/search?q=#{name}+logo&tbs=ic:trans&tbm=isch&tbas=0&source=lnt&sa=X&ved=0ahUKEwjYipaC8K_MAhURymMKHZ9UCz0QpwUIFA&dpr=1&biw=1920&bih=686"
 
-    # response = RestClient.get site
-    # doc = Nokogiri::HTML(response)
-    # image_url = doc.xpath("//a")[37].children[0].attributes["src"].value
+    #   response = RestClient.get site
+    #   doc = Nokogiri::HTML(response)
 
-   new_stock = Stock.new(symbol: stock["Symbol"],
-   name: stock["Name"],
-   sector: stock["Sector"],
-   # image_url: image_url
-   )
+    #   if doc.xpath("//a")[37].children[0].attributes["src"] != nil
+    #     image_url = doc.xpath("//a")[37].children[0].attributes["src"].value
+    #   else
+    #     image_url = nil
+    #   end
 
-    p new_stock
+     new_stock = Stock.new(symbol: stock["Symbol"],
+     name: stock["Name"],
+     sector: stock["Sector"],
+     image_url: stock["Link"]
+     )
 
-  sector = Industry.find_by(name: "#{new_stock.sector}")
-  sector.stocks << new_stock
-  new_stock.save
-  # end
+      sector = Industry.find_by(name: "#{new_stock.sector}")
+      sector.stocks << new_stock
+      new_stock.save
 end
-StocksUser.create(user_id: 1, stock_id: 1)
-StocksUser.create(user_id: 1, stock_id: 2)
-StocksUser.create(user_id: 1, stock_id: 3)
-StocksUser.create(user_id: 1, stock_id: 4)
 
-@s = Stock.all
+
+# StocksUser.create(user_id: 1, stock_id: 1)
+# StocksUser.create(user_id: 1, stock_id: 2)
+# StocksUser.create(user_id: 1, stock_id: 3)
+# StocksUser.create(user_id: 1, stock_id: 4)
+
+# @s = Stock.all
 
 #Seed Users
 User.create(email: "sam@aol.com", password: "1234")
@@ -105,6 +111,27 @@ Portfolio.create(name: "Blackrock Index Fund", description: "A normal fund track
 Portfolio.create(name: "Quantum Testing Fund", description: "Quantum fund, still testing my strategy", user_id: 12)
 Portfolio.create(name: "Google AlphaGo Fund", description: "Google AlphaGo machine learning comes into play!", user_id: 12)
 Portfolio.create(name: "Microsoft Dividend Fund", description: "A fund to beat the inflation", user_id: 12)
+
+
+
+# stocks = Stock.all
+
+
+# CSV.open("image.csv", "w") do |csv|
+#   csv << ["Symbol", "Name", "Link"]
+
+#   stocks.each do |stock|
+
+#     if stock.image_url == nil
+#       stock.image_url = "N"
+#     end
+
+#     csv << [stock.symbol, stock.name, stock.image_url]
+
+#   end
+
+# end
+
 
 
 # @s.each do |a|

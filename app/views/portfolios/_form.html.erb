@@ -19,15 +19,15 @@
     </div>
     <div class="field">
       Description<br>
-      <%= f.text_field :description %>
+      <%= f.text_field :description, value: "#{@portfolio.try(:description)}" %>
     </div>
     <div class="field">
       Start-time<br>
-      <%= f.date_field :start_time %>
+      <%= f.date_field :start_time, value: "#{@portfolio.try(:start_time)}" %>
     </div>
     <div class="field">
       End-time<br>
-      <%= f.date_field :end_time %>
+      <%= f.date_field :end_time, value: "#{@portfolio.try(:end_time)}"  %>
     </div>
 
     <% i = 0 %>
@@ -35,23 +35,29 @@
       <div class="form-divider">
         <div class="field">
           Symbol<br>
-          <%= ff.text_field :symbol, :value => @selections[i].symbol %>
+          <%= ff.text_field :symbol, :value => @selections[i].try(:symbol) %>
         </div>
         <div class="field">
           Allocation<br>
-          <%= ff.number_field :allocation, :value => 0 %>
+          <%= ff.number_field :allocation, :value => @selections[i].try(:allocation) %>
         </div>
+        <% if ff.object.persisted? %>
+        <div class="field">
+          <%= ff.check_box :_destroy, style: "height:50px;" %>
+        </div>
+        <% end %>
+        <br>
+        <br>
+        <br>
       </div>
-        <%# if ff.object.persisted? %>
-          <%#= ff.check_box :_destroy %>
-          <%#= ff.label :_destroy, "Destroy" %>
-        <%# end %>
+
       <% i += 1 %>
     <% end %>
   </form>
   <div class="container-fluid">
-    <%= button_to 'Back', portfolios_path, :method => "get", :class => "btn btn-primary btn-sm" %>
-    <%= f.submit 'Create', :class => "btn btn-primary btn-sm" %>
+    <%#= button_to 'Back', portfolios_path, :method => "get", :class => "btn btn-primary btn-sm" %>
+    <%= button_tag "Cancel", :class => "btn btn-primary btn-sm", :onclick => "location.href = '#{portfolios_path}'" %>
+    <%= f.submit :class => "btn btn-primary btn-sm" %>
   </div>
 <% end %>
 
