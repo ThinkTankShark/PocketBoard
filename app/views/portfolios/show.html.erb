@@ -46,11 +46,11 @@
                           <div class="panel-heading">
                               <div class="row">
                                   <div class="col-xs-3">
-                                      <i class="fa fa-tasks fa-5x"></i>
+                                      <i class="fa fa-clipboard fa-5x"></i>
                                   </div>
                                   <div class="col-xs-9 text-right">
-                                      <div class="huge">April 19th</div>
-                                      <div>Start Date!</div>
+                                      <div class="huge"><%=  @count %></div>
+                                      <div>Portfolios!</div>
                                   </div>
                               </div>
                           </div>
@@ -61,11 +61,12 @@
                           <div class="panel-heading">
                               <div class="row">
                                   <div class="col-xs-3">
-                                      <i class="fa fa-shopping-cart fa-5x"></i>
+                                      <i class="fa fa-calendar-o fa-5x"></i>
                                   </div>
                                   <div class="col-xs-9 text-right">
-                                      <div class="huge">July 19th</div>
-                                      <div>End Date!</div>
+                                  <% start_date = DateTime.parse(@portfolio.start_time).to_date %>
+                                      <div class="huge"><%= start_date.strftime('%d %b %Y') %></div>
+                                      <div>Start Date!</div>
                                   </div>
                               </div>
                           </div>
@@ -76,11 +77,12 @@
                           <div class="panel-heading">
                               <div class="row">
                                   <div class="col-xs-3">
-                                      <i class="fa fa-support fa-5x"></i>
+                                      <i class="fa fa-calendar fa-5x"></i>
                                   </div>
                                   <div class="col-xs-9 text-right">
-                                      <div class="huge">10</div>
-                                      <div>Portfolios!</div>
+                                  <% end_date = DateTime.parse(@portfolio.end_time).to_date %>
+                                      <div class="huge"><%= end_date.strftime('%d %b %Y') %></div>
+                                      <div>End Date!</div>
                                   </div>
                               </div>
                           </div>
@@ -126,10 +128,7 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
-                <div class="row">
-
-                    </div>
+                <!-- News Section (Stretch Goal) -->
                     <!-- <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -143,9 +142,8 @@
                                         <i class="fa fa-fw fa-calendar"></i> Yahoo got bankrupt today!
                                     </a>
                             </div>
-
                         </div>
-                    </div> -->
+                      </div> -->
             </div>
             <!-- /.container-fluid -->
 
@@ -161,14 +159,8 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="/assets/bootstrap.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-<!--     <script src="/assets/plugins/morris/raphael.min.js"></script>
-    <script src="/assets/plugins/morris/morris.min.js"></script>
-    <script src="/assets/plugins/morris/morris-data.js"></script> -->
-
     <!-- High Chart JavaScript -->
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-
     <script src="/assets/highcharts.js"></script>
 
