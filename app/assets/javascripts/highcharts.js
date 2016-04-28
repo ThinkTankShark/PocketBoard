@@ -71,7 +71,7 @@ $(document).ready(function(){
 
 var startPieChart = function(data_for_pie){
   $(function () {
-  $('#container').highcharts({
+  $('#pie-chart').highcharts({
     chart: {
       plotBackgroundColor: null,
       plotBorderWidth: null,
@@ -81,6 +81,9 @@ var startPieChart = function(data_for_pie){
     title: {
       text: 'Look I am a Pie chart for your portfolio'
     },
+    credits: {
+      enabled: false
+  },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
     },
@@ -167,6 +170,9 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
           },
           title : {
             text : title
+          },
+          credits: {
+           enabled: false
           },
           plotOptions:{
                 flags:{
