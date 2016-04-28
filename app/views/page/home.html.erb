@@ -4,10 +4,13 @@
         <div class="intro-text">
             <div class="intro-heading">Identify Your Portfolio's Strengths</div>
             <div class="intro-lead-in">Get Objective Feedback On How Your Portfolio Compares To An Optimal One</div>
-            <a href="#services" class="page-scroll btn btn-xl">Get Started Now</a>
+            <% if user_signed_in? %>
+                <a href="/portfolios" class="page-scroll btn btn-xl">Get Started Now</a>
+            <% else %>
+                <a href="#signup" class="page-scroll btn btn-xl">Get Started Now</a>
+            <% end %>
         </div>
     </div>
-
 </header>
 
 <!-- About Section -->
@@ -321,53 +324,36 @@
 </div>
 </div>
 
-<script type="text/javascript">
-    $(function() {
-        //----- OPEN
-        $('[data-popup-open]').on('click', function(e)  {
-            var targeted_popup_class = jQuery(this).attr('data-popup-open');
-            $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-
-            e.preventDefault();
-        });
-
-        //----- CLOSE
-        $('[data-popup-close]').on('click', function(e)  {
-            var targeted_popup_class = jQuery(this).attr('data-popup-close');
-            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-            e.preventDefault();
-        });
-    });
-</script>
+<!-- Login Animation -->
+<script src="/assets/loginFade.js"></script>
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="assets/jquery.js"></script>
+<script src="/assets/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="assets/bootstrap.min.js"></script>
+<script src="/assets/bootstrap.min.js"></script>
 
 <!-- Plugin JavaScript -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
 <!-- Header Animation Layout -->
-<script src="assets/classie.js"></script>
-<script src="assets/cbpAnimatedHeader.js"></script>
+<script src="/assets/classie.js"></script>
+<script src="/assets/cbpAnimatedHeader.js"></script>
 
 <!-- Contact Form JavaScript -->
-<script src="assets/jqBootstrapValidation.js"></script>
-<script src="assets/contact_me.js"></script>
+<script src="/assets/jqBootstrapValidation.js"></script>
+<script src="/assets/contact_me.js"></script>
 
 <!-- High Chart JavaScript -->
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="assets/agency.js"></script>
+<script src="/assets/agency.js"></script>
 
 <!-- Login / Sign up JavaScript -->
-<script src="assets/login.js"></script>
+<script src="/assets/login.js"></script>
 
 <!-- Graph JavaScript -->
-<script src="assets/graph-homepage.js"></script>
+<script src="/assets/graph-homepage.js"></script>
