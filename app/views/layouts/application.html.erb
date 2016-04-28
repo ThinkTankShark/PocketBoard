@@ -81,10 +81,10 @@
                   Account <i class="fa fa-user" aria-hidden="true"></i><b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Logged in as <%= current_user.email %></a></li>
-                  <li><a href="/portfolios">Dashboard</a></li>
+                  <li><a href="#" class="dropdown-shrink">Logged in as <%= current_user.email %></a></li>
+                  <li><a href="/portfolios" class="dropdown-shrink">Dashboard</a></li>
                   <li class="divider"></li>
-                  <li><a class="page-scroll" href="/logout">Logout</a></li>
+                  <li><a class="page-scroll dropdown-shrink" href="/logout">Logout</a></li>
                 </ul>
               </li>
 
