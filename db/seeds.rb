@@ -65,6 +65,7 @@ nasdaq_stocks = parse_csv('nasdaq_with_img.csv')
 
 
 nasdaq_stocks.each_with_index do |stock,index|
+
     # # if index > 1587, now id:1589 is nil
     # # no image: 1590
     # if index > 2360
@@ -103,13 +104,13 @@ end
 #Seed Users
 User.create(email: "sam@aol.com", password: "1234")
 
-Portfolio.create(name: "Value Compounding Fund", description: "A fund with all undervalued stocks listed in Nasdaq", user_id: 12)
-Portfolio.create(name: "High Growth Fund", description: "A fund with high growth tech stocks", user_id: 12)
-Portfolio.create(name: "Vanguard Fund", description: "A fund mimicking the actual Vanguard Fund", user_id: 12)
-Portfolio.create(name: "Blackrock Index Fund", description: "A normal fund tracking the S&P index", user_id: 12)
-Portfolio.create(name: "Quantum Testing Fund", description: "Quantum fund, still testing my strategy", user_id: 12)
-Portfolio.create(name: "Google AlphaGo Fund", description: "Google AlphaGo machine learning comes into play!", user_id: 12)
-Portfolio.create(name: "Microsoft Dividend Fund", description: "A fund to beat the inflation", user_id: 12)
+Portfolio.create(name: "Value Compounding Fund", description: "A fund with all undervalued stocks listed in Nasdaq", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "High Growth Fund", description: "A fund with high growth tech stocks", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "Vanguard Fund", description: "A fund mimicking the actual Vanguard Fund", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "Blackrock Index Fund", description: "A normal fund tracking the S&P index", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "Quantum Testing Fund", description: "Quantum fund, still testing my strategy", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "Google AlphaGo Fund", description: "Google AlphaGo machine learning comes into play!", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "Microsoft Dividend Fund", description: "A fund to beat the inflation", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
 
 
 

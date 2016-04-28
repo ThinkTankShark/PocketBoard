@@ -29,7 +29,6 @@
 
 	Plugin.prototype = {
 
-
 		init: function (element) {
 
 			container = $(">ul", element);
