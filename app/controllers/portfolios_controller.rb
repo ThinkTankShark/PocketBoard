@@ -131,7 +131,7 @@ class PortfoliosController < ApplicationController
     end
 
     def portfolio_params
-      params.require(:portfolio).permit(:name, :user_id,:start_time,:end_time, holdings_attributes: [:symbol, :allocation])
+      params.require(:portfolio).permit(:name,:description, :user_id,:start_time,:end_time, :image_url, holdings_attributes: [:id,:symbol, :allocation, :_destroy])
     end
 
 end

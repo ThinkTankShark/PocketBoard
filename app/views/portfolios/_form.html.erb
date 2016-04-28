@@ -42,7 +42,9 @@
           <%= ff.number_field :allocation, :value => @selections[i].try(:allocation) %>
         </div>
         <% if ff.object.persisted? %>
-          <%= ff.check_box :_destroy %>
+        <div class="field">
+          <%= ff.check_box :_destroy, style: "height:50px;" %>
+        </div>
         <% end %>
         <br>
         <br>
@@ -55,7 +57,7 @@
   <div class="container-fluid">
     <%#= button_to 'Back', portfolios_path, :method => "get", :class => "btn btn-primary btn-sm" %>
     <%= button_tag "Cancel", :class => "btn btn-primary btn-sm", :onclick => "location.href = '#{portfolios_path}'" %>
-    <%= f.submit 'Create', :class => "btn btn-primary btn-sm" %>
+    <%= f.submit :class => "btn btn-primary btn-sm" %>
   </div>
 <% end %>
 
