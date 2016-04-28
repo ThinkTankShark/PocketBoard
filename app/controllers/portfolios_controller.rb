@@ -24,7 +24,6 @@ class PortfoliosController < ApplicationController
   end
 
   def index
-
     if user_signed_in?
       @user = User.find(session[:id])
       @portfolios = @user.portfolios
