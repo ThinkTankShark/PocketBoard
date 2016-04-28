@@ -9,6 +9,7 @@ gem 'omniauth-github'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '>= 3.2'
 
+gem 'nokogiri', '~> 1.6', '>= 1.6.7.2'
 gem 'materialize-sass'
 gem 'faker'
 gem 'rails'

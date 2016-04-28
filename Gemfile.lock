@@ -229,6 +229,7 @@ DEPENDENCIES
   jquery-rails
   json (~> 1.8, >= 1.8.3)
   materialize-sass
+  nokogiri (~> 1.6, >= 1.6.7.2)
   omniauth-facebook
   omniauth-github
   omniauth-twitter
