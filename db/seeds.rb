@@ -1,4 +1,6 @@
+require 'pry-byebug'
 require 'csv'
+require 'rest-client'
 
 sectors = [
 "Basic Industries",
@@ -59,19 +61,31 @@ def parse_csv(file_path)
 end
 
 nasdaq_stocks = parse_csv('nasdaq.csv')
+stocks_without_images = []
 
-nasdaq_stocks.each do |stock|
-  new_stock = Stock.new(symbol: stock["Symbol"],
+
+nasdaq_stocks.each_with_index do |stock,index|
+    # if index > 1326
+    name = stock["Name"]
+    site = "https://www.google.com/search?q=#{name}+logo&tbs=ic:trans&tbm=isch&tbas=0&source=lnt&sa=X&ved=0ahUKEwjYipaC8K_MAhURymMKHZ9UCz0QpwUIFA&dpr=1&biw=1920&bih=686"
+
+    response = RestClient.get site
+    doc = Nokogiri::HTML(response)
+    image_url = doc.xpath("//a")[37].children[0].attributes["src"].value
+
+    new_stock = Stock.new(symbol: stock["Symbol"],
    name: stock["Name"],
    sector: stock["Sector"],
-   image_url: "http://logo.clearbit.com/#{stock["Name"].downcase.chomp.split(" ")[0]}.com"
+   image_url: image_url
    )
+
+    p new_stock
 
   sector = Industry.find_by(name: "#{new_stock.sector}")
   sector.stocks << new_stock
   new_stock.save
+  # end
 end
-
 StocksUser.create(user_id: 1, stock_id: 1)
 StocksUser.create(user_id: 1, stock_id: 2)
 StocksUser.create(user_id: 1, stock_id: 3)
@@ -95,6 +109,20 @@ Portfolio.create(name: "Microsoft Dividend Fund", description: "A fund to beat t
 #    a.image_url = "http://logo.clearbit.com/#{a.name.downcase.chomp.split(" ")[0]}.com"
 #    a.save
 # end
+
+# begin
+  #  response = RestClient.get "http://www.nasdaq.com/logos/#{stock['Symbol']}.gif"
+  # rescue
+  #   puts "Stock Not found"
+  # end
+
+  #  if response
+  #   image_url = "http://www.nasdaq.com/logos/#{stock["Symbol"]}.gif"
+  #   return_image = true
+  #  # "http://logo.clearbit.com/#{stock["Name"].downcase.chomp.split(" ")[0]}.com"
+  #  else
+  #   return_image = false
+  #  end
 
 # symbols = ["TFSC", "TFSCR", "TFSCU", "TFSCW", "PIH", "FLWS",
 #  "FCTY", "FCCY", "SRCE", "VNET", "TWOU", "JOBS", "CAFD", "EGHT",
