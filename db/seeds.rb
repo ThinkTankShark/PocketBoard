@@ -1,6 +1,7 @@
 require 'pry-byebug'
 require 'csv'
 require 'rest-client'
+require 'uri'
 
 sectors = [
 "Basic Industries",
@@ -66,14 +67,15 @@ stocks_without_images = []
 
 nasdaq_stocks.each_with_index do |stock,index|
     # if index > 1326
-    name = stock["Name"]
+    name = URI.escape(stock["Name"])
+
     site = "https://www.google.com/search?q=#{name}+logo&tbs=ic:trans&tbm=isch&tbas=0&source=lnt&sa=X&ved=0ahUKEwjYipaC8K_MAhURymMKHZ9UCz0QpwUIFA&dpr=1&biw=1920&bih=686"
 
     response = RestClient.get site
     doc = Nokogiri::HTML(response)
     image_url = doc.xpath("//a")[37].children[0].attributes["src"].value
 
-    new_stock = Stock.new(symbol: stock["Symbol"],
+   new_stock = Stock.new(symbol: stock["Symbol"],
    name: stock["Name"],
    sector: stock["Sector"],
    image_url: image_url
