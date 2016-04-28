@@ -25,6 +25,7 @@
 
 .btn-xl {
   border-radius: 5%;
+  margin-top: 30px;
 }
 
 // industries/index.html
@@ -115,3 +116,14 @@ pre.prettyprint{
     color: #999;
 }
 
+section {
+    padding: 90px;
+}
+
+.navbar-default .nav li a, .navbar-default .navbar-brand {
+    color: #2e2e2d;
+}
+
+.navbar.navbar-shrink li a, .navbar-shrink .navbar-brand{
+  color: white
+}

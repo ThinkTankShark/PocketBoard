@@ -33,7 +33,7 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/1
   # GET /portfolios/1.json
   def show
-    @count = User.find(session[:id]).portfolios.count
+    # @count = User.find(session[:id]).portfolios.count
     @portfolio = Portfolio.find(params[:id])
     @holdings = @portfolio.holdings
 
