@@ -101,7 +101,6 @@ end
 # StocksUser.create(user_id: 1, stock_id: 4)
 
 # @s = Stock.all
->>>>>>> aa93ade1e5923980cbb97b1128ce15787a3a09ae
 
 #Seed Users
 User.create(email: "sam@aol.com", password: "1234")
