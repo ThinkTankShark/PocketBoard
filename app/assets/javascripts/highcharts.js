@@ -161,8 +161,7 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
           },
           plotOptions: {
               series: {
-                  compare: 'percent',
-                  animation: true,
+                  compare: 'percent'
 
               }
           },
@@ -182,12 +181,11 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
                     events:{
                         click:function(e){
                             e.preventDefault();
-
                             var url = this.url;
-
                             window.open(url,'_blank');
                         }
-                    }
+
+                      }
                     }
                 }
             },
