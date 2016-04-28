@@ -1,6 +1,7 @@
 <%# if api.any? %>
 
 <%# else %>
+
 <section class="container portfolio">
   <p id="notice"><%= notice %></p>
   <% i = 1 %>
@@ -15,7 +16,7 @@
       <div class="card__content card__padding">
         <div class="card__share">
           <div class="card__social">
-            <%= link_to 'Edit', edit_portfolio_path(portfolio), class: "share-icon facebook" %></a>
+            <%= link_to 'Edit', edit_portfolio_path(portfolio.id), class: "share-icon facebook" %></a>
             <%= link_to 'Destroy', portfolio, class: "share-icon googleplus", method: :delete, data: { confirm: 'Are you sure?' } %></a>
           </div>
           <a id="share" class="share-toggle share-icon" href="#"></a>

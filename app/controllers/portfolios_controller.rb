@@ -24,6 +24,7 @@ class PortfoliosController < ApplicationController
   end
 
   def index
+
     if user_signed_in?
       @user = User.find(session[:id])
       @portfolios = @user.portfolios
@@ -73,7 +74,10 @@ class PortfoliosController < ApplicationController
 
   # GET /portfolios/1/edit
   def edit
-
+    @user = User.find(session[:id])
+    @portfolio = Portfolio.find(params[:id])
+    @selections = @portfolio.holdings
+    @holdings = @portfolio.holdings
   end
 
   # POST /portfolios
@@ -83,7 +87,7 @@ class PortfoliosController < ApplicationController
     @portfolio = Portfolio.create(portfolio_params)
     @user = User.find(session[:id])
     @user.portfolios << @portfolio
-    StocksUser.delete_all
+    StocksUser.where(user_id: session[:id]).destroy_all
     redirect_to portfolios_path
 
 
@@ -101,15 +105,12 @@ class PortfoliosController < ApplicationController
   # PATCH/PUT /portfolios/1
   # PATCH/PUT /portfolios/1.json
   def update
-    respond_to do |format|
-      if @portfolio.update(portfolio_params)
-        format.html { redirect_to @portfolio, notice: 'Portfolio was successfully updated.' }
-        format.json { render :show, status: :ok, location: @portfolio }
-      else
-        format.html { render :edit }
-        format.json { render json: @portfolio.errors, status: :unprocessable_entity }
-      end
-    end
+    @portfolio = Portfolio.find(params[:id])
+    @user = User.find(session[:id])
+    StocksUser.where(user_id: session[:id]).destroy_all
+    @portfolio.update(portfolio_params)
+
+    redirect_to portfolios_path
   end
 
   # DELETE /portfolios/1
