@@ -43,11 +43,10 @@
         </div>
         <% if ff.object.persisted? %>
         <div class="field">
-          <%= ff.check_box :_destroy, style: "height:50px;" %>
+          <div class="delete-checkbox">Delete</div>
+          <div class="delete-checkbox"><%= ff.check_box :_destroy, style: "height:50px;" %></div>
         </div>
         <% end %>
-        <br>
-        <br>
         <br>
       </div>
 

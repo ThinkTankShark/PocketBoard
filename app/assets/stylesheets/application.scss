@@ -115,3 +115,19 @@ pre.prettyprint{
     color: #999;
 }
 
+// Normalize All Buttons
+.form-style-8 input[type="button"], .form-style-8 input[type="submit"], #back-button, .btn-primary {
+    -moz-box-shadow: inset 0px 1px 0px 0px #3b5998;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #3b5998;
+    box-shadow: inset 0px 1px 0px 0px #3b5998;
+    background-color: #3b5998;
+    border: 1px solid #3b5998;
+    display: inline-block;
+    cursor: pointer;
+    color: #c4bab8;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 14px;
+    padding: 8px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
