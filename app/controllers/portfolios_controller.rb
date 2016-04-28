@@ -52,7 +52,12 @@ class PortfoliosController < ApplicationController
       @news = []
       @holdings.each do |holding|
         name =Stock.find_by(symbol: holding.symbol).name
-        @news << [holding.symbol, nytimes(name, @portfolio.start_time.tr('-',''), @portfolio.end_time.tr('-','') )]
+        begin
+         @news << [holding.symbol, nytimes(name, @portfolio.start_time.tr('-',''), @portfolio.end_time.tr('-','') )]
+        rescue
+          puts "Times not loading"
+        end
+        # @news << [holding.symbol, nytimes(name, @portfolio.start_time.tr('-',''), @portfolio.end_time.tr('-','') )]
       end
       render :json => {"stocks" => @portfolio_data, "snp" => @snp, "nasdaq" => @nasdaq, "dji" => @dji, "title" => @portfolio.name, "articles" => @news, "holdings" => @holdings }
     end
