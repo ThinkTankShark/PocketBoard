@@ -16,6 +16,9 @@ gem 'rails'
 gem 'pg'
 gem 'bcrypt'
 
+gem 'compass'
+gem 'compass-rails'
+
 gem 'angularjs-rails'
 
 gem 'activerecord-session_store'

@@ -67,21 +67,18 @@ stocks_without_images = []
 
 nasdaq_stocks.each_with_index do |stock,index|
     # if index > 1326
-    name = URI.escape(stock["Name"])
+    # name = URI.escape(stock["Name"])
 
-    site = "https://www.google.com/search?q=#{name}+logo&tbs=ic:trans&tbm=isch&tbas=0&source=lnt&sa=X&ved=0ahUKEwjYipaC8K_MAhURymMKHZ9UCz0QpwUIFA&dpr=1&biw=1920&bih=686"
+    # site = "https://www.google.com/search?q=#{name}+logo&tbs=ic:trans&tbm=isch&tbas=0&source=lnt&sa=X&ved=0ahUKEwjYipaC8K_MAhURymMKHZ9UCz0QpwUIFA&dpr=1&biw=1920&bih=686"
 
-    response = RestClient.get site
-    doc = Nokogiri::HTML(response)
-    image_url = doc.xpath("//a")[37].children[0].attributes["src"].value
+    # response = RestClient.get site
+    # doc = Nokogiri::HTML(response)
+    # image_url = doc.xpath("//a")[37].children[0].attributes["src"].value
 
    new_stock = Stock.new(symbol: stock["Symbol"],
    name: stock["Name"],
-   sector: stock["Sector"],
-   image_url: image_url
+   sector: stock["Sector"]
    )
-
-    p new_stock
 
   sector = Industry.find_by(name: "#{new_stock.sector}")
   sector.stocks << new_stock
@@ -98,13 +95,13 @@ StocksUser.create(user_id: 1, stock_id: 4)
 #Seed Users
 User.create(email: "sam@aol.com", password: "1234")
 
-Portfolio.create(name: "Value Compounding Fund", description: "A fund with all undervalued stocks listed in Nasdaq", user_id: 12)
-Portfolio.create(name: "High Growth Fund", description: "A fund with high growth tech stocks", user_id: 12)
-Portfolio.create(name: "Vanguard Fund", description: "A fund mimicking the actual Vanguard Fund", user_id: 12)
-Portfolio.create(name: "Blackrock Index Fund", description: "A normal fund tracking the S&P index", user_id: 12)
-Portfolio.create(name: "Quantum Testing Fund", description: "Quantum fund, still testing my strategy", user_id: 12)
-Portfolio.create(name: "Google AlphaGo Fund", description: "Google AlphaGo machine learning comes into play!", user_id: 12)
-Portfolio.create(name: "Microsoft Dividend Fund", description: "A fund to beat the inflation", user_id: 12)
+Portfolio.create(name: "Value Compounding Fund", description: "A fund with all undervalued stocks listed in Nasdaq", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "High Growth Fund", description: "A fund with high growth tech stocks", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "Vanguard Fund", description: "A fund mimicking the actual Vanguard Fund", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "Blackrock Index Fund", description: "A normal fund tracking the S&P index", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "Quantum Testing Fund", description: "Quantum fund, still testing my strategy", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "Google AlphaGo Fund", description: "Google AlphaGo machine learning comes into play!", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
+Portfolio.create(name: "Microsoft Dividend Fund", description: "A fund to beat the inflation", user_id: 12, start_time:2015-4-10  ,end_time:2016-4-10)
 
 
 # @s.each do |a|
