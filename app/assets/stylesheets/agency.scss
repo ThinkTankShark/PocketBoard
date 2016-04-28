@@ -218,7 +218,7 @@ fieldset[disabled] .btn-xl.active {
   }
 }
 header {
-  background-image: url('mockupfinal.png');
+  background-image: url('laptopmockup.png');
   background-repeat: none;
   background-attachment: scroll;
   background-position: center center;
@@ -248,12 +248,13 @@ header .intro-text .intro-heading {
   font-size: 50px;
   line-height: 50px;
   margin-bottom: 25px;
-  text-shadow: 1px 1px gray;
+  text-shadow: 2px 2px gray;
+  color: #cacbcf;
 }
 @media (min-width: 768px) {
   header .intro-text {
     padding-top: 200px;
-    padding-bottom: 200px;
+    padding-bottom: 50px;
   }
   header .intro-text .intro-lead-in {
     font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -261,7 +262,8 @@ header .intro-text .intro-heading {
     font-size: 30px;
     line-height: 40px;
     margin-bottom: 45px;
-    text-shadow: 1px 1px gray;
+    text-shadow: 2px 2px gray;
+    color: #cacbcf;
   }
   header .intro-text .intro-heading {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
