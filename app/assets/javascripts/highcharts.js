@@ -72,7 +72,7 @@ $(document).ready(function(){
 
 var startPieChart = function(data_for_pie){
   $(function () {
-  $('#pie-chart').highcharts({
+  var chart2 = $('#pie-chart').highcharts({
     chart: {
       plotBackgroundColor: null,
       plotBorderWidth: null,
@@ -144,7 +144,9 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
        * @returns {undefined}
        */
       function createChart() {
-        $('#chart').highcharts('StockChart', {
+        var chart1 = $('#chart').highcharts('StockChart', {
+             colors: ["#000000", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+              "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
             chart: {
 
             },
@@ -165,7 +167,8 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
           },
           plotOptions: {
               series: {
-                  compare: 'percent'
+                  compare: 'percent',
+                  linewidth: 6
 
               },
               flags:{
@@ -192,6 +195,8 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
           credits: {
            enabled: false
           },
+
+
             series: seriesOptions
         }
 
@@ -231,3 +236,5 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
   });
 
 };
+
+
