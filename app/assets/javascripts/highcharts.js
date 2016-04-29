@@ -219,8 +219,12 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
                   title: articles[i][0],
                   url: articles[i][1].response.docs[j].web_url
                 }],
-                onSeries: 1
-                })
+                onSeries: 1,
+                tooltip:{
+                  pointFormat: ""
+                  }
+                }
+                )
       }
     }
     createChart();
