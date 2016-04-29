@@ -80,7 +80,7 @@ var startPieChart = function(data_for_pie){
       type: 'pie'
     },
     title: {
-      text: 'Look I am a Pie chart for your portfolio'
+      text: ''
     },
     credits: {
       enabled: false
@@ -145,6 +145,9 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
        */
       function createChart() {
         $('#chart').highcharts('StockChart', {
+            chart: {
+
+            },
             rangeSelector: {
                 selected: 4
           },
@@ -164,20 +167,8 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
               series: {
                   compare: 'percent'
 
-              }
-          },
-          tooltip: {
-              pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-              valueDecimals: 2
-          },
-          title : {
-            text : title
-          },
-          credits: {
-           enabled: true
-          },
-          plotOptions:{
-                flags:{
+              },
+              flags:{
                     point:{
                     events:{
                         click:function(e){
@@ -189,7 +180,18 @@ var startChart = function(stocks,nasdaq,snp,dji,articles,title){
                       }
                     }
                 }
-            },
+          },
+          tooltip: {
+              pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>({point.change}%)<br/>',
+              //
+              valueDecimals: 2
+          },
+          title : {
+            text : title
+          },
+          credits: {
+           enabled: false
+          },
             series: seriesOptions
         }
 
