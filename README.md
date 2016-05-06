@@ -49,4 +49,4 @@
 [Live Presentation](https://youtu.be/8QUZFZloCFM)
 
 ## Deployment Link
-[heroku](http://pocketboard.herokuapp.com/)
+[Heroku](http://pocketboard.herokuapp.com/)
