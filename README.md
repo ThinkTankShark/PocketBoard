@@ -41,7 +41,12 @@
 
 ![dashboard4](app/assets/images/Wireframes/Dashboard4.png)
 
-## installation note
 
+## Our Team
+![team](app/assets/images/team/team.png)
+
+## Presentation
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8QUZFZloCFM" frameborder="0" allowfullscreen></iframe>
 
 ## Deployment Link
+[heroku](http://pocketboard.herokuapp.com/)
