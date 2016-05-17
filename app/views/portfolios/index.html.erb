@@ -1,31 +1,55 @@
-<p id="notice"><%= notice %></p>
+<%# if api.any? %>
 
-<h1>Listing Portfolios</h1>
+<%# else %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>User</th>
-      <th>Stock</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<section class="container portfolio">
+  <p id="notice"><%= notice %></p>
+  <% i = 1 %>
+  <% @portfolios.each do |portfolio| %>
 
-  <tbody>
-    <% @portfolios.each do |portfolio| %>
-      <tr>
-        <td><%= portfolio.name %></td>
-        <td><%= portfolio.user %></td>
-        <td><%= portfolio.stock %></td>
-        <td><%= link_to 'Show', portfolio %></td>
-        <td><%= link_to 'Edit', edit_portfolio_path(portfolio) %></td>
-        <td><%= link_to 'Destroy', portfolio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="wrapper">
+    <div class="card radius shadowDepth1">
+      <div class="card__image border-tlr-radius">
+        <img src="http://lorempixel.com/400/200/sports/" alt="image" class="border-tlr-radius">
+      </div>
 
-<br>
+      <div class="card__content card__padding">
+        <div class="card__share">
+          <div class="card__social">
+            <%= link_to 'Edit', edit_portfolio_path(portfolio.id), class: "share-icon facebook" %></a>
+            <%= link_to 'Destroy', portfolio, class: "share-icon googleplus", method: :delete, data: { confirm: 'Are you sure?' } %></a>
+          </div>
+          <a id="share" class="share-toggle share-icon" href="#"></a>
+        </div>
 
-<%= link_to 'New Portfolio', new_portfolio_path %>
+        <div class="card__meta">
+          <time><%= portfolio.created_at.strftime("%b %d %Y") %></time>
+        </div>
+
+        <article class="card__article">
+          <h4><%= link_to portfolio.name, portfolio_path(portfolio.id) %></h4>
+          <!-- Description for each portfolio goes here -->
+          <p style="font-size: 13px"><%= portfolio.description %></p>
+        </article>
+      </div>
+
+
+    </div>
+  </div>
+  <% i += 1 %>
+  <% end %>
+  <%= link_to 'New Portfolio', industries_path, class: "btn btn-primary container-fluid" %>
+</section>
+
+
+<!-- <div class="container"> -->
+<%#=@news%>
+<%#=@news["response"]%>
+<!-- </div> -->
+
+<!-- High Chart JavaScript -->
+<!-- <script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+<script src="assets/portfolio.js"></script> -->
+<script src="assets/dashboard.js"></script>

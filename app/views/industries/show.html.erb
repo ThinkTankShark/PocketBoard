@@ -1,14 +1,48 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%#= notice %></p> -->
 
-<p>
-  <strong>Name:</strong>
-  <%= @industry.name %>
-</p>
+<!-- start padding container -->
+<section class="container tinder-wrapper">
+<h3>Please choose Your Stock Card</h3>
+    <div class="wrap">
+        <!-- start jtinder container -->
+        <div id="tinderslide">
+            <ul class="tinder-layout">
+            <% session[:stocks].each do |stock| %>
+             <% stock.id %>
+                <li class="pane2">
+                    <div><img src="<%= stock.image_url  %>"></div>
+                    <div class="stock-info">
+                        <p><strong>Name: </strong><%= stock.name %></p>
+                        <p><strong>Symbol: </strong><span class="stock-symbol"><%= stock.symbol %></span></p>
+                    </div>
+                    <div class="like"></div>
+                    <div class="dislike"></div>
+                </li>
 
-<p>
-  <strong>Description:</strong>
-  <%= @industry.description %>
-</p>
+                <%#= link_to "stock.name", "http://www.google.com/search?query=", :target => "_blank" %>
+                <%#= link_to "Google Search Me", "http://www.facebook.com/mypage", :target => "_blank" %>
 
-<%= link_to 'Edit', edit_industry_path(@industry) %> |
-<%= link_to 'Back', industries_path %>
+                <% end %>
+            </ul>
+        </div>
+        <!-- jTinder status text  -->
+        <div id="status"></div>
+    </div>
+    <!-- end padding container -->
+
+    <!-- jTinder trigger by buttons  -->
+    <div class="actions tinder-layout tinder-btn">
+        <a href="#" class="dislike"><i></i></a>
+        <a href="#" class="like"><i></i></a>
+        <a href="/portfolios/new" class="proceed"><i></i></a>
+    </div>
+    <!-- end jtinder container -->
+</section>
+    <!-- jQuery lib -->
+    <script type="text/javascript" src="/assets/jTinder/jquery.js"></script>
+    <!-- transform2d lib -->
+    <script type="text/javascript" src="/assets/jTinder/jquery.transform2d.js"></script>
+    <!-- jTinder lib -->
+    <script type="text/javascript" src="/assets/jTinder/jquery.jTinder.js"></script>
+    <!-- jTinder initialization script -->
+    <script type="text/javascript" src="/assets/jTinder/main.js"></script>

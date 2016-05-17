@@ -1,68 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Pocketboard</title>
-   <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  <title>Pocket Board</title>
+
+  <!-- Custom Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+
+  <!-- <link href="/assets/login-icon/pe-icon-7-stroke.css" rel="stylesheet" /> -->
+  <link href="/assets/login-icon/ct-navbar.css" rel="stylesheet" />
+
+  <!--     Font Awesome     -->
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+
+
+
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script> -->
+
+  <!-- <script src="/assets/gettingStarted.js"></script> -->
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
-<body>
 
-<div id="fb-root"></div>
+    </head>
+    <body id="page-top" class="index <%= controller_name%> <%=action_name%>" ng-app="wizardApp">
+      <!-- Navigation -->
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div ui-view></div>
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="/">Pocket Board</a>
+          </div>
 
-<nav id="nav">
-    <div id="page_nav">
-      <%= link_to "Home", root_path  %>
-      <%= link_to "About", page_about_path  %>
-      <%= link_to "FAQs", page_faqs_path  %>
-      <%= link_to "Contact", page_contact_path  %>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="hidden">
+                <a href="#page-top"></a>
+              </li>
+              <li>
+                <a class="page-scroll" href="#about">About</a>
+              </li>
+              <li>
+                <a class="page-scroll" href="#team">Team</a>
+              </li>
+              <li>
+                <a class="page-scroll" href="#contact">Contact</a>
+              </li>
+              <% if user_signed_in? %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Account <i class="fa fa-user" aria-hidden="true"></i><b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="dropdown-shrink">Logged in as <%= current_user.email %></a></li>
+                  <li><a href="/portfolios" class="dropdown-shrink">Dashboard</a></li>
+                  <li class="divider"></li>
+                  <li><a class="page-scroll dropdown-shrink" href="/logout">Logout</a></li>
+                </ul>
+              </li>
+
+              <% end %>
+              <% if !user_signed_in?%>
+              <li>
+                <a class="page-scroll" data-popup-open="popup-1" href="#login">Login</a>
+              </li>
+              <li>
+                <a class="page-scroll" data-popup-open="popup-1" href="#">Register</a>
+              </li>
+              <%end%>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+      </nav>
+
+<!--     <p class="notice"><%#= notice  %></p>
+    <p class="alert"><%#= alert  %></p>
+  -->
+  <%= yield %>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <span class="copyright">Copyright &copy; Pocket Board 2016</span>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li><a href="#"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li><a href="#"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks">
+            <li><a href="#">Privacy Policy</a>
+            </li>
+            <li><a href="#">Terms of Use</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-
-    <div id="sign_in">
-      <% if user_signed_in? %>
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Sign In", new_user_session_path  %>
-        <%= link_to "Sign Up", new_user_registration_path %>
-         <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div>
-      <% end %>
-    </div>
-</nav>
-
-  <div class="main">
-    <p class='notice'><%= notice  %></p>
-    <p class='alert'><%= alert  %></p>
-
-
-
-    <%= yield %>
-
-    <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons"></i>
-    </a>
-    <ul>
-    <% if user_signed_in? %>
-      <li><a href="/users/<%= current_user.id %>/portfolios" class="btn-floating red"><i class="material-icons"></i></a></li>
-      <% if current_user.portfolios.first %>
-        <li><a href="/users/<%= current_user.id %>/portfolios/<%= current_user.portfolios.first %>/industries" class="btn-floating yellow darken-1"><i class="material-icons"></i></a></li>
-      <% end %>
-      <li><a href="/users/<%= current_user.id %>/portfolios/new" class="btn-floating purple"><i class="material-icons"></i></a></li>
-      <li><a href="/page/about" class="btn-floating green"><i class="material-icons"></i></a></li>
-      <li><a href="/page/faqs" class="btn-floating blue"><i class="material-icons"></i></a></li>
-    <% end %>
-    </ul>
-
-  </div>
-
-
-  </div>
+  </footer>
+  <script src="/assets/ct-navbar.js"></script>
+  <script src="/assets/classie.js"></script>
+  <script src="/assets/cbpAnimatedHeader.js"></script>
 </body>
 </html>
+
+
 
 

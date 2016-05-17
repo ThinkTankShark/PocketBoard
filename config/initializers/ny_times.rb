@@ -1,0 +1,1 @@
+ENV['NYTIME_KEY']

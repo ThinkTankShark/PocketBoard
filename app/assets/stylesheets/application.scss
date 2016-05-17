@@ -1,37 +1,151 @@
-@import "materialize";
-@import "materialize/extras/nouislider";
+@import "bootstrap";
+@import "agency";
+@import "font-awesome";
+@import "font-awesome-sprockets";
+@import "styles"; //Main Styles to website
+@import "login"; //Login Section
+@import "jTinder";
+@import "dashboard";
+@import "form";
+@import "spinkit";
+// @import "portfolios";
 
-*{
-  margin: 0;
-  padding: 0;
+// Normalize Website Style
+// Header Tag for each page (If Any)
+.page-header {
+  color: black;
+  text-align: center;
+  margin: auto;
 }
 
-#nav{
-  width: 100%;
-  height: 40px;
-  background: #000;
-  float: left;
+// Normalize the button style
+.btn-primary {
+  margin: 0 auto;
 }
 
-#page_nav a, #sign_in a{
-  line-height: 40px;
-  color: #fff;
-  padding: 0 20px 0 20px;
-  text-decoration: 0;
+.btn-xl {
+  border-radius: 5%;
+  margin-top: 30px;
 }
 
-#page_nav{
-  margin: 0 0 0 5%;
-  float: left;
+// industries/index.html
+.industry-btn {
+  display: inline-block;
 }
 
-#sign_in{
-  float: right;
-  margin: 0 5% 0 0;
+//industries/:id
+//Tinder Card Layout
+ul.tinder-layout {
+  text-align: center;
+  margin: 0 auto;
+  display: inline-block;
 }
 
-.main{
-  width: 90%;
-  float: left;
-  margin: 20px 5% 0 5%;
+.tinder-wrapper {
+  text-align: center;
+}
+.tinder-btn {
+  width: 50%;
+  display: inline-block;
+}
+
+div.actions.tinder-layout.tinder-btn {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+li.pane2 {
+  display: inline-block;
+  text-align: center;
+  height: 50%;
+}
+
+.stock-info {
+  margin-top: 25px;
+}
+
+div.wrap {
+  width: 60%;
+  display: inline-block;
+  margin: auto;
+}
+
+section.container.tinder-wrapper {
+  height: 100%;
+  padding-bottom: 20px;
+}
+
+.pane2 img{
+  -webkit-filter: drop-shadow(6px 6px 4px rgba(0,0,0,0.9));
+  filter: drop-shadow(6px 6px 4px rgba(0,0,0,0.9));
+}
+
+//
+div.collapse {
+  display: none;
+}
+
+// Login icon
+.fa-heart{
+    color: #F74933;
+}
+.space-100{
+    height: 100px;
+    display: block;
+}
+pre.prettyprint{
+    background-color: null;
+    border: 1px solid #999;
+    margin-top: 20px;
+    padding: 20px;
+    text-align: left;
+}
+.atv, .str{
+    color: #05AE0E;
+}
+.tag, .pln, .kwd{
+     color: #3472F7;
+}
+.atn{
+  color: #2C93FF;
+}
+.pln{
+   color: #333;
+}
+.com{
+    color: #999;
+}
+
+
+// Normalize All Buttons
+.form-style-8 input[type="button"], .form-style-8 input[type="submit"], #back-button, .btn-primary {
+    -moz-box-shadow: inset 0px 1px 0px 0px #3b5998;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #3b5998;
+    box-shadow: inset 0px 1px 0px 0px #3b5998;
+    background-color: #3b5998;
+    border: 1px solid #3b5998;
+    display: inline-block;
+    cursor: pointer;
+    color: #c4bab8;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 14px;
+    padding: 8px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+section {
+    padding: 90px;
+}
+
+.navbar-default .nav li a, .navbar-default .navbar-brand {
+    color: #2e2e2d;
+}
+
+.navbar.navbar-shrink li a, .navbar-shrink .navbar-brand{
+  color: white
+}
+
+.navbar-shrink .dropdown li a {
+    color: black;
 }

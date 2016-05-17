@@ -1,13 +1,8 @@
 class PageController < ApplicationController
   def home
-  end
-
-  def about
-  end
-
-  def faqs
-  end
-
-  def contact
+    if user_signed_in?
+      @user = User.find(session[:id])
+      @portfolios = @user.portfolios
+    end
   end
 end
